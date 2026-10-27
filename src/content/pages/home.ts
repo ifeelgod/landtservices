@@ -1,0 +1,474 @@
+import type { PageModule } from '../types';
+import { servicesGlance } from '../shared';
+import { SITE, price } from '../../config/site';
+
+const page: PageModule = {
+  en: {
+    title: 'Accredited Drug, Alcohol & DNA Testing in Marshall, TX | L&T Solutions',
+    description: `SAMHSA-certified drug screening, AABB legal court DNA ($250 all-in), DOT compliance, in-home blood draws and 24/7 mobile collection in Marshall, TX and East Texas.`,
+    schemaType: 'WebPage',
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'Marshall & East Texas Specimen Collection',
+        title: 'Fast, Accredited Drug, Alcohol & Legal DNA Testing in Marshall, TX',
+        subtitle: `SAMHSA-certified partner lab results, AABB-accredited legal DNA collections, and 24/7 on-site mobile testing across Harrison County and East Texas. Hablamos Español.`,
+        image: 'storefront',
+        imageAlt: 'L&T Solutions clinic storefront and entrance at 203 A W. Pinecrest Dr. in Marshall, TX',
+        primary: { label: 'Schedule a Test Now', href: 'contact' },
+        secondary: { label: 'Request Mobile Unit (24/7)', href: 'mobile' },
+        badges: true,
+        points: [
+          'We come to your door or job site — or visit our Marshall clinic',
+          'Fast 24–48 hour lab turnaround with MRO verification',
+          'Zero long hospital wait times or corporate hassle',
+        ],
+      },
+      {
+        type: 'banner',
+        tone: 'pink',
+        text: 'Need emergency on-site drug or alcohol collection? 24/7 post-accident & reasonable suspicion dispatch available across East Texas.',
+        cta: { label: `Call 24/7: ${SITE.emergencyPhone.display}`, href: 'emergency' },
+      },
+      servicesGlance.en,
+      {
+        type: 'cards',
+        variant: 'router',
+        columns: 5,
+        eyebrow: 'Fast Navigation',
+        title: 'What brings you in today?',
+        intro: 'Select your situation to find the right test, pricing, and scheduling options.',
+        cards: [
+          {
+            title: 'Individual / Court DNA',
+            text: `AABB legal court-admissible paternity (${price(SITE.prices.dnaLegal) ?? '$250'}), peace-of-mind DNA, or personal testing.`,
+            href: 'dna',
+            icon: 'dna',
+          },
+          {
+            title: 'Employer Drug Screens',
+            text: 'Pre-employment 5/10/12-panel urine, 90-day hair follicle, oral fluid, and alcohol testing for local businesses.',
+            href: 'drug',
+            icon: 'briefcase',
+          },
+          {
+            title: 'Fleet & DOT Compliance',
+            text: 'FMCSA/DOT physicals, random testing consortium pools, FMCSA Clearinghouse queries, and supervisor training.',
+            href: 'dot',
+            icon: 'truck',
+          },
+          {
+            title: 'Immediate On-Site Testing',
+            text: '24/7 mobile collection unit dispatched directly to your job site, oilfield rig, facility, or fleet yard.',
+            href: 'mobile',
+            icon: 'siren',
+          },
+          {
+            title: 'Doctor-Ordered Lab Work',
+            text: 'Gentle in-home blood draws for seniors/homebound and walk-in phlebotomy for routine or specialty lab orders.',
+            href: 'blood',
+            icon: 'drop',
+          },
+        ],
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        bg: 'lavender',
+        eyebrow: 'Our Services',
+        title: 'Full-Service Testing & Mobile Phlebotomy',
+        intro: 'Accredited specimen collection designed around your convenience and peace of mind.',
+        cards: [
+          {
+            title: 'Urinalysis & Drug Screening',
+            text: 'Rapid urinalysis (5, 10, and 12-panel urine screens), 90-day hair follicle testing, saliva tests, and EtG alcohol screening with MRO review.',
+            href: 'drug',
+            icon: 'flask',
+          },
+          {
+            title: 'Legal Court & Private DNA',
+            text: `AABB chain-of-custody paternity testing (${price(SITE.prices.dnaLegal) ?? '$250'} all-in) for Harrison County court, plus private peace-of-mind tests.`,
+            href: 'dna',
+            icon: 'scale',
+            price: price(SITE.prices.dnaLegal),
+          },
+          {
+            title: 'In-Home & Walk-In Blood Draws',
+            text: 'Professional phlebotomy at our Marshall clinic or delivered to your home for seniors, busy parents, and mobility-impaired patients.',
+            href: 'blood',
+            icon: 'home',
+          },
+          {
+            title: 'Specialty Lab Kits',
+            text: 'We draw, process, centrifuge, and ship your functional medicine, hormone, or specialty lab kits according to strict kit instructions.',
+            href: 'kits',
+            icon: 'clipboard',
+          },
+          {
+            title: 'Early Gender Reveal Blood Test',
+            text: 'Determine your baby’s gender as early as 6–7 weeks into pregnancy with a quick, gentle blood draw.',
+            href: 'gender',
+            icon: 'baby',
+          },
+          {
+            title: 'DOT Compliance Programs',
+            text: 'Turnkey FMCSA, FAA, and FRA compliance including random pool consortium management, physicals, and Clearinghouse administration.',
+            href: 'dot',
+            icon: 'shield',
+          },
+          {
+            title: '24/7 Mobile Collection Unit',
+            text: 'On-site post-accident, reasonable suspicion, and routine workplace testing brought directly to your facility day or night.',
+            href: 'mobile',
+            icon: 'truck',
+          },
+          {
+            title: 'Bilingual Client Care',
+            text: 'Full Spanish navigation and bilingual certified collectors ensure clear, comfortable communication for all clients.',
+            href: 'about',
+            icon: 'globe',
+          },
+        ],
+      },
+      {
+        type: 'split',
+        eyebrow: 'The Local Advantage',
+        title: 'We come to you — or you visit our Marshall clinic',
+        text: 'Corporate draw centers in nearby Longview often suffer from long waiting rooms, rigid appointments, and refusal of specialty lab orders. Meanwhile, Marshall residents historically had to drive out of town for accredited testing.',
+        items: [
+          'No long hospital outpatient clinic wait times',
+          'Friendly, certified phlebotomists who treat you with dignity and respect',
+          'Flexible scheduling: home visits, workplace calls, or clinic walk-ins',
+          'Bilingual collectors and staff available for Spanish-speaking clients',
+        ],
+        image: 'office',
+        imageAlt: 'Reception area at the L&T Solutions office in Marshall TX',
+        cta: { label: 'Learn More About Us', href: 'about' },
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: 'Where can I get a drug test or DNA test in Marshall, TX?',
+        answer: `L&T Solutions provides accredited drug testing, alcohol screening, AABB legal court DNA paternity testing, and mobile phlebotomy at our Marshall clinic at ${SITE.address.street} and on-site throughout Harrison County. We offer walk-in appointments, same-day scheduling, and 24/7 mobile dispatch for employers and homebound individuals.`,
+      },
+      {
+        type: 'cards',
+        columns: 3,
+        eyebrow: 'Standards & Compliance',
+        title: 'Built on Rigorous Legal & Regulatory Standards',
+        intro: 'Every specimen we collect adheres strictly to Texas and federal regulatory guidelines.',
+        cards: [
+          {
+            title: 'Texas Labor Code § 411.091',
+            text: 'We help local employers establish legally compliant drug-free workplace policies and testing standards under Texas law.',
+            icon: 'shield',
+          },
+          {
+            title: 'Harrison County Court Admissibility',
+            text: 'Our legal DNA collections strictly follow AABB chain-of-custody protocols for child support, custody, and legal proceedings.',
+            icon: 'scale',
+          },
+          {
+            title: 'SAMHSA & MRO Verification',
+            text: 'All non-negative lab samples are processed by SAMHSA-certified partner laboratories and reviewed by licensed Medical Review Officers.',
+            icon: 'check',
+          },
+        ],
+      },
+      {
+        type: 'testimonials',
+        bg: 'lavender',
+        title: 'What East Texas Clients Say',
+        note: 'Sample testimonials — replace with real, verified client reviews before launch.',
+        items: [
+          {
+            quote: 'Fast, professional, and so polite. Having a phlebotomist come to my mother’s home in Marshall saved us a stressful hospital trip.',
+            name: 'Sarah M. — Marshall, TX',
+          },
+          {
+            quote: 'Needed a court-admissible paternity DNA test for Harrison County court. L & T handled everything with total professionalism and results were fast.',
+            name: 'David R. — Longview, TX',
+          },
+          {
+            quote: 'Their mobile unit arrived at our trucking yard within 90 minutes after an accident. Kept our fleet fully DOT compliant without delay.',
+            name: 'Robert T. — Fleet Safety Manager',
+          },
+        ],
+      },
+      {
+        type: 'area',
+        title: 'Serving Marshall, Longview & All of East Texas',
+        intro: `Our central clinic is located in ${SITE.address.city}, TX. Our mobile testing units cover Harrison, Gregg, Panola, Rusk, and Smith counties daily.`,
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'Frequently Asked Questions',
+        items: [
+          {
+            q: 'Do I need an appointment or can I walk in?',
+            a: 'Walk-ins are welcome at our Marshall clinic during standard business hours for drug screens and standard blood draws. We recommend scheduling an appointment for legal DNA tests and mobile home visits.',
+          },
+          {
+            q: 'Are your legal DNA paternity tests valid in Texas family courts?',
+            a: `Yes. Our legal DNA paternity collections follow strict AABB chain-of-custody procedures with government photo ID verification and biometric records, making results 100% admissible in Harrison County family court.`,
+          },
+          {
+            q: 'How quickly do drug screening results come back?',
+            a: 'Rapid urine drug screens provide negative results in 15 minutes. Lab-confirmed urine and oral fluid samples typically return in 24 to 48 hours. Hair follicle tests take 3 to 5 business days.',
+          },
+          {
+            q: 'Can you collect blood for a doctor’s lab order from my home?',
+            a: 'Yes! Our mobile phlebotomists can draw blood in the comfort of your home, process the specimen, and deliver it safely to your required lab (Quest, Labcorp, or hospital lab).',
+          },
+          {
+            q: 'Is bilingual staff available for Spanish-speaking clients?',
+            a: '¡Sí! Contamos con personal 100% bilingüe tanto en nuestra clínica como en nuestras unidades móviles para atenderle en español con total claridad.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: 'Ready to Book Your Test or Request Mobile Collection?',
+        text: `Call ${SITE.phone.display} to speak with our team immediately, or submit an online request in seconds.`,
+        primary: { label: 'Schedule Appointment', href: 'contact' },
+        secondary: { label: `Call ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+  es: {
+    title: 'Pruebas Acreditadas de Drogas, Alcohol y ADN en Marshall, TX | L&T Solutions',
+    description: `Pruebas de drogas certificadas por SAMHSA, ADN legal para corte ($250), cumplimiento DOT, toma de sangre a domicilio y servicio móvil 24/7 en Marshall y el Este de Texas.`,
+    schemaType: 'WebPage',
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'Toma de Muestras en Marshall y Este de Texas',
+        title: 'Pruebas Rápidas y Acreditadas de Drogas, Alcohol y ADN Legal en Marshall, TX',
+        subtitle: `Resultados de laboratorio certificados por SAMHSA, toma de ADN legal acreditada por AABB y servicio móvil a domicilio las 24 horas en el condado de Harrison y el Este de Texas. Atendido en español.`,
+        image: 'storefront',
+        imageAlt: 'Fachada y entrada de la clínica L&T Solutions en 203 A W. Pinecrest Dr. en Marshall, TX',
+        primary: { label: 'Agendar Cita Ahora', href: 'contact' },
+        secondary: { label: 'Solicitar Unidad Móvil (24/7)', href: 'mobile' },
+        badges: true,
+        points: [
+          'Vamos a su domicilio o lugar de trabajo — o visite nuestra clínica en Marshall',
+          'Resultados rápidos de laboratorio en 24–48 horas con verificación MRO',
+          'Sin largas esperas hospitalarias ni trámites complicados',
+        ],
+      },
+      {
+        type: 'banner',
+        tone: 'pink',
+        text: '¿Necesita recolección urgente de drogas o alcohol en el sitio? Servicio móvil 24/7 disponible para accidentes y sospecha razonable.',
+        cta: { label: `Llamar 24/7: ${SITE.emergencyPhone.display}`, href: 'emergency' },
+      },
+      servicesGlance.es,
+      {
+        type: 'cards',
+        variant: 'router',
+        columns: 5,
+        eyebrow: 'Navegación Rápida',
+        title: '¿Qué servicio necesita hoy?',
+        intro: 'Seleccione su caso para ver detalles, precios y opciones de cita.',
+        cards: [
+          {
+            title: 'Individual / ADN para Corte',
+            text: `ADN de paternidad legal admisible en corte (${price(SITE.prices.dnaLegal) ?? '$250'} todo incluido), pruebas privadas y familiares.`,
+            href: 'dna',
+            icon: 'dna',
+          },
+          {
+            title: 'Pruebas para Empleadores',
+            text: 'Exámenes de orina de 5, 10 y 12 paneles, folículo capilar de 90 días, fluido oral y alcohol para empresas locales.',
+            href: 'drug',
+            icon: 'briefcase',
+          },
+          {
+            title: 'Flotas y Cumplimiento DOT',
+            text: 'Físicos DOT, administración de grupo de pruebas aleatorias (consorcio), consultas en el Clearinghouse y capacitación.',
+            href: 'dot',
+            icon: 'truck',
+          },
+          {
+            title: 'Servicio Móvil Inmediato',
+            text: 'Unidad móvil de recolección 24/7 enviada directamente a su lugar de trabajo, campo petrolero o patio de vehículos.',
+            href: 'mobile',
+            icon: 'siren',
+          },
+          {
+            title: 'Toma de Sangre por Orden Médica',
+            text: 'Extracción de sangre amable a domicilio para adultos mayores o en clínica para órdenes rutinarias o kits especiales.',
+            href: 'blood',
+            icon: 'drop',
+          },
+        ],
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        bg: 'lavender',
+        eyebrow: 'Nuestros Servicios',
+        title: 'Servicio Completo de Pruebas y Flebotomía Móvil',
+        intro: 'Toma de muestras acreditada y diseñada para su comodidad y tranquilidad.',
+        cards: [
+          {
+            title: 'Detección de Drogas y Uroanálisis',
+            text: 'Uroanálisis rápido (5, 10 y 12 sustancias en orina), folículo capilar de 90 días, saliva y pruebas de alcohol EtG con revisión médica MRO.',
+            href: 'drug',
+            icon: 'flask',
+          },
+          {
+            title: 'ADN Legal para Corte y Privado',
+            text: `Pruebas con cadena de custodia AABB (${price(SITE.prices.dnaLegal) ?? '$250'} todo incluido) para la corte del condado de Harrison, y pruebas privadas.`,
+            href: 'dna',
+            icon: 'scale',
+            price: price(SITE.prices.dnaLegal),
+          },
+          {
+            title: 'Extracción de Sangre a Domicilio y en Clínica',
+            text: 'Flebotomía profesional en nuestra clínica en Marshall o a domicilio para adultos mayores y personas con movilidad reducida.',
+            href: 'blood',
+            icon: 'home',
+          },
+          {
+            title: 'Kits Especializados de Laboratorio',
+            text: 'Tomamos, procesamos, centrifugamos y enviamos sus kits de medicina funcional o bienestar siguiendo las instrucciones exactas.',
+            href: 'kits',
+            icon: 'clipboard',
+          },
+          {
+            title: 'Prueba Temprana de Género',
+            text: 'Conozca el sexo de su bebé desde la semana 6 a 7 de embarazo mediante una extracción de sangre rápida y sencilla.',
+            href: 'gender',
+            icon: 'baby',
+          },
+          {
+            title: 'Programas de Cumplimiento DOT',
+            text: 'Solución integral FMCSA, FAA y FRA que incluye consorcio de pruebas aleatorias, exámenes físicos y manejo del Clearinghouse.',
+            href: 'dot',
+            icon: 'shield',
+          },
+          {
+            title: 'Unidad Móvil 24/7',
+            text: 'Pruebas en el lugar de trabajo por accidentes o rutina, disponibles de día o de noche en todas sus instalaciones.',
+            href: 'mobile',
+            icon: 'truck',
+          },
+          {
+            title: 'Atención 100% en Español',
+            text: 'Navegación completa en español y recolectores certificados bilingües para brindarle atención clara y respetuosa.',
+            href: 'about',
+            icon: 'globe',
+          },
+        ],
+      },
+      {
+        type: 'split',
+        eyebrow: 'La Ventaja Local',
+        title: 'Vamos a su domicilio — o visítenos en la clínica de Marshall',
+        text: 'Los grandes laboratorios corporativos en Longview suelen tener largas salas de espera y horarios rígidos. Ahora en Marshall usted cuenta con un centro acreditado y amable cerca de su hogar.',
+        items: [
+          'Sin largas horas de espera en clínicas ni hospitales',
+          'Flebotomistas certificados que le brindan un trato digno y amable',
+          'Horarios flexibles: visitas a domicilio, servicio en empresas o en clínica',
+          'Atención médica personalizada y 100% bilingüe en español',
+        ],
+        image: 'office',
+        imageAlt: 'Sala de recolección moderna y limpia en L&T Solutions en Marshall TX',
+        cta: { label: 'Conozca Más Sobre Nosotros', href: 'about' },
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: '¿Dónde puedo hacerme una prueba de drogas o de ADN en Marshall, TX?',
+        answer: `L&T Solutions ofrece pruebas acreditadas de drogas, alcohol, ADN legal para la corte (AABB) y flebotomía móvil en nuestra clínica en Marshall (${SITE.address.street}) y a domicilio en todo el condado de Harrison. Atendemos sin cita, con cita el mismo día y enviamos unidades móviles 24/7 para empresas y particulares.`,
+      },
+      {
+        type: 'cards',
+        columns: 3,
+        eyebrow: 'Normativa y Cumplimiento',
+        title: 'Respaldados por Estándares Legales Cumplidos al 100%',
+        intro: 'Cada muestra que tomamos cumple estrictamente con las normativas de Texas y las leyes federales.',
+        cards: [
+          {
+            title: 'Código del Trabajo de Texas § 411.091',
+            text: 'Ayudamos a las empresas locales a establecer políticas de lugar de trabajo libre de drogas cumpliendo con la ley de Texas.',
+            icon: 'shield',
+          },
+          {
+            title: 'Validez en la Corte del Condado de Harrison',
+            text: 'Nuestras pruebas de ADN legal siguen la cadena de custodia AABB para manutención, custodia y trámites legales.',
+            icon: 'scale',
+          },
+          {
+            title: 'Verificación SAMHSA y MRO',
+            text: 'Las muestras son analizadas en laboratorios asociados certificados por SAMHSA y revisadas por médicos MRO licenciados.',
+            icon: 'check',
+          },
+        ],
+      },
+      {
+        type: 'testimonials',
+        bg: 'lavender',
+        title: 'Lo que dicen nuestros clientes en el Este de Texas',
+        note: 'Testimonios de ejemplo — reemplace con testimonios reales verificados antes del lanzamiento.',
+        items: [
+          {
+            quote: 'Rápidos, profesionales y muy amables. Que la enfermera viniera a tomarle sangre a mi mamá a su casa en Marshall nos evitó un viaje muy cansado al hospital.',
+            name: 'Sarah M. — Marshall, TX',
+          },
+          {
+            quote: 'Necesitaba una prueba de paternidad para la corte del condado de Harrison. L & T se encargó de todo con gran profesionalismo y los resultados llegaron rápido.',
+            name: 'David R. — Longview, TX',
+          },
+          {
+            quote: 'Su unidad móvil llegó a nuestro patio de camiones en menos de 90 minutos tras un accidente. Mantuvieron nuestra flota al día con las normas DOT sin demoras.',
+            name: 'Robert T. — Gerente de Seguridad de Flota',
+          },
+        ],
+      },
+      {
+        type: 'area',
+        title: 'Atendiendo Marshall, Longview y Todo el Este de Texas',
+        intro: `Nuestra clínica principal se ubica en ${SITE.address.city}, TX. Nuestras unidades móviles cubren diariamente los condados de Harrison, Gregg, Panola, Rusk y Smith.`,
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'Preguntas Frecuentes',
+        items: [
+          {
+            q: '¿Necesito cita o puedo llegar directamente a la clínica?',
+            a: 'Puede llegar sin cita a nuestra clínica en Marshall durante el horario regular para pruebas de drogas y tomas de sangre rutinarias. Recomendamos agendar cita para pruebas de ADN legal y visitas móviles a domicilio.',
+          },
+          {
+            q: '¿Sus pruebas de ADN son válidas en la corte de familia de Texas?',
+            a: `Sí. Nuestras muestras de ADN legal cumplen estrictamente con la cadena de custodia AABB, verificación de identificación oficial y fotos, garantizando 100% de validez en las cortes del condado de Harrison.`,
+          },
+          {
+            q: '¿Cuánto tardan los resultados de las pruebas de drogas?',
+            a: 'Las pruebas rápidas de orina dan resultados negativos en 15 minutos. Los análisis de laboratorio para orina y saliva tardan de 24 a 48 horas. Las pruebas de folículo capilar tardan de 3 a 5 días hábiles.',
+          },
+          {
+            q: '¿Pueden tomarme sangre a domicilio si tengo orden de mi médico?',
+            a: '¡Sí! Nuestras flebotomistas móviles pueden tomar su muestra de sangre en la comodidad de su hogar, procesarla y enviarla al laboratorio que indique su médico (Quest, Labcorp u hospital).',
+          },
+          {
+            q: '¿Cuentan con atención en español?',
+            a: '¡Sí! Contamos con personal 100% bilingüe tanto en nuestra clínica como en nuestras unidades móviles para atenderle en español con total claridad.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: '¿Listo para agendar su prueba o solicitar recolección móvil?',
+        text: `Llame al ${SITE.phone.display} para hablar con nuestro equipo de inmediato o envíe su solicitud en línea en segundos.`,
+        primary: { label: 'Agendar Cita', href: 'contact' },
+        secondary: { label: `Llamar al ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+};
+
+export default page;

@@ -1,0 +1,119 @@
+---
+import type { Lang } from '../../i18n/routes';
+import { path } from '../../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+<div class="mileage-calc" data-mileage-calc>
+  <div class="mileage-calc__head">
+    <span class="eyebrow">{es ? 'Calculadora de Viaje Móvil' : 'Mobile Dispatch Calculator'}</span>
+    <h2>{es ? 'Calculadora Interactiva de Tarifa de Desplazamiento' : 'Interactive Travel Fee & Mileage Estimator'}</h2>
+    <p>{es ? 'Ingrese su ciudad o código postal en el Este de Texas para estimar la tarifa de despacho móvil a su domicilio u obra.' : 'Enter your East Texas city or zip code below to estimate mobile unit travel surcharges for home visits or job site dispatch.'}</p>
+  </div>
+
+  <form class="mileage-form" onsubmit="return false;">
+    <div class="field">
+      <label for="zip-input">{es ? 'Ciudad o Código Postal de Destino:' : 'Target City or Zip Code:'}</label>
+      <div class="input-group">
+        <input id="zip-input" type="text" placeholder={es ? 'Ej: 75670, Longview, Carthage...' : 'e.g. 75670, Longview, Carthage, 75601'} required />
+        <button type="button" class="btn btn--primary" data-calc-btn>{es ? 'Calcular Tarifa' : 'Calculate Fee'}</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mileage-result hidden" data-result-box>
+    <div class="result-card">
+      <div class="result-zone" data-zone-tag>{es ? 'Zona 1: Área de Servicio Principal' : 'Zone 1: Core Service Area'}</div>
+      <h3 data-city-name>Marshall, TX (75670)</h3>
+      <div class="result-price" data-price-tag>{es ? 'Despacho Estándar Incluido' : 'Standard Dispatch Included'}</div>
+      <p data-result-desc>{es ? 'Incluido en la tarifa estándar de recolección móvil dentro de Marshall.' : 'Included in standard mobile collection fee within Marshall city limits.'}</p>
+      <a class="btn btn--purple btn--sm" href={`${path('contact', lang)}?service=mobile`}>{es ? 'Solicitar Recolector Móvil' : 'Request Mobile Collector'}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const calc = document.querySelector('[data-mileage-calc]');
+  if (calc) {
+    const input = calc.querySelector<HTMLInputElement>('#zip-input');
+    const btn = calc.querySelector<HTMLButtonElement>('[data-calc-btn]');
+    const resultBox = calc.querySelector<HTMLElement>('[data-result-box]');
+    const zoneTag = calc.querySelector<HTMLElement>('[data-zone-tag]');
+    const cityName = calc.querySelector<HTMLElement>('[data-city-name]');
+    const priceTag = calc.querySelector<HTMLElement>('[data-price-tag]');
+    const descTag = calc.querySelector<HTMLElement>('[data-result-desc]');
+
+    const zones: Record<string, { name: string; zone: string; price: string; descEn: string; descEs: string }> = {
+      '75670': { name: 'Marshall, TX', zone: 'Zone 1: Core Service Area', price: 'Included / Standard Fee', descEn: 'Core service area. Standard collection fee applies with zero extra travel surcharge during regular hours.', descEs: 'Área principal. Se aplica tarifa estándar sin recargo adicional de viaje en horario regular.' },
+      'marshall': { name: 'Marshall, TX', zone: 'Zone 1: Core Service Area', price: 'Included / Standard Fee', descEn: 'Core service area. Standard collection fee applies with zero extra travel surcharge during regular hours.', descEs: 'Área principal. Se aplica tarifa estándar sin recargo adicional de viaje en horario regular.' },
+      '75601': { name: 'Longview, TX', zone: 'Zone 2: Adjacent Zone', price: '$25 – $35 Surcharge', descEn: 'Short travel distance along I-20 corridor. Low-tier travel surcharge added to dispatch.', descEs: 'Corta distancia sobre corredor I-20. Recargo de viaje bajo sobre el servicio móvil.' },
+      'longview': { name: 'Longview, TX', zone: 'Zone 2: Adjacent Zone', price: '$25 – $35 Surcharge', descEn: 'Short travel distance along I-20 corridor. Low-tier travel surcharge added to dispatch.', descEs: 'Corta distancia sobre corredor I-20. Recargo de viaje bajo sobre el servicio móvil.' },
+      'hallsville': { name: 'Hallsville, TX', zone: 'Zone 2: Adjacent Zone', price: '$20 – $30 Surcharge', descEn: 'Short travel distance along US-80. Low travel surcharge added to dispatch.', descEs: 'Corta distancia sobre US-80. Recargo de viaje bajo sobre el servicio móvil.' },
+      'carthage': { name: 'Carthage, TX (Panola Co.)', zone: 'Zone 3: Extended County', price: '$45 – $55 Surcharge', descEn: 'Panola County oilfield & residential dispatch. Standard regional travel surcharge.', descEs: 'Despacho a condado de Panola y campos petroleros. Recargo de viaje regional estándar.' },
+      'kilgore': { name: 'Kilgore, TX', zone: 'Zone 3: Extended County', price: '$40 – $50 Surcharge', descEn: 'Gregg/Rusk County oilfield & fleet dispatch. Standard regional travel surcharge.', descEs: 'Despacho a campos petroleros y flotas en Gregg/Rusk. Recargo de viaje regional estándar.' },
+      'tyler': { name: 'Tyler, TX', zone: 'Zone 4: Regional Metro', price: 'Quoted by Phone', descEn: 'Regional metro coverage. Custom trip fee calculated based on mileage and urgency.', descEs: 'Cobertura metro regional. Tarifa personalizada basada en millas y urgencia.' },
+      'shreveport': { name: 'Shreveport, LA', zone: 'Zone 4: Regional Metro', price: 'Quoted by Phone', descEn: 'Cross-state I-20 corridor dispatch. Custom trip fee calculated based on location.', descEs: 'Despacho interestatal sobre corredor I-20. Tarifa personalizada basada en ubicación.' },
+    };
+
+    const isEs = document.documentElement.lang.startsWith('es');
+    const tr = (s: string) => {
+      if (!isEs) return s;
+      return s
+        .replace('Zone 1: Core Service Area', 'Zona 1: Área de Servicio Principal')
+        .replace('Zone 2: Adjacent Zone', 'Zona 2: Zona Adyacente')
+        .replace('Zone 3: Extended County', 'Zona 3: Condado Extendido')
+        .replace('Zone 4: Regional Metro', 'Zona 4: Metro Regional')
+        .replace('Zone 4: Extended East Texas Region', 'Zona 4: Región Extendida del Este de Texas')
+        .replace('Included / Standard Fee', 'Incluido / Tarifa Estándar')
+        .replace('Surcharge', 'de Recargo')
+        .replace('Quoted by Phone', 'Cotizado por Teléfono')
+        .replace('Custom Quote Available', 'Cotización Personalizada Disponible');
+    };
+    const doCalc = () => {
+      const q = (input?.value || '').trim().toLowerCase();
+      if (!q) return;
+      let matched = zones[q];
+      if (!matched) {
+        // Partial matching
+        const key = Object.keys(zones).find((k) => q.includes(k) || k.includes(q));
+        if (key) matched = zones[key];
+      }
+
+      resultBox?.classList.remove('hidden');
+      if (matched) {
+        if (zoneTag) zoneTag.textContent = tr(matched.zone);
+        if (cityName) cityName.textContent = matched.name;
+        if (priceTag) priceTag.textContent = tr(matched.price);
+        if (descTag) descTag.textContent = document.documentElement.lang.startsWith('es') ? matched.descEs : matched.descEn;
+      } else {
+        if (zoneTag) zoneTag.textContent = tr('Zone 4: Extended East Texas Region');
+        if (cityName) cityName.textContent = q.toUpperCase();
+        if (priceTag) priceTag.textContent = tr('Custom Quote Available');
+        if (descTag) descTag.textContent = document.documentElement.lang.startsWith('es')
+          ? 'Atendemos esta ubicación. Por favor llámenos para confirmar la tarifa exacta de viaje.'
+          : 'We service this location. Please call us to confirm the exact travel surcharge before dispatch.';
+      }
+    };
+
+    btn?.addEventListener('click', doCalc);
+    input?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') doCalc();
+    });
+  }
+</script>
+
+<style>
+  .mileage-calc { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); }
+  .mileage-calc__head { margin-bottom: 1.5rem; }
+  .input-group { display: flex; gap: 0.5rem; }
+  .input-group input { flex: 1; }
+  .mileage-result { margin-top: 1.5rem; }
+  .mileage-result.hidden { display: none; }
+  .result-card { background: var(--lavender-50); border: 1px solid #c4b5fd; border-radius: var(--radius); padding: 1.5rem; display: grid; gap: 0.6rem; }
+  .result-zone { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--purple-700); }
+  .result-card h3 { margin: 0; font-size: 1.3rem; }
+  .result-price { font-size: 1.25rem; font-weight: 800; color: var(--pink-600); }
+  .result-card p { margin: 0; color: var(--ink-soft); }
+</style>

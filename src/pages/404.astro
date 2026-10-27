@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { UI_STRINGS } from '../i18n/ui';
+import { path } from '../i18n/routes';
+const en = UI_STRINGS.en.notFound;
+const es = UI_STRINGS.es.notFound;
+---
+<BaseLayout lang="en" title="404 — Page not found | L&T Solutions" description="Page not found." noindex>
+  <section class="section nf">
+    <div class="container">
+      <p class="nf__code" aria-hidden="true">404</p>
+      <h1>{en.title} <span lang="es">· {es.title}</span></h1>
+      <p>{en.body} <span lang="es">{es.body}</span></p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={path('home', 'en')}>{en.home}</a>
+        <a class="btn btn--outline" href={path('home', 'es')} lang="es">{es.home}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { text-align: center; background: linear-gradient(180deg, var(--lavender-50), #fff); }
+  .nf .btn-row { justify-content: center; }
+  .nf h1 span { color: var(--purple-700); }
+  .nf__code { font-size: clamp(5rem, 16vw, 9rem); font-weight: 800; line-height: 1; margin: 0; background: linear-gradient(90deg, var(--purple-700), var(--pink-500)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+</style>

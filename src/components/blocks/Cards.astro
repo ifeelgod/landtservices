@@ -1,0 +1,50 @@
+---
+import type { Block, Card } from '../../content/types';
+import { path, type Lang } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type Cards = Extract<Block, { type: 'cards' }>;
+interface Props { block: Cards; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+const ui = t(lang);
+const cols = b.columns ?? (b.cards.length % 3 === 0 ? 3 : b.cards.length >= 4 ? 4 : 2);
+const hid = `h-${idx}`;
+const router = b.variant === 'router';
+const cardCta = (c: Card) => c.cta ?? ui.learnMore;
+---
+<Section bg={b.bg} labelledby={b.title ? hid : undefined} class={router ? 'router' : undefined}>
+  {(b.title || b.intro) && (
+    <div class="section-head">
+      {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+      {b.title && <h2 id={hid}>{b.title}</h2>}
+      {b.intro && <p set:html={b.intro} />}
+    </div>
+  )}
+  <ul class:list={['grid', `grid--${cols}`, 'cards']} role="list">
+    {b.cards.map((c, i) => (
+      <li class:list={['card', { 'card--router': router }]}>
+        {router && <span class="card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>}
+        {c.icon && <div class="card__icon"><Icon name={c.icon} /></div>}
+        <h3>{c.title}</h3>
+        {c.price && <span class="card__price">{c.price}</span>}
+        <p set:html={c.text} />
+        {c.href && (
+          <a class="card__link" href={path(c.href, lang)}>
+            {cardCta(c)}<span class="sr-only">: {c.title}</span> <span aria-hidden="true">→</span>
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .cards { list-style: none; padding: 0; margin: 0; }
+  .card { display: flex; flex-direction: column; }
+  .card :global(.card__link) { margin-top: auto; }
+  .card--router { border-width: 1.5px; }
+  .card--router:hover { background: linear-gradient(180deg, #fff, var(--lavender-50)); }
+  .card__num { position: absolute; top: 1.1rem; right: 1.25rem; font-weight: 800; font-size: 0.85rem; color: #c4b5fd; }
+</style>

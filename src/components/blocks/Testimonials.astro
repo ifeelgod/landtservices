@@ -1,0 +1,32 @@
+---
+import type { Block } from '../../content/types';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type T = Extract<Block, { type: 'testimonials' }>;
+interface Props { block: T; idx: number }
+const { block: b, idx } = Astro.props;
+---
+<Section bg={b.bg} labelledby={`h-${idx}`}>
+  <div class="section-head"><h2 id={`h-${idx}`}>{b.title}</h2></div>
+  <ul class="grid grid--3 quotes" role="list">
+    {b.items.map((q) => (
+      <li class="card quote">
+        <div class="stars" aria-label="5 / 5">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={18} />)}</div>
+        <blockquote><p set:html={q.quote} /></blockquote>
+        <p class="quote__name">— {q.name}</p>
+      </li>
+    ))}
+  </ul>
+  {b.note && <p class="quotes__note">{b.note}</p>}
+</Section>
+
+<style>
+  .quotes { list-style: none; padding: 0; margin: 0; }
+  .stars { display: flex; gap: 2px; color: #f59e0b; margin-bottom: 0.75rem; }
+  .stars :global(svg) { fill: currentColor; }
+  blockquote { margin: 0; }
+  blockquote p { color: var(--ink); font-size: 1.04rem; }
+  .quote__name { font-weight: 800; color: var(--purple-700); margin: 0; }
+  .quotes__note { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); font-style: italic; }
+</style>

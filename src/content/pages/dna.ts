@@ -1,0 +1,306 @@
+import type { PageModule } from '../types';
+import { SITE, price } from '../../config/site';
+
+const legalPriceStr = price(SITE.prices.dnaLegal) ?? '$250';
+const pomPriceStr = price(SITE.prices.dnaPeaceOfMind) ?? '$150';
+
+const page: PageModule = {
+  en: {
+    title: 'Legal & Private DNA Paternity Testing in Marshall, TX | AABB Accredited',
+    description: `AABB-accredited court-admissible legal DNA paternity testing (${legalPriceStr} all-in) for Harrison County family court, plus private peace-of-mind DNA tests (${pomPriceStr}).`,
+    schemaType: 'MedicalWebPage',
+    service: {
+      name: 'DNA Paternity Testing',
+      serviceType: 'DNA Paternity Testing',
+      description: 'AABB-accredited legal court-admissible DNA paternity testing and private peace-of-mind DNA testing in Marshall, TX.',
+      offers: [
+        { name: 'Legal Court DNA Paternity Test', price: SITE.prices.dnaLegal },
+        { name: 'Peace-of-Mind DNA Paternity Test', price: SITE.prices.dnaPeaceOfMind },
+      ],
+    },
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'AABB Accredited DNA Collection',
+        title: 'AABB-Accredited Court-Admissible & Private DNA Paternity Testing',
+        subtitle: `Official legal DNA testing for Harrison County Family Court child support, custody, and birth certificate changes (${legalPriceStr} all-in), plus private peace-of-mind tests (${pomPriceStr}).`,
+        image: 'dna',
+        imageAlt: 'Gloved hands holding an AABB legal DNA buccal cheek swab collection kit',
+        primary: { label: 'Book a DNA Test', href: 'contact' },
+        secondary: { label: `Call ${SITE.phone.display}`, href: 'tel' },
+        badges: true,
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: 'What Is the Difference Between a Legal DNA Test and a Peace-of-Mind Test in Texas?',
+        answer: 'A legal DNA test follows strict AABB-certified chain-of-custody protocols, requiring government photo ID verification and professional cheek swabbing, producing a certified laboratory report legally admissible in Texas family courts for child support and custody. A peace-of-mind DNA test provides private answers without formal chain-of-custody and cannot be used in court proceedings.',
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        eyebrow: 'Testing Options',
+        title: 'DNA Testing Services in Marshall, TX',
+        intro: 'Select the DNA collection service that fits your legal or personal situation.',
+        cards: [
+          {
+            title: 'Legal Court Paternity Test',
+            text: `100% court-admissible for Texas child support, custody, social security, and estate cases. Includes photo ID and fingerprint verification.`,
+            href: 'contact',
+            icon: 'scale',
+            price: legalPriceStr,
+            cta: 'Schedule Legal Test',
+          },
+          {
+            title: 'Peace-of-Mind DNA Test',
+            text: `Identical 99.99% accuracy as our legal test, designed for private family knowledge when court documentation is not required.`,
+            href: 'contact',
+            icon: 'user',
+            price: pomPriceStr,
+            cta: 'Schedule Private Test',
+          },
+          {
+            title: 'USCIS Immigration DNA Test',
+            text: 'AABB-accredited relationship testing coordinated with US embassies and USCIS offices worldwide for visa and citizenship applications.',
+            href: 'contact',
+            icon: 'globe',
+            price: 'Call for Quote',
+            cta: 'Inquire About Immigration DNA',
+          },
+          {
+            title: 'Non-Invasive Prenatal Paternity',
+            text: 'Safe paternity testing as early as 7 weeks of pregnancy using a simple blood draw from the mother and cheek swab from the alleged father.',
+            href: 'contact',
+            icon: 'baby',
+            price: 'Call for Quote',
+            cta: 'Inquire About Prenatal DNA',
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        howTo: true,
+        bg: 'lavender',
+        title: 'The Legal DNA Collection Process',
+        intro: 'A simple, 15-minute appointment handled with complete privacy and care.',
+        steps: [
+          {
+            title: 'Schedule Your Appointment',
+            text: 'Book online or call our Marshall office. We can schedule all parties together or in separate appointments if preferred.',
+          },
+          {
+            title: 'Cheek Swab Collection',
+            text: 'A certified AABB collector performs a gentle 15-second oral cheek swab for each participant while verifying photo IDs.',
+          },
+          {
+            title: 'AABB Partner Laboratory Analysis',
+            text: 'Samples are dispatched via express courier to our AABB-accredited partner laboratory for dual-run 24-marker DNA testing.',
+          },
+          {
+            title: 'Confidential Results Delivered',
+            text: 'Receive a notarized, court-ready legal report via secure portal or mail within 2 to 3 business days.',
+          },
+        ],
+      },
+      {
+        type: 'split',
+        eyebrow: 'Court Readiness',
+        title: 'Harrison County Family Court Admissible DNA',
+        text: 'When child custody, child support, or legal paternity recognition is involved in East Texas courts, unverified home DNA kits are rejected by judges. L&T Solutions ensures your test strictly adheres to Texas Family Code standards.',
+        items: [
+          'AABB-accredited chain of custody documentation included',
+          'Government photo ID, photograph, and thumbprint captured at appointment',
+          'Separate, conflict-free appointments available for mother and alleged father',
+          'Out-of-state collection coordination if one party lives in another city or state',
+        ],
+        image: 'dna',
+        imageAlt: 'BUCCAL cheek swab collection materials for legal court DNA test',
+        cta: { label: 'Schedule Your Legal DNA Test', href: 'contact' },
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'DNA Testing Frequently Asked Questions',
+        items: [
+          {
+            q: 'How much does a legal DNA paternity test cost in Marshall, TX?',
+            a: `Our legal court-admissible DNA paternity test is ${legalPriceStr} all-in, covering sample collection, AABB partner lab analysis, and notarized court reports. Private peace-of-mind tests are ${pomPriceStr}.`,
+          },
+          {
+            q: 'What should I bring to a legal DNA appointment?',
+            a: 'Adult participants must bring a government-issued photo ID (driver’s license, passport, or state ID). For minor children, bring a birth certificate or hospital record if available.',
+          },
+          {
+            q: 'Can testing be done if the mother or father lives in another state?',
+            a: 'Yes. We coordinate out-of-state collections through our network of AABB-accredited collection sites across the United States, linking both samples seamlessly at the lab.',
+          },
+          {
+            q: 'How accurate are your DNA paternity test results?',
+            a: 'All testing yields a 99.99%+ probability of paternity for inclusions, or 100% certainty for exclusions, analyzed by our AABB-accredited partner laboratory.',
+          },
+          {
+            q: 'Is a mother’s sample required for a paternity test?',
+            a: 'No. A mother’s sample is recommended when available, but a definitive court-admissible result can be achieved testing only the alleged father and child.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: 'Need Answers or a Court-Ready DNA Report?',
+        text: `Call ${SITE.phone.display} to speak with our DNA specialist in Marshall, TX, or book your appointment online.`,
+        primary: { label: 'Book DNA Test', href: 'contact' },
+        secondary: { label: `Call ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+  es: {
+    title: 'Pruebas de ADN Legal y Privadas en Marshall, TX | Acreditado por AABB',
+    description: `Prueba de paternidad por ADN legal admisible en corte (${legalPriceStr} todo incluido) para la corte de familia del condado de Harrison, y pruebas privadas de tranquilidad (${pomPriceStr}).`,
+    schemaType: 'MedicalWebPage',
+    service: {
+      name: 'Pruebas de Paternidad por ADN',
+      serviceType: 'Pruebas de Paternidad por ADN',
+      description: 'Pruebas de paternidad por ADN legal admisibles en corte y pruebas privadas de tranquilidad acreditadas por AABB en Marshall, TX.',
+      offers: [
+        { name: 'Prueba de ADN Legal para Corte', price: SITE.prices.dnaLegal },
+        { name: 'Prueba de ADN Privada de Tranquilidad', price: SITE.prices.dnaPeaceOfMind },
+      ],
+    },
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'Toma de ADN Acreditada por AABB',
+        title: 'Pruebas de Paternidad por ADN Legal para Corte y Privadas en Marshall, TX',
+        subtitle: `Pruebas de ADN oficiales admisibles en la corte de familia del condado de Harrison para manutención, custodia y acta de nacimiento (${legalPriceStr} todo incluido), y pruebas privadas (${pomPriceStr}).`,
+        image: 'dna',
+        imageAlt: 'Manos con guantes tomando muestra de hisopado bucal para prueba de ADN legal AABB',
+        primary: { label: 'Agendar Prueba de ADN', href: 'contact' },
+        secondary: { label: `Llamar al ${SITE.phone.display}`, href: 'tel' },
+        badges: true,
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: '¿Cuál es la diferencia entre una prueba de ADN legal y una prueba de tranquilidad privada en Texas?',
+        answer: 'La prueba de ADN legal sigue una estricta cadena de custodia acreditada por AABB, requiere identificación oficial con foto y toma profesional mediante hisopado bucal, emitiendo un reporte notariado admisible en las cortes de familia de Texas. La prueba de tranquilidad brinda respuestas privadas sin cadena de custodia formal y no puede ser utilizada en trámites judiciales.',
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        eyebrow: 'Opciones de Pruebas',
+        title: 'Servicios de Pruebas de ADN en Marshall, TX',
+        intro: 'Seleccione la prueba de ADN que mejor se adapte a su caso legal o personal.',
+        cards: [
+          {
+            title: 'ADN Legal para la Corte',
+            text: `100% admisible en cortes de Texas para manutención, custodia, seguro social y trámites legales. Incluye foto y huella digital.`,
+            href: 'contact',
+            icon: 'scale',
+            price: legalPriceStr,
+            cta: 'Agendar Prueba Legal',
+          },
+          {
+            title: 'ADN Privado de Tranquilidad',
+            text: `Misma precisión del 99.99% que la prueba legal, diseñada para información personal cuando no requiere trámites judiciales.`,
+            href: 'contact',
+            icon: 'user',
+            price: pomPriceStr,
+            cta: 'Agendar Prueba Privada',
+          },
+          {
+            title: 'ADN para Inmigración USCIS',
+            text: 'Pruebas acreditadas por AABB coordinadas con embajadas de EE. UU. y oficinas de USCIS para visas y ciudadanía.',
+            href: 'contact',
+            icon: 'globe',
+            price: 'Consulte Precio',
+            cta: 'Preguntar sobre ADN Inmigración',
+          },
+          {
+            title: 'Paternidad Prenatal No Invasiva',
+            text: 'Prueba segura desde las 7 semanas de embarazo mediante extracción de sangre a la madre e hisopado al presunto padre.',
+            href: 'contact',
+            icon: 'baby',
+            price: 'Consulte Precio',
+            cta: 'Preguntar sobre ADN Prenatal',
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        howTo: true,
+        bg: 'lavender',
+        title: 'Proceso de Toma de Muestra para ADN Legal',
+        intro: 'Una cita rápida de 15 minutos realizada con total confidencialidad y respeto.',
+        steps: [
+          {
+            title: 'Agende su Cita',
+            text: 'Solicite su cita por internet o por teléfono. Podemos citar a las partes juntas o en horarios separados si así lo prefiere.',
+          },
+          {
+            title: 'Toma de Muestra por Hisopado',
+            text: 'Un colector certificado AABB realiza un hisopado bucal suave de 15 segundos a cada participante verificando su identificación.',
+          },
+          {
+            title: 'Análisis en Laboratorio Acreditado AABB',
+            text: 'Las muestras se envían por mensajería exprés a nuestro laboratorio asociado acreditado por AABB para análisis de 24 marcadores.',
+          },
+          {
+            title: 'Resultados Confidenciales',
+            text: 'Reciba su reporte notariado admisible en corte por portal seguro o correo en 2 a 3 días hábiles.',
+          },
+        ],
+      },
+      {
+        type: 'split',
+        eyebrow: 'Validez Legal',
+        title: 'ADN Válido en la Corte de Familia del Condado de Harrison',
+        text: 'En casos de custodia o manutención infantil en las cortes del Este de Texas, los kits de ADN comprados en farmacias son rechazados por los jueces. L&T Solutions garantiza el cumplimiento total del Código de Familia de Texas.',
+        items: [
+          'Documentación completa de cadena de custodia AABB incluida',
+          'Toma de foto e identificación oficial durante la cita',
+          'Citas separadas disponibles para la madre y el presunto padre en caso de conflicto',
+          'Coordinación de muestras en otros estados si una parte vive fuera de Texas',
+        ],
+        image: 'dna',
+        imageAlt: 'Hisopado bucal para prueba de ADN legal en Marshall TX',
+        cta: { label: 'Agendar Prueba de ADN Legal', href: 'contact' },
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'Preguntas Frecuentes sobre Pruebas de ADN',
+        items: [
+          {
+            q: '¿Cuánto cuesta una prueba de ADN legal de paternidad en Marshall, TX?',
+            a: `Nuestra prueba de ADN legal admisible en corte cuesta ${legalPriceStr} todo incluido (toma de muestras, análisis en laboratorio AABB y reporte notariado). La prueba privada cuesta ${pomPriceStr}.`,
+          },
+          {
+            q: '¿Qué debo llevar a la cita de ADN legal?',
+            a: 'Los adultos deben presentar una identificación oficial con fotografía (licencia de conducir o pasaporte). Para los niños menores, traiga el certificado de nacimiento si dispone de él.',
+          },
+          {
+            q: '¿Se puede hacer la prueba si el padre o la madre viven en otro estado?',
+            a: 'Sí. Coordinamos la toma de muestra en otros estados a través de laboratorios asociados certificados por AABB en todo Estados Unidos.',
+          },
+          {
+            q: '¿Qué tan precisos son los resultados de ADN?',
+            a: 'Todos los análisis garantizan una precisión mayor al 99.99% para inclusión de paternidad, o 100% para exclusión.',
+          },
+          {
+            q: '¿Es obligatoria la muestra de la madre para la prueba de paternidad?',
+            a: 'No. La muestra de la madre es recomendada pero no obligatoria; se puede obtener un resultado legal 100% certero analizando únicamente al presunto padre y al hijo.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: '¿Necesita Respuestas o un Reporte de ADN Válido en Corte?',
+        text: `Llame al ${SITE.phone.display} para hablar con nuestro especialista en ADN en Marshall, TX o agende su cita en línea.`,
+        primary: { label: 'Agendar Prueba de ADN', href: 'contact' },
+        secondary: { label: `Llamar al ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+};
+
+export default page;

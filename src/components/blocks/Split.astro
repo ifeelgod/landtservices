@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { Block } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { resolveHref } from '../../lib/links';
+import { IMAGES } from '../../lib/images';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type Split = Extract<Block, { type: 'split' }>;
+interface Props { block: Split; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+---
+<Section bg={b.bg} labelledby={`h-${idx}`}>
+  <div class:list={['split', { 'split--rev': b.reverse }]}>
+    <div class="split__media">
+      <Image src={IMAGES[b.image]} alt={b.imageAlt} widths={[480, 720, 960]} sizes="(min-width: 1000px) 560px, 100vw" format="webp" quality={70} loading="lazy" />
+    </div>
+    <div class="split__copy">
+      {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+      <h2 id={`h-${idx}`}>{b.title}</h2>
+      {b.text && <p class="split__text" set:html={b.text} />}
+      {b.items && (
+        <ul class="split__list">
+          {b.items.map((i) => <li><Icon name="check" size={18} /><span set:html={i} /></li>)}
+        </ul>
+      )}
+      {b.cta && <a class="btn btn--purple" href={resolveHref(b.cta.href, lang)}>{b.cta.label}</a>}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .split { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 1000px) { .split { grid-template-columns: 1fr 1fr; gap: 4rem; } .split--rev .split__media { order: 2; } }
+  .split__media :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+  .split__text { color: var(--ink-soft); font-size: 1.08rem; }
+  .split__list { list-style: none; padding: 0; margin: 0 0 1.6rem; display: grid; gap: 0.7rem; }
+  .split__list li { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .split__list :global(svg) { flex: none; margin-top: 3px; color: var(--pink-600); }
+</style>

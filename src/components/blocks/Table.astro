@@ -1,0 +1,43 @@
+---
+import type { Block } from '../../content/types';
+import Section from './Section.astro';
+
+type Table = Extract<Block, { type: 'table' }>;
+interface Props { block: Table; idx: number }
+const { block: b, idx } = Astro.props;
+---
+<Section bg={b.bg} labelledby={`h-${idx}`}>
+  <div class="section-head">
+    <h2 id={`h-${idx}`}>{b.title}</h2>
+    {b.intro && <p set:html={b.intro} />}
+  </div>
+  <div class="table-wrap" role="region" aria-labelledby={`h-${idx}`} tabindex="0">
+    <table>
+      <thead><tr>{b.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+      <tbody>
+        {b.rows.map((r) => (
+          <tr>{r.map((c, i) => (i === 0 ? <th scope="row" set:html={c} /> : <td data-label={b.head[i]} set:html={c} />))}</tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {b.note && <p class="table-note" set:html={b.note} />}
+</Section>
+
+<style>
+  .table-wrap { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
+  table { font-size: 0.97rem; }
+  th, td { text-align: left; padding: 0.95rem 1.1rem; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--purple-700); color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody th { color: var(--purple-800); font-weight: 800; }
+  tbody tr:nth-child(even) { background: #fcfaff; }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .table-note { margin-top: 1rem; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 760px) {
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    tr { display: block; padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+    tbody th, td { display: block; border: 0; padding: 0.3rem 1rem; }
+    tbody th { font-size: 1.05rem; }
+    td::before { content: attr(data-label) ': '; font-weight: 700; color: var(--ink); }
+  }
+</style>

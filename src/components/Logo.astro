@@ -1,0 +1,29 @@
+---
+interface Props { light?: boolean; class?: string }
+const { light = false, class: cls } = Astro.props;
+---
+<span class:list={['logo', { 'logo--light': light }, cls]}>
+  <img
+    class="logo__img"
+    src="/logo.png"
+    alt="L&T Solutions"
+    width="48"
+    height="48"
+    loading="eager"
+    decoding="async"
+  />
+  <span class="logo__text">
+    <span class="logo__name">L&amp;T Solutions</span>
+    <span class="logo__tag">Testing · DNA · Lab Draws</span>
+  </span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); }
+  .logo__img { flex: none; width: 44px; height: 44px; object-fit: contain; }
+  .logo__text { display: grid; line-height: 1.05; }
+  .logo__name { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; }
+  .logo__tag { font-size: 0.7rem; font-weight: 700; color: var(--purple-700); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px; }
+  .logo--light .logo__name { color: #fff; }
+  .logo--light .logo__tag { color: #e9ddff; }
+</style>

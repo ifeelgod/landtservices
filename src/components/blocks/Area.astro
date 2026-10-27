@@ -1,0 +1,45 @@
+---
+import type { Block } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { SITE } from '../../config/site';
+import { telHref } from '../../lib/links';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type Area = Extract<Block, { type: 'area' }>;
+interface Props { block: Area; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+const es = lang === 'es';
+---
+<Section bg={b.bg} labelledby={`h-${idx}`}>
+  <div class="section-head">
+    <h2 id={`h-${idx}`}>{b.title}</h2>
+    {b.intro && <p set:html={b.intro} />}
+  </div>
+  {b.cities ? (
+    <ul class="grid grid--4 cities" role="list">
+      {b.cities.map((c) => (
+        <li class="card city">
+          <h3><Icon name="map" size={20} /> {c.name}</h3>
+          <p set:html={c.text} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <ul class="chips" aria-label={es ? 'Ciudades atendidas' : 'Cities served'}>
+      {SITE.serviceArea.map((c) => <li class="chip"><Icon name="map" />{c}</li>)}
+      <li class="chip"><Icon name="map" />{es ? `y todo el condado de Harrison` : `+ all of ${SITE.county}`}</li>
+    </ul>
+  )}
+  <p class="area__call">
+    {es ? '¿No ve su ciudad? ' : "Don't see your town? "}
+    <a href={telHref(SITE.phone.e164)}>{es ? 'Llámenos al' : 'Call'} {SITE.phone.display}</a>
+  </p>
+</Section>
+
+<style>
+  .city h3 { display: flex; align-items: center; gap: 0.4rem; color: var(--purple-800); }
+  .city h3 :global(svg) { color: var(--pink-600); }
+  .cities { list-style: none; padding: 0; margin: 0; }
+  .area__call { margin-top: 1.5rem; font-weight: 700; }
+</style>

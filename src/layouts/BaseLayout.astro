@@ -1,0 +1,123 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import { SITE } from '../config/site';
+import { t } from '../i18n/ui';
+import { ROUTES, routeKeyOf, type Lang } from '../i18n/routes';
+import { absUrl, resolveHref, telHref } from '../lib/links';
+import UtilityBar from '../components/UtilityBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  jsonLd?: unknown;
+  noindex?: boolean;
+}
+const { lang, title, description, jsonLd, noindex = false } = Astro.props;
+const pathname = Astro.url.pathname;
+const ui = t(lang);
+const key = routeKeyOf(pathname);
+const canonical = absUrl(pathname);
+const alternates = key ? { en: absUrl(ROUTES[key].en), es: absUrl(ROUTES[key].es) } : null;
+const ogImage = absUrl('/og-image.png');
+---
+<!doctype html>
+<html lang={lang === 'es' ? 'es-US' : 'en-US'} class="notranslate" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google" content="notranslate" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates && (
+      <>
+        <link rel="alternate" hreflang="en-US" href={alternates.en} />
+        <link rel="alternate" hreflang="es-US" href={alternates.es} />
+        <link rel="alternate" hreflang="x-default" href={alternates.en} />
+      </>
+    )}
+    {(noindex || SITE.isDraft) && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#5B21B6" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_US' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="geo.region" content="US-TX" />
+    <meta name="geo.placename" content={SITE.address.city} />
+    <meta name="geo.position" content={`${SITE.geo.lat};${SITE.geo.lng}`} />
+    <script is:inline>
+      /* Language persistence: once Spanish is chosen, keep every page in Spanish until the user picks English. */
+      (function () {
+        try {
+          var isEs = document.documentElement.lang.indexOf('es') === 0;
+          var pref = localStorage.getItem('lt-lang');
+          if (isEs) { localStorage.setItem('lt-lang', 'es'); }
+          else if (pref === 'es') {
+            var alt = document.querySelector('link[rel="alternate"][hreflang="es-US"]');
+            if (alt) {
+              var p = new URL(alt.href).pathname;
+              if (p !== location.pathname) location.replace(p + location.search + location.hash);
+            }
+          }
+        } catch (e) {}
+
+        document.addEventListener('click', function (e) {
+          var t = e.target && e.target.closest ? e.target.closest('[data-set-lang]') : null;
+          if (t && t.dataset && t.dataset.setLang) {
+            try { localStorage.setItem('lt-lang', t.dataset.setLang); } catch (err) {}
+          }
+        }, true);
+      })();
+    </script>
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class="notranslate" translate="no">
+    <a class="skip-link" href="#main">{ui.skip}</a>
+    {SITE.isDraft && <div class="draft-ribbon" role="note">{ui.draft}</div>}
+    <UtilityBar lang={lang} pathname={pathname} />
+    <Header lang={lang} pathname={pathname} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} pathname={pathname} />
+
+    <div class="callbar" aria-label={ui.callUs}>
+      <a class="callbar__btn callbar__call" href={telHref(SITE.phone.e164)}><Icon name="phone" size={20} />{ui.call}</a>
+      <a class="callbar__btn callbar__book" href={resolveHref('contact', lang)}><Icon name="clipboard" size={20} />{ui.book}</a>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  main:focus { outline: none; }
+  .draft-ribbon {
+    position: fixed; z-index: 999; bottom: 84px; left: 12px; pointer-events: none;
+    background: #fef08a; color: #713f12; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.04em;
+    padding: 0.35rem 0.7rem; border-radius: 6px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.15); opacity: 0.92;
+  }
+  @media (min-width: 900px) { .draft-ribbon { bottom: 12px; } }
+  .callbar {
+    position: fixed; z-index: 90; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+    padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom)); background: rgb(255 255 255 / 0.96);
+    backdrop-filter: blur(10px); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgb(46 10 99 / 0.08);
+  }
+  .callbar__btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 52px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 1.02rem; }
+  .callbar__call { background: var(--purple-700); color: #fff; }
+  .callbar__book { background: var(--pink-600); color: #fff; }
+  .callbar__btn:hover { color: #fff; }
+  @media (min-width: 900px) { .callbar { display: none; } }
+  body.nav-open { overflow: hidden; }
+</style>

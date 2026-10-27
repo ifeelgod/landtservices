@@ -1,0 +1,35 @@
+---
+import { SITE } from '../../config/site';
+import type { Lang } from '../../i18n/routes';
+import Icon from '../Icon.astro';
+
+interface Props { lang: Lang; light?: boolean }
+const { lang, light = false } = Astro.props;
+const es = lang === 'es';
+const all = [
+  { on: SITE.badges.clia, icon: 'shield', label: es ? 'Cumple con CLIA' : 'CLIA Compliant' },
+  { on: SITE.badges.aabb, icon: 'dna', label: es ? 'Colector Acreditado AABB' : 'AABB Accredited Collector' },
+  { on: SITE.badges.samhsa, icon: 'flask', label: es ? 'Laboratorio SAMHSA' : 'SAMHSA Certified Lab' },
+  { on: SITE.badges.dot, icon: 'truck', label: es ? 'Cumple con DOT' : 'DOT Compliant' },
+  { on: SITE.badges.mro, icon: 'check', label: es ? 'Verificado por MRO' : 'MRO Verified' },
+  { on: SITE.badges.spanish, icon: 'globe', label: '¡Hablamos Español!' },
+] as const;
+const badges = all.filter((b) => b.on);
+---
+<ul class:list={['badges', { 'badges--light': light }]} aria-label={es ? 'Acreditaciones' : 'Accreditations'}>
+  {badges.map((b) => (
+    <li class="badge"><Icon name={b.icon} size={16} />{b.label}</li>
+  ))}
+</ul>
+
+<style>
+  .badges { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.75rem; border-radius: 999px;
+    font-size: 0.82rem; font-weight: 700; background: #fff; color: var(--purple-800); border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .badge :global(svg) { color: var(--pink-600); }
+  .badges--light .badge { background: rgb(255 255 255 / 0.12); border-color: rgb(255 255 255 / 0.25); color: #fff; box-shadow: none; }
+  .badges--light .badge :global(svg) { color: #fbcfe8; }
+</style>

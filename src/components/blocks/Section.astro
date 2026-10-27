@@ -1,0 +1,8 @@
+---
+import type { Bg } from '../../content/types';
+interface Props { bg?: Bg; id?: string; class?: string; labelledby?: string }
+const { bg = 'default', id, class: cls, labelledby } = Astro.props;
+---
+<section id={id} class:list={['section', bg !== 'default' && `section--${bg}`, cls]} aria-labelledby={labelledby}>
+  <div class="container"><slot /></div>
+</section>

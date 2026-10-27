@@ -1,0 +1,36 @@
+---
+import type { Block } from '../../content/types';
+import Section from './Section.astro';
+
+type Steps = Extract<Block, { type: 'steps' }>;
+interface Props { block: Steps; idx: number }
+const { block: b, idx } = Astro.props;
+---
+<Section bg={b.bg} labelledby={`h-${idx}`}>
+  <div class="section-head">
+    <h2 id={`h-${idx}`}>{b.title}</h2>
+    {b.intro && <p set:html={b.intro} />}
+  </div>
+  <ol class:list={['steps', `steps--${Math.min(b.steps.length, 4)}`]}>
+    {b.steps.map((s, i) => (
+      <li class="step">
+        <span class="step__n" aria-hidden="true">{i + 1}</span>
+        <h3>{s.title}</h3>
+        <p set:html={s.text} />
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.25rem; counter-reset: s; }
+  @media (min-width: 760px) { .steps--3, .steps--4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } .steps--4 { grid-template-columns: repeat(4, 1fr); } }
+  .step { position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow-sm); }
+  .step__n {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--purple-700), var(--pink-500)); color: #fff; font-weight: 800; font-size: 1.1rem;
+    box-shadow: 0 6px 16px rgb(236 72 153 / 0.3);
+  }
+  .step p { color: var(--muted); margin: 0; }
+</style>

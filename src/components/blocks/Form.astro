@@ -1,0 +1,147 @@
+---
+import type { Block, FormService } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { SITE, fullAddress, mapsUrl } from '../../config/site';
+import { t } from '../../i18n/ui';
+import { telHref } from '../../lib/links';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type Form = Extract<Block, { type: 'form' }>;
+interface Props { block: Form; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+const ui = t(lang);
+const f = ui.form;
+const dispatch = b.variant === 'dispatch';
+const services: FormService[] = ['drug', 'dnaLegal', 'dnaPrivate', 'dot', 'blood', 'kits', 'gender', 'other'];
+const fid = b.id ?? `form-${idx}`;
+const subject = dispatch
+  ? `[${SITE.shortName}] Mobile dispatch request (${lang.toUpperCase()})`
+  : `[${SITE.shortName}] Appointment request (${lang.toUpperCase()})`;
+---
+<Section bg={b.bg} id={fid} labelledby={`${fid}-h`}>
+  <div class:list={['formwrap', { 'formwrap--aside': b.aside }]}>
+    <div class="formcard">
+      <h2 id={`${fid}-h`}>{b.title ?? (dispatch ? f.dispatchTitle : f.title)}</h2>
+      <p class="formcard__intro">{b.intro ?? f.intro}</p>
+      <form action={SITE.form.endpoint} method="POST" data-lt-form novalidate={false}>
+        <input type="hidden" name="access_key" value={SITE.form.accessKey} />
+        <input type="hidden" name="subject" value={subject} />
+        <input type="hidden" name="from_name" value={SITE.name + ' website'} />
+        <input type="hidden" name="language" value={lang} />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        {dispatch ? (
+          <>
+            <div class="field-row">
+              <div class="field"><label for={`${fid}-company`}>{f.company} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-company`} name="company" required autocomplete="organization" /></div>
+              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for={`${fid}-loc`}>{f.location} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-loc`} name="location" required /></div>
+              <div class="field"><label for={`${fid}-donors`}>{f.donors}</label><input id={`${fid}-donors`} name="donors" type="number" min="1" inputmode="numeric" value="1" /></div>
+            </div>
+            <div class="field">
+              <label for={`${fid}-test`}>{f.test} <span class="req" aria-hidden="true">*</span></label>
+              <select id={`${fid}-test`} name="test" required>
+                <option value="">{f.choose}</option>
+                {services.map((s) => <option value={ui.services[s]} selected={b.preset === s}>{ui.services[s]}</option>)}
+              </select>
+            </div>
+          </>
+        ) : (
+          <>
+            <div class="field-row">
+              <div class="field"><label for={`${fid}-name`}>{f.name} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-name`} name="name" required autocomplete="name" /></div>
+              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></div>
+            </div>
+            <div class="field">
+              <label for={`${fid}-test`}>{f.test} <span class="req" aria-hidden="true">*</span></label>
+              <select id={`${fid}-test`} name="test" required>
+                <option value="">{f.choose}</option>
+                {services.map((s) => <option value={ui.services[s]} selected={b.preset === s}>{ui.services[s]}</option>)}
+              </select>
+            </div>
+            <fieldset class="radio-row">
+              <legend class="sr-only">{f.where}</legend>
+              <label><input type="radio" name="where" value={f.whereClinic} checked /> {f.whereClinic}</label>
+              <label><input type="radio" name="where" value={f.whereMobile} /> {f.whereMobile}</label>
+            </fieldset>
+            <div class="field-row">
+              <div class="field"><label for={`${fid}-city`}>{f.city}</label><input id={`${fid}-city`} name="city" autocomplete="address-level2" /></div>
+              <div class="field"><label for={`${fid}-when`}>{f.when}</label><input id={`${fid}-when`} name="preferred_time" /></div>
+            </div>
+            <div class="field"><label for={`${fid}-msg`}>{f.message}</label><textarea id={`${fid}-msg`} name="message" rows="3" maxlength="600"></textarea></div>
+          </>
+        )}
+
+        <button class="btn btn--primary btn--block" type="submit" data-label={dispatch ? f.dispatchSubmit : f.submit} data-sending={f.sending}>
+          {dispatch ? f.dispatchSubmit : f.submit}
+        </button>
+        <p class="form-note"><Icon name="shield" size={16} />{f.privacy}</p>
+        <div class="form-status" role="status" aria-live="polite" hidden data-success={f.success} data-error={`${f.error} ${SITE.phone.display}.`}></div>
+      </form>
+    </div>
+
+    {b.aside && (
+      <aside class="contactcard" aria-label={ui.footer.visit}>
+        <h3>{ui.footer.visit}</h3>
+        <a class="contactcard__phone" href={telHref(SITE.phone.e164)}><Icon name="phone" />{SITE.phone.display}</a>
+        <p><Icon name="map" size={18} /><a href={mapsUrl()} target="_blank" rel="noopener">{fullAddress()}</a></p>
+        <p><Icon name="clock" size={18} /><span>{ui.footer.hours}: {SITE.hours.map((h) => `${ui.days[h.days[0]]}–${ui.days[h.days[h.days.length - 1]]} ${h.opens}–${h.closes}`).join(', ')}<br /><strong>{ui.footer.mobileHours}</strong></span></p>
+        <p><Icon name="globe" size={18} /><strong>{ui.footer.spanish}</strong></p>
+        <a class="contactcard__map" href={mapsUrl()} target="_blank" rel="noopener">
+          <Icon name="map" size={28} /><span>{lang === 'es' ? 'Abrir en Google Maps' : 'Open in Google Maps'} →</span>
+        </a>
+      </aside>
+    )}
+  </div>
+</Section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-lt-form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      const status = form.querySelector<HTMLElement>('.form-status')!;
+      btn.disabled = true;
+      btn.textContent = btn.dataset.sending ?? '…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.success === false) throw new Error(data.message || 'Request failed');
+        status.dataset.state = 'success';
+        status.textContent = status.dataset.success ?? 'Thank you!';
+        form.reset();
+      } catch {
+        status.dataset.state = 'error';
+        status.textContent = status.dataset.error ?? 'Error';
+      } finally {
+        status.hidden = false;
+        btn.disabled = false;
+        btn.textContent = btn.dataset.label ?? 'Send';
+      }
+    });
+  });
+</script>
+
+<style>
+  .formwrap { display: grid; gap: 2rem; max-width: 820px; }
+  .formwrap--aside { max-width: none; }
+  @media (min-width: 1000px) { .formwrap--aside { grid-template-columns: 1.5fr 1fr; align-items: start; } }
+  .formcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); border-top: 5px solid var(--pink-600); }
+  .formcard__intro { color: var(--muted); }
+  .contactcard { background: linear-gradient(160deg, var(--purple-900), var(--purple-700)); color: #ede0ff; border-radius: var(--radius-lg); padding: 2rem; position: sticky; top: calc(var(--header-h) + 1rem); }
+  .contactcard h3 { color: #fff; }
+  .contactcard a { color: #fff; }
+  .contactcard p { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .contactcard p :global(svg) { flex: none; margin-top: 4px; color: #fbcfe8; }
+  .contactcard__phone { display: inline-flex; gap: 0.6rem; align-items: center; font-size: 1.6rem; font-weight: 800; text-decoration: none; margin-bottom: 1.25rem; }
+  .contactcard__map { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.25rem; padding: 1.1rem; border-radius: var(--radius); background: rgb(255 255 255 / 0.1); border: 1px dashed rgb(255 255 255 / 0.35); text-decoration: none; font-weight: 700; }
+  .contactcard__map:hover { background: rgb(255 255 255 / 0.18); }
+</style>

@@ -1,0 +1,351 @@
+import type { PageModule } from '../types';
+import { SITE } from '../../config/site';
+
+const page: PageModule = {
+  en: {
+    title: 'Drug & Urinalysis Testing in Marshall, TX | 5/10/12 Panel & Hair Follicle',
+    description: 'Confidential pre-employment, court-ordered, and personal urinalysis & drug testing in Marshall, TX. 5-panel, 10-panel, 12-panel urine, hair follicle, and EtG alcohol testing.',
+    schemaType: 'MedicalWebPage',
+    service: {
+      name: 'Drug Testing and Urinalysis',
+      serviceType: 'Drug and Alcohol Testing & Urinalysis',
+      description: 'SAMHSA-certified drug testing and urinalysis including 5-panel, 10-panel, 12-panel urine screens, 90-day hair follicle tests, oral fluid screening, and EtG alcohol detection.',
+    },
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'Drug & Alcohol Screening · Urinalysis',
+        title: 'Comprehensive Urinalysis & Drug Screening in Marshall, TX',
+        subtitle: 'Confidential pre-employment, court-ordered, and personal urinalysis testing with rapid SAMHSA-certified lab turnaround within 24–48 hours and licensed MRO verification.',
+        image: 'clinic',
+        imageAlt: 'Clean, modern collection room for urinalysis and drug screening in Marshall TX',
+        primary: { label: 'Schedule a Drug Test', href: 'contact' },
+        secondary: { label: '24/7 Mobile Dispatch', href: 'mobile' },
+        points: [
+          'Urinalysis drug screens (5, 10, 12-Panel & customized panels)',
+          'SAMHSA-certified laboratory results with licensed MRO review',
+          'Marshall walk-in clinic or 24/7 mobile on-site dispatch',
+        ],
+        badges: true,
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: 'What Drug Testing Panels and Urinalysis Services Are Available in Marshall, TX?',
+        answer: 'L&T Solutions provides certified urinalysis drug testing (standard 5-panel, 10-panel, 12-panel, and expanded urine screens) detecting substance use within 1–5 days, hair follicle testing providing a 90-day detection window, non-invasive oral fluid screening, and EtG alcohol testing detecting consumption up to 80 hours prior. All tests utilize SAMHSA-certified laboratory processing and licensed MRO verification.',
+      },
+      {
+        type: 'table',
+        title: 'Drug & Alcohol Testing Panel Comparison',
+        intro: 'Compare detection windows, turnaround times, and common applications across our urinalysis and substance testing panels.',
+        head: ['Test Type / Panel', 'Detection Window', 'Common Applications', 'Turnaround Time', 'Primary Benefit'],
+        rows: [
+          [
+            '5-Panel Urinalysis (Urine Drug Screen)',
+            '1 to 5 Days',
+            'Pre-Employment & Workplace Screening',
+            '24–48 Hours',
+            'Standard baseline workplace compliance (THC, Cocaine, Opiates, PCP, Amphetamines)',
+          ],
+          [
+            '10-Panel Urinalysis (Urine Drug Screen)',
+            '1 to 7 Days',
+            'Healthcare, Probation & Extended Screening',
+            '24–48 Hours',
+            'Broad spectrum detection including prescription painkillers and sedatives',
+          ],
+          [
+            '12-Panel Urinalysis (Expanded Screen)',
+            '1 to 7 Days',
+            'Executive, Legal & Comprehensive Screening',
+            '24–48 Hours',
+            'Expanded panel covering synthetic opioids (Fentanyl, Oxycodone, Hydrocodone)',
+          ],
+          [
+            'Hair Follicle Drug Test',
+            'Up to 90 Days',
+            'Court-Ordered, Custody & Long-Term History',
+            '3–5 Business Days',
+            'Long detection window that cannot be cheated by quick cleanses or dilution',
+          ],
+          [
+            'Oral Fluid / Saliva Screen',
+            '1 to 48 Hours',
+            'Post-Accident & Immediate On-Site Testing',
+            'Instant to 48 Hours',
+            'Non-invasive, direct observation testing ideal for remote or immediate job sites',
+          ],
+          [
+            'EtG / PEth Alcohol Test',
+            'Up to 80 Hours / 21 Days',
+            'Zero-Tolerance Probation & Court Compliance',
+            '24–48 Hours',
+            'Verifies extended alcohol abstinence beyond standard breathalyzer windows',
+          ],
+        ],
+        note: 'All positive non-negative screenings are automatically sent to SAMHSA-certified partner laboratories for GC/MS confirmation and MRO review.',
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        bg: 'lavender',
+        eyebrow: 'Testing Applications',
+        title: 'Tailored Drug Screening & Urinalysis Solutions',
+        intro: 'We provide confidential drug testing and urinalysis for individuals, employers, and legal cases.',
+        cards: [
+          {
+            title: 'Pre-Employment Urinalysis',
+            text: 'Fast 24-hour turnaround on standard 5-panel, 10-panel, and 12-panel employer urinalysis drug screens to keep hiring moving.',
+            icon: 'briefcase',
+          },
+          {
+            title: 'Court-Ordered & Probation',
+            text: 'Legal chain-of-custody urinalysis and hair testing meeting Harrison County court requirements for custody and probation.',
+            icon: 'scale',
+          },
+          {
+            title: 'Post-Accident & Reasonable Suspicion',
+            text: '24/7 mobile collectors dispatched within 2 hours to document job site incidents and satisfy OSHA/DOT requirements.',
+            icon: 'siren',
+          },
+          {
+            title: 'Personal & Family Peace of Mind',
+            text: 'Confidential self-pay urinalysis and drug testing with zero reporting to insurance companies or employers without authorization.',
+            icon: 'user',
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'What to Expect During Your Drug Test',
+        intro: 'A quick, comfortable, and professional collection experience in four easy steps.',
+        steps: [
+          {
+            title: 'Bring Photo Identification',
+            text: 'Arrive at our Marshall clinic or mobile unit with a government-issued photo ID (driver’s license, passport, or state ID).',
+          },
+          {
+            title: 'Donor Check-In',
+            text: 'Complete a brief consent form. Our bilingual staff will answer any questions before collection begins.',
+          },
+          {
+            title: 'Urinalysis or Specimen Collection',
+            text: 'Provide your urine specimen in our private, temperature-monitored facility, or oral fluid/hair per test protocol.',
+          },
+          {
+            title: 'Lab Analysis & MRO Review',
+            text: 'Negative results return quickly. Any non-negative results are verified by a licensed Medical Review Officer before reporting.',
+          },
+        ],
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'Drug Testing & Urinalysis Frequently Asked Questions',
+        items: [
+          {
+            q: 'What is included in a workplace drug testing urinalysis?',
+            a: 'A drug testing urinalysis screens for controlled substances (THC, cocaine, opiates, amphetamines, PCP, and synthetic opioids) while verifying temperature, integrity, and validity to ensure adulteration-free compliance.',
+          },
+          {
+            q: 'Can hair follicle drug tests detect drug use from yesterday?',
+            a: 'No. Hair follicle tests require approximately 5 to 7 days for scalp hair to grow above the skin line. Hair testing is designed to show a 90-day historical window of substance use.',
+          },
+          {
+            q: 'What happens if my drug screen shows a prescription medication?',
+            a: 'A licensed Medical Review Officer (MRO) will contact you confidentially to verify your legitimate prescription before reporting final results to an employer or agency.',
+          },
+          {
+            q: 'How does EtG alcohol testing differ from a breathalyzer?',
+            a: 'A breathalyzer measures active alcohol in your breath right now. EtG (Ethyl Glucuronide) urine testing measures alcohol metabolites produced by the liver, detecting consumption up to 80 hours after drinking.',
+          },
+          {
+            q: 'Do you offer mobile workplace drug screening in Marshall?',
+            a: 'Yes. Our 24/7 mobile collection van comes directly to your facility, job site, or fleet yard anywhere in Harrison County and surrounding East Texas towns.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: 'Need to Schedule a Drug Screen Today?',
+        text: `Visit our Marshall clinic at ${SITE.address.street} or call ${SITE.phone.display} for immediate appointment booking.`,
+        primary: { label: 'Book Drug Screen', href: 'contact' },
+        secondary: { label: `Call ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+  es: {
+    title: 'Pruebas de Drogas y Uroanálisis en Marshall, TX | 5/10/12 Paneles y Folículo Capilar',
+    description: 'Pruebas confidenciales de uroanálisis y drogas para empleo, corte y particulares en Marshall, TX. Orina de 5/10/12 sustancias, folículo capilar y alcohol EtG.',
+    schemaType: 'MedicalWebPage',
+    service: {
+      name: 'Pruebas de Drogas y Uroanálisis',
+      serviceType: 'Pruebas de Drogas, Alcohol y Uroanálisis',
+      description: 'Pruebas de drogas, alcohol y uroanálisis certificadas por SAMHSA que incluyen paneles de 5, 10 y 12 sustancias en orina, folículo capilar de 90 días, saliva y detección de alcohol EtG.',
+    },
+    blocks: [
+      {
+        type: 'hero',
+        eyebrow: 'Exámenes de Drogas y Alcohol · Uroanálisis',
+        title: 'Pruebas Integrales de Uroanálisis y Drogas en Marshall, TX',
+        subtitle: 'Exámenes confidenciales de uroanálisis para empleo, orden judicial y particulares, con resultados rápidos de laboratorio certificado por SAMHSA en 24 a 48 horas y revisión médica MRO.',
+        image: 'clinic',
+        imageAlt: 'Sala de toma de muestras moderna y limpia para uroanálisis y pruebas de drogas en Marshall TX',
+        primary: { label: 'Agendar Prueba de Drogas', href: 'contact' },
+        secondary: { label: 'Servicio Móvil 24/7', href: 'mobile' },
+        points: [
+          'Uroanálisis para detección de sustancias (paneles de 5, 10 y 12)',
+          'Resultados de laboratorio certificado por SAMHSA con revisión MRO',
+          'Clínica en Marshall sin cita o unidad móvil 24/7 en su sitio',
+        ],
+        badges: true,
+      },
+      {
+        type: 'answer',
+        bg: 'lavender',
+        question: '¿Qué paneles de drogas y servicios de uroanálisis están disponibles en Marshall, TX?',
+        answer: 'L&T Solutions ofrece uroanálisis y pruebas de detección de drogas (paneles de 5, 10 y 12 sustancias en orina) con detección reciente de 1 a 5 días, análisis de folículo capilar para una ventana de 90 días, pruebas de saliva y alcohol EtG de hasta 80 horas. Todos los análisis se procesan en laboratorios certificados por SAMHSA con verificación por un médico MRO.',
+      },
+      {
+        type: 'table',
+        title: 'Tabla Comparativa de Paneles de Drogas y Uroanálisis',
+        intro: 'Compare los períodos de detección, tiempos de entrega y aplicaciones principales de nuestros paneles de orina y detección de sustancias.',
+        head: ['Tipo de Prueba / Panel', 'Ventana de Detección', 'Aplicaciones Comunes', 'Tiempo de Resultado', 'Beneficio Principal'],
+        rows: [
+          [
+            'Uroanálisis de 5 Sustancias (Panel de Orina)',
+            '1 a 5 Días',
+            'Exámenes Pre-empleo y Laborales',
+            '24–48 Horas',
+            'Cumplimiento estándar laboral (Marihuana, Cocaína, Opiáceos, PCP, Anfetaminas)',
+          ],
+          [
+            'Uroanálisis de 10 Sustancias (Panel de Orina)',
+            '1 a 7 Días',
+            'Personal Médico, Probatoria y Control Amplio',
+            '24–48 Horas',
+            'Detección amplia que incluye medicamentos recetados y sedantes',
+          ],
+          [
+            'Uroanálisis de 12 Sustancias (Panel Extendido)',
+            '1 a 7 Días',
+            'Nivel Ejecutivo, Legal y Exhaustivo',
+            '24–48 Horas',
+            'Panel ampliado para opioides sintéticos (Fentanilo, Oxicodona, Hidrocodona)',
+          ],
+          [
+            'Prueba de Folículo Capilar',
+            'Hasta 90 Días',
+            'Corte de Familia, Custodia e Historial',
+            '3–5 Días Hábiles',
+            'Ventana amplia de detección que no se puede alterar con lavados rápidos ni agua',
+          ],
+          [
+            'Prueba de Saliva / Fluido Oral',
+            '1 a 48 Horas',
+            'Post-accidente y Recolección Móvil',
+            'Instantáneo a 48 Horas',
+            'Prueba no invasiva y de observación directa ideal para obras y campos petroleros',
+          ],
+          [
+            'Prueba de Alcohol EtG / PEth',
+            'Hasta 80 Horas / 21 Días',
+            'Cero Tolerancia, Libertad Condicional',
+            '24–48 Horas',
+            'Verifica la abstinencia de alcohol más allá del tiempo que mide el alcoholímetro',
+          ],
+        ],
+        note: 'Todas las muestras preliminares no negativas se envían a laboratorios certificados por SAMHSA para confirmación por espectrometría de masas (GC/MS) y revisión por médico MRO.',
+      },
+      {
+        type: 'cards',
+        columns: 4,
+        bg: 'lavender',
+        eyebrow: 'Casos de Uso',
+        title: 'Soluciones Adaptadas de Detección y Uroanálisis',
+        intro: 'Brindamos servicios confidenciales para personas particulares, empresas y casos judiciales.',
+        cards: [
+          {
+            title: 'Exámenes Pre-empleo y Uroanálisis',
+            text: 'Resultados rápidos en 24 horas en pruebas de uroanálisis laboral de 5, 10 y 12 sustancias para mantener su contratación en marcha.',
+            icon: 'briefcase',
+          },
+          {
+            title: 'Orden Judicial y Probatoria',
+            text: 'Pruebas con cadena de custodia legal que cumplen con las exigencias de la corte del condado de Harrison.',
+            icon: 'scale',
+          },
+          {
+            title: 'Post-accidente y Sospecha Razonable',
+            text: 'Recolectores móviles las 24/7 en menos de 2 horas para documentar incidentes y cumplir normas OSHA/DOT.',
+            icon: 'siren',
+          },
+          {
+            title: 'Tranquilidad Personal y Familiar',
+            text: 'Pruebas confidenciales pagadas por usted sin reporte a aseguradoras ni empresas sin su autorización.',
+            icon: 'user',
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'Qué Esperar Durante su Prueba de Drogas',
+        intro: 'Una experiencia cómoda, profesional y rápida en cuatro sencillos pasos.',
+        steps: [
+          {
+            title: 'Presentar Identificación con Foto',
+            text: 'Llegue a nuestra clínica en Marshall o unidad móvil con una identificación oficial (licencia o pasaporte).',
+          },
+          {
+            title: 'Registro del Donante',
+            text: 'Llene un breve formulario de consentimiento. Nuestro personal bilingüe responderá sus dudas.',
+          },
+          {
+            title: 'Uroanálisis o Toma de Muestra',
+            text: 'Entregue su muestra de orina en nuestras instalaciones privadas con control de temperatura, o muestra de saliva/cabello según el protocolo.',
+          },
+          {
+            title: 'Análisis y Revisión MRO',
+            text: 'Los resultados negativos se entregan rápido. Muestras no negativas son revisadas por un médico MRO.',
+          },
+        ],
+      },
+      {
+        type: 'faq',
+        bg: 'lavender',
+        title: 'Preguntas Frecuentes sobre Pruebas de Drogas y Uroanálisis',
+        items: [
+          {
+            q: '¿Qué incluye un uroanálisis para detección de drogas?',
+            a: 'El uroanálisis detecta sustancias controladas e ilícitas (THC, cocaína, opiáceos, anfetaminas, PCP y opioides sintéticos), verificando además temperatura, validez e integridad de la muestra para asegurar su cumplimiento.',
+          },
+          {
+            q: '¿La prueba de folículo capilar detecta el consumo de ayer?',
+            a: 'No. El cabello tarda entre 5 y 7 días en crecer sobre el cuero cabelludo. La prueba de cabello mide un historial acumulado de 90 días.',
+          },
+          {
+            q: '¿Qué sucede si tomo medicamentos recetados por un médico?',
+            a: 'Un médico MRO se comunicará con usted de forma confidencial para verificar su receta válida antes de emitir el reporte final.',
+          },
+          {
+            q: '¿En qué se diferencia la prueba EtG del alcoholímetro?',
+            a: 'El alcoholímetro mide el alcohol activo en el aliento al momento. La prueba EtG en orina mide los metabolitos producidos por el hígado, detectando consumo de hasta 80 horas antes.',
+          },
+          {
+            q: '¿Ofrecen servicio móvil de pruebas de drogas para empresas?',
+            a: 'Sí. Nuestra unidad móvil 24/7 acude a sus oficinas, obras o patios de camiones en todo el condado de Harrison y el Este de Texas.',
+          },
+        ],
+      },
+      {
+        type: 'cta',
+        title: '¿Necesita Agendar una Prueba de Drogas Hoy?',
+        text: `Visite nuestra clínica en Marshall en ${SITE.address.street} o llame al ${SITE.phone.display} para agendar su cita de inmediato.`,
+        primary: { label: 'Agendar Prueba', href: 'contact' },
+        secondary: { label: `Llamar al ${SITE.phone.display}`, href: 'tel' },
+      },
+    ],
+  },
+};
+
+export default page;

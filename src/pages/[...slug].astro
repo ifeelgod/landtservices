@@ -1,0 +1,28 @@
+---
+/**
+ * Single dynamic route that statically generates all 26 EN + ES pages
+ * from the ROUTES map and the bilingual content modules.
+ */
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlockRenderer from '../components/BlockRenderer.astro';
+import { ROUTES, LANGS, type Lang, type RouteKey } from '../i18n/routes';
+import { getPage } from '../content';
+import { pageGraph } from '../lib/schema';
+
+export const getStaticPaths = (() =>
+  (Object.keys(ROUTES) as RouteKey[]).flatMap((key) =>
+    LANGS.map((lang) => {
+      const p = ROUTES[key][lang].replace(/^\/|\/$/g, '');
+      return { params: { slug: p === '' ? undefined : p }, props: { key, lang } };
+    }),
+  )) satisfies GetStaticPaths;
+
+interface Props { key: RouteKey; lang: Lang }
+const { key, lang } = Astro.props;
+const page = getPage(key, lang);
+const jsonLd = pageGraph(page, lang, ROUTES[key][lang]);
+---
+<BaseLayout lang={lang} title={page.title} description={page.description} jsonLd={jsonLd}>
+  <BlockRenderer blocks={page.blocks} lang={lang} />
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+import { SITE, fullAddress, mapsUrl, hasValue } from '../config/site';
+import { t } from '../i18n/ui';
+import { path, alternatePath, type Lang, type RouteKey } from '../i18n/routes';
+import { telHref } from '../lib/links';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+interface Props { lang: Lang; pathname?: string }
+const { lang, pathname = '/' } = Astro.props;
+const ui = t(lang);
+const year = new Date().getFullYear();
+const altHref = alternatePath(pathname, lang === 'en' ? 'es' : 'en');
+const services: { key: RouteKey; label: string }[] = [
+  { key: 'drug', label: ui.nav.drug },
+  { key: 'dna', label: ui.nav.dna },
+  { key: 'blood', label: ui.navItems.blood! },
+  { key: 'kits', label: ui.navItems.kits! },
+  { key: 'gender', label: ui.navItems.gender! },
+  { key: 'dot', label: ui.nav.dot },
+  { key: 'mobile', label: ui.nav.mobile },
+  { key: 'notary', label: ui.navItems.notary! },
+];
+const company: RouteKey[] = ['about', 'area', 'compliance'];
+const fmt = (hhmm: string) => {
+  const [h, m] = hhmm.split(':').map(Number);
+  const d = new Date(2000, 0, 1, h, m);
+  return d.toLocaleTimeString(lang === 'es' ? 'es-US' : 'en-US', { hour: 'numeric', minute: '2-digit' });
+};
+const social = Object.entries(SITE.social).filter(([, v]) => hasValue(v));
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <Logo light />
+      <p>{ui.footer.tagline}</p>
+      <p class="footer__es">
+        <a href={altHref} data-set-lang={lang === 'en' ? 'es' : 'en'} class="footer__lang-btn">
+          <Icon name="globe" size={16} />
+          <span>{lang === 'en' ? 'Hablamos Español · Cambiar a Español' : 'We speak English · Switch to English'}</span>
+        </a>
+      </p>
+      {social.length > 0 && (
+        <ul class="footer__social">
+          {social.map(([k, v]) => <li><a href={v} rel="noopener" target="_blank">{k[0].toUpperCase() + k.slice(1)}</a></li>)}
+        </ul>
+      )}
+    </div>
+    <div>
+      <h2 class="footer__h">{ui.footer.services}</h2>
+      <ul class="footer__links">
+        {services.map((s) => <li><a href={path(s.key, lang)}>{s.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer__h">{ui.footer.company}</h2>
+      <ul class="footer__links">
+        {company.map((k) => <li><a href={path(k, lang)}>{ui.navItems[k]}</a></li>)}
+        <li><a href={path('contact', lang)}>{ui.book}</a></li>
+        <li><a href={path('privacy', lang)}>{ui.footer.privacy}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer__h">{ui.footer.visit}</h2>
+      <address class="footer__nap">
+        <strong>{SITE.name}</strong><br />
+        <a href={mapsUrl()} target="_blank" rel="noopener">{fullAddress()}</a><br />
+        <a class="footer__phone" href={telHref(SITE.phone.e164)}>{SITE.phone.display}</a><br />
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </address>
+      <p class="footer__hours">
+        <strong>{ui.footer.hours}:</strong><br />
+        {SITE.hours.map((h) => (
+          <span>{ui.days[h.days[0]]}–{ui.days[h.days[h.days.length - 1]]}: {fmt(h.opens)} – {fmt(h.closes)}<br /></span>
+        ))}
+        <strong class="footer__247">{ui.footer.mobileHours}</strong>
+      </p>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p class="footer__disclaimer">{ui.footer.disclaimer}</p>
+    <p>© {year} {SITE.name}. {ui.footer.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--purple-950); color: #d9cbf7; padding-top: 4rem; padding-bottom: 6rem; font-size: 0.96rem; }
+  @media (min-width: 900px) { .footer { padding-bottom: 2rem; } }
+  .footer a { color: #f3e8ff; text-decoration: none; }
+  .footer a:hover { color: #fbcfe8; text-decoration: underline; }
+  .footer__grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 760px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1.3fr; } }
+  .footer__brand p { margin-top: 1rem; max-width: 34ch; }
+  .footer__es { margin-top: 1.25rem; }
+  .footer__lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f3e8ff;
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .footer__lang-btn:hover {
+    color: #fff;
+    background: var(--pink-600);
+    border-color: var(--pink-500);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .footer__h { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: #fff; margin-bottom: 1rem; }
+  .footer__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+  .footer__nap { font-style: normal; line-height: 1.8; }
+  .footer__phone { font-weight: 800; font-size: 1.1rem; }
+  .footer__hours { margin-top: 1rem; line-height: 1.7; }
+  .footer__247 { color: #fbcfe8; }
+  .footer__social { list-style: none; padding: 0; display: flex; gap: 1rem; }
+  .footer__bottom { border-top: 1px solid rgb(255 255 255 / 0.12); margin-top: 3rem; padding-top: 1.5rem; font-size: 0.85rem; color: #b9a6e6; }
+  .footer__disclaimer { max-width: 900px; }
+</style>

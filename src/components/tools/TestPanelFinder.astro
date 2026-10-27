@@ -1,0 +1,121 @@
+---
+import type { Lang } from '../../i18n/routes';
+import { path } from '../../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+<div class="panel-finder" data-panel-finder>
+  <div class="panel-finder__head">
+    <span class="eyebrow">{es ? 'Herramienta de Selección' : 'Interactive Selection Tool'}</span>
+    <h2>{es ? 'Buscador Interactivo de Paneles para Empresas' : 'Interactive Employer Test Panel Finder'}</h2>
+    <p>{es ? 'Seleccione su sector industrial para ver al instante las regulaciones, paneles requeridos y plazos de entrega.' : 'Click your industry sector below to see exactly what testing panel, regulations, and turnaround apply to your workforce.'}</p>
+  </div>
+
+  <div class="panel-finder__tabs" role="tablist" aria-label={es ? 'Industrias' : 'Industries'}>
+    <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="trucking">
+      🚚 {es ? 'Transporte y Camiones (FMCSA)' : 'Trucking & Fleets (FMCSA)'}
+    </button>
+    <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="pipeline">
+      🛢️ {es ? 'Oleoductos y Petróleo (PHMSA)' : 'Oilfield & Pipeline (PHMSA)'}
+    </button>
+    <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="construction">
+      🏗️ {es ? 'Construcción y Planta (OSHA)' : 'Construction & Manufacturing'}
+    </button>
+    <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="healthcare">
+      🏥 {es ? 'Salud y Clínicas' : 'Healthcare & Clinical Staff'}
+    </button>
+  </div>
+
+  <div class="panel-finder__card" data-panel-card>
+    <div class="panel-info" data-info="trucking">
+      <div class="panel-badge">{es ? 'Regulado por DOT / FMCSA' : 'DOT FMCSA Regulated'}</div>
+      <h3>{es ? 'Panel DOT de 5 Sustancias + Alcohol en Aliento' : '5-Panel DOT Urine Screen + Breath Alcohol'}</h3>
+      <p class="panel-desc">{es ? 'Obligatorio para choferes con licencia comercial CDL bajo la norma federal 49 CFR Parte 40.' : 'Mandatory for commercial driver’s license (CDL) holders operating vehicles over 26,001 lbs or transporting hazardous materials under 49 CFR Part 40.'}</p>
+      <ul class="panel-list">
+        <li><strong>{es ? 'Sustancias Detectadas:' : 'Tested Substances:'}</strong> {es ? 'THC (Marihuana), Cocaína, Anfetaminas/Metanfetaminas/MDMA, Opioides (Fentanilo, Oxicodona, Codeína, Morfina), PCP' : 'THC (marijuana), cocaine, amphetamines/methamphetamines/MDMA, opioids (fentanyl, oxycodone, codeine, morphine), PCP'}</li>
+        <li><strong>{es ? 'Requisitos Adicionales:' : 'Mandatory Program Requirements:'}</strong> {es ? 'Inscripción en consorcio aleatorio, consultas en el FMCSA Clearinghouse y revisión médica MRO.' : 'Random pool consortium membership, FMCSA Clearinghouse queries, SAMHSA certified lab, MRO verification.'}</li>
+        <li><strong>{es ? 'Resultado:' : 'Turnaround:'}</strong> 24–48 {es ? 'horas para negativos.' : 'hours for lab-verified negative results.'}</li>
+      </ul>
+      <a class="btn btn--primary" href={`${path('contact', lang)}?service=dot`}>{es ? 'Inscribir Flota en Consorcio' : 'Enroll Fleet in DOT Program'}</a>
+    </div>
+
+    <div class="panel-info hidden" data-info="pipeline">
+      <div class="panel-badge">{es ? 'PHMSA / Requerido por el Cliente' : 'PHMSA / Client Required'}</div>
+      <h3>{es ? 'Panel Ampliado de 10 Sustancias + Tarjeta DISA' : '10-Panel Expanded Screen + DISA / Client Carding'}</h3>
+      <p class="panel-desc">{es ? 'Diseñado para contratistas de oleoductos, refinerías y plataformas petroleras en el Este de Texas.' : 'Designed for oilfield service contractors, pipeline operators, and refinery personnel requiring strict contractor carding.'}</p>
+      <ul class="panel-list">
+        <li><strong>{es ? 'Sustancias Detectadas:' : 'Tested Substances:'}</strong> {es ? '5 Paneles Básicos + Barbitúricos, Benzodiacepinas, Metadona, Metacualona, Propoxifeno' : 'Basic 5-panel + barbiturates, benzodiazepines, methadone, methaqualone, propoxyphene'}</li>
+        <li><strong>{es ? 'Opciones de Folículo:' : 'Hair Follicle Option:'}</strong> {es ? 'Prueba de cabello de 90 días disponible para ingreso a instalaciones industriales exigentes.' : '90-day hair follicle collection available for strict refinery access sweeps.'}</li>
+        <li><strong>{es ? 'Resultado:' : 'Turnaround:'}</strong> 24–48 {es ? 'horas (orina), 3-5 días (cabello).' : 'hours (urine), 3–5 business days (hair follicle).'}</li>
+      </ul>
+      <a class="btn btn--primary" href={`${path('contact', lang)}?service=drug`}>{es ? 'Solicitar Cuenta de Contratista' : 'Request Oilfield Account'}</a>
+    </div>
+
+    <div class="panel-info hidden" data-info="construction">
+      <div class="panel-badge">Texas Labor Code § 411.091</div>
+      <h3>{es ? 'Panel No-DOT de 5 o 10 Sustancias + Saliva' : '5 or 10-Panel Non-DOT Urine / Oral Fluid Screen'}</h3>
+      <p class="panel-desc">{es ? 'Solución personalizada para empresas de construcción, plantas industriales y logística no regulada por DOT.' : 'Custom drug-free workplace screening for general commercial contractors, plants, and non-DOT fleets.'}</p>
+      <ul class="panel-list">
+        <li><strong>{es ? 'Detección Rápida:' : 'Rapid On-Site Option:'}</strong> {es ? 'Resultados preliminares en 15 minutos en el sitio de trabajo.' : 'Instant 15-minute rapid screens on job sites via saliva or urine.'}</li>
+        <li><strong>{es ? 'Norma de Texas:' : 'Texas Compliance:'}</strong> {es ? 'Políticas de lugar de trabajo libre de drogas alineadas con la ley laboral de Texas.' : 'Written drug-free workplace policy templates aligned with Texas labor law.'}</li>
+        <li><strong>{es ? 'Resultado:' : 'Turnaround:'}</strong> {es ? 'Instantáneo o 24 horas laboratorio.' : 'Instant on-site or 24-hour SAMHSA lab confirmation.'}</li>
+      </ul>
+      <a class="btn btn--primary" href={path('contact', lang)}>{es ? 'Crear Programa para Empresa' : 'Establish Workplace Policy'}</a>
+    </div>
+
+    <div class="panel-info hidden" data-info="healthcare">
+      <div class="panel-badge">{es ? 'Clínico y Ejecutivo' : 'Clinical & Executive'}</div>
+      <h3>{es ? 'Panel Exhaustivo de 12 Sustancias' : '12-Panel Expanded Clinical Urine Screen'}</h3>
+      <p class="panel-desc">{es ? 'Panel completo exigido para personal médico, enfermería, farmacia e instalaciones de salud.' : 'High-security 12-panel drug screen covering extended synthetic opioids, sedatives, and prescription medications.'}</p>
+      <ul class="panel-list">
+        <li><strong>{es ? 'Sustancias Detectadas:' : 'Tested Substances:'}</strong> {es ? '10 Paneles Clásicos + Tramadol, Fentanilo, Oximorfona, Hidrocodona' : 'Classic 10-panel + tramadol, fentanyl, oxymorphone, hydrocodone'}</li>
+        <li><strong>{es ? 'Revisión MRO:' : 'MRO Verification:'}</strong> {es ? 'Verificación confidencial de recetas médicas legítimas.' : 'Strict confidential physician verification of legal medical prescriptions.'}</li>
+        <li><strong>{es ? 'Resultado:' : 'Turnaround:'}</strong> 24–48 {es ? 'horas.' : 'hours lab confirmed.'}</li>
+      </ul>
+      <a class="btn btn--primary" href={path('contact', lang)}>{es ? 'Solicitar Examen Clínico' : 'Schedule Clinical Screening'}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const finder = document.querySelector('[data-panel-finder]');
+  if (finder) {
+    const tabs = finder.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const cards = finder.querySelectorAll<HTMLElement>('[data-info]');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        cards.forEach((c) => {
+          c.classList.toggle('hidden', c.dataset.info !== target);
+        });
+      });
+    });
+  }
+</script>
+
+<style>
+  .panel-finder { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); }
+  .panel-finder__head { margin-bottom: 1.5rem; }
+  .panel-finder__tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; border-bottom: 2px solid var(--lavender-50); padding-bottom: 1rem; }
+  .tab-btn {
+    padding: 0.6rem 1.1rem; border-radius: 999px; border: 1.5px solid var(--line);
+    background: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.2s;
+  }
+  .tab-btn:hover { background: var(--lavender-50); border-color: var(--purple-500); }
+  .tab-btn.active { background: var(--purple-700); color: #fff; border-color: var(--purple-700); }
+  .panel-info { display: grid; gap: 0.9rem; }
+  .panel-info.hidden { display: none; }
+  .panel-badge { display: inline-block; justify-self: start; background: var(--pink-600); color: #fff; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; }
+  .panel-info h3 { margin: 0; font-size: 1.4rem; color: var(--purple-900); }
+  .panel-desc { color: var(--ink-soft); margin: 0; font-size: 1.05rem; }
+  .panel-list { list-style: none; padding: 0; margin: 0.5rem 0 1rem; display: grid; gap: 0.5rem; background: var(--lavender-50); padding: 1.1rem; border-radius: var(--radius); }
+  .panel-list li { font-size: 0.95rem; color: var(--ink); }
+</style>

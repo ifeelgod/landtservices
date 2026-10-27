@@ -1,0 +1,57 @@
+---
+import type { Block } from '../content/types';
+import type { Lang } from '../i18n/routes';
+import Hero from './blocks/Hero.astro';
+import Banner from './blocks/Banner.astro';
+import Answer from './blocks/Answer.astro';
+import Cards from './blocks/Cards.astro';
+import Table from './blocks/Table.astro';
+import Steps from './blocks/Steps.astro';
+import Faq from './blocks/Faq.astro';
+import Split from './blocks/Split.astro';
+import Testimonials from './blocks/Testimonials.astro';
+import Area from './blocks/Area.astro';
+import Form from './blocks/Form.astro';
+import CtaBand from './blocks/CtaBand.astro';
+import Section from './blocks/Section.astro';
+
+// Tier 3 Tools
+import TestPanelFinder from './tools/TestPanelFinder.astro';
+import MileageCalculator from './tools/MileageCalculator.astro';
+import RequisitionUploader from './tools/RequisitionUploader.astro';
+
+interface Props { blocks: Block[]; lang: Lang }
+const { blocks, lang } = Astro.props;
+---
+{blocks.map((b, idx) => {
+  switch (b.type) {
+    case 'hero': return <Hero block={b} lang={lang} />;
+    case 'banner': return <Banner block={b} lang={lang} />;
+    case 'answer': return <Answer block={b} idx={idx} />;
+    case 'cards': return <Cards block={b} lang={lang} idx={idx} />;
+    case 'table': return <Table block={b} idx={idx} />;
+    case 'steps': return <Steps block={b} idx={idx} />;
+    case 'faq': return <Faq block={b} idx={idx} />;
+    case 'split': return <Split block={b} lang={lang} idx={idx} />;
+    case 'testimonials': return <Testimonials block={b} idx={idx} />;
+    case 'area': return <Area block={b} lang={lang} idx={idx} />;
+    case 'form': return <Form block={b} lang={lang} idx={idx} />;
+    case 'tool': return (
+      <Section bg={b.bg}>
+        {b.tool === 'panel' && <TestPanelFinder lang={lang} />}
+        {b.tool === 'mileage' && <MileageCalculator lang={lang} />}
+        {b.tool === 'uploader' && <RequisitionUploader lang={lang} />}
+      </Section>
+    );
+    case 'cta': return <CtaBand block={b} lang={lang} idx={idx} />;
+    case 'prose': return (
+      <Section bg={b.bg}>
+        <div class="prose">
+          {b.title && <h2>{b.title}</h2>}
+          {b.paragraphs.map((p) => <p set:html={p} />)}
+        </div>
+      </Section>
+    );
+    default: return null;
+  }
+})}

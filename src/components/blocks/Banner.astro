@@ -1,0 +1,27 @@
+---
+import type { Block } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { resolveHref } from '../../lib/links';
+import Icon from '../Icon.astro';
+
+type Banner = Extract<Block, { type: 'banner' }>;
+interface Props { block: Banner; lang: Lang }
+const { block: b, lang } = Astro.props;
+---
+<div class:list={['banner', `banner--${b.tone ?? 'pink'}`]} role="note">
+  <div class="container banner__inner">
+    <Icon name="siren" size={26} />
+    <p set:html={b.text} />
+    {b.cta && <a class="btn btn--sm banner__btn" href={resolveHref(b.cta.href, lang)}><Icon name="phone" />{b.cta.label}</a>}
+  </div>
+</div>
+
+<style>
+  .banner { color: #fff; padding-block: 1rem; }
+  .banner--pink { background: linear-gradient(90deg, var(--pink-700), var(--pink-600)); }
+  .banner--purple { background: var(--purple-800); }
+  .banner__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+  .banner p { margin: 0; flex: 1 1 320px; font-weight: 700; font-size: 1.05rem; }
+  .banner__btn { background: #fff; color: var(--pink-700); }
+  .banner__btn:hover { background: var(--purple-950); color: #fff; }
+</style>

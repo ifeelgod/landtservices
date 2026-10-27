@@ -1,0 +1,44 @@
+---
+import { SITE, hasValue, mapsUrl } from '../config/site';
+import { t } from '../i18n/ui';
+import { alternatePath, type Lang } from '../i18n/routes';
+import { telHref } from '../lib/links';
+import Icon from './Icon.astro';
+
+interface Props { lang: Lang; pathname: string }
+const { lang, pathname } = Astro.props;
+const ui = t(lang);
+const enHref = alternatePath(pathname, 'en');
+const esHref = alternatePath(pathname, 'es');
+---
+<div class="utility">
+  <div class="container utility__inner">
+    <a class="utility__item utility__hot" href={telHref(SITE.emergencyPhone.e164)}>
+      <Icon name="phone" size={16} /><span><strong>{ui.hotline}:</strong> {SITE.emergencyPhone.display}</span>
+    </a>
+    <a class="utility__item hide-sm" href={mapsUrl()} target="_blank" rel="noopener">
+      <Icon name="map" size={16} /><span>{SITE.address.street} · {ui.clinic}</span>
+    </a>
+    <nav class="lang" aria-label={ui.langLabel} data-lang-switch>
+      <a href={enHref} hreflang="en" lang="en" data-set-lang="en" aria-current={lang === 'en' ? 'true' : undefined} title="Switch to English">English</a>
+      <span class="lang__sep" aria-hidden="true">/</span>
+      <a href={esHref} hreflang="es" lang="es" data-set-lang="es" aria-current={lang === 'es' ? 'true' : undefined} title="Cambiar a Español">Español</a>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .utility { background: var(--purple-950); color: #e9ddff; font-size: 0.86rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+  .utility__inner { display: flex; align-items: center; gap: 1rem; min-height: 40px; }
+  .utility__item { display: inline-flex; align-items: center; gap: 0.4rem; color: #e9ddff; text-decoration: none; white-space: nowrap; }
+  a.utility__item:hover { color: #fff; }
+  .utility__hot strong { color: #fbcfe8; }
+  .soon { font-style: normal; font-size: 0.72rem; background: rgb(255 255 255 / 0.12); padding: 0.05rem 0.45rem; border-radius: 999px; margin-left: 0.25rem; }
+  .lang { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 800; font-size: 0.82rem; }
+  .lang a { color: #e9ddff; text-decoration: none; padding: 0.2rem 0.65rem; border-radius: 999px; transition: background 0.15s, color 0.15s; border: 1px solid rgba(255, 255, 255, 0.2); }
+  .lang a:hover { color: #fff; background: rgba(255, 255, 255, 0.18); }
+  .lang a[aria-current='true'] { color: #fff; background: var(--pink-600); border-color: var(--pink-500); box-shadow: 0 1px 4px rgba(0,0,0,0.25); }
+  .lang__sep { color: #a78bfa; font-weight: 600; opacity: 0.6; user-select: none; }
+  @media (max-width: 899px) { .hide-md { display: none; } }
+  @media (max-width: 639px) { .hide-sm { display: none; } .utility__inner { gap: 0.75rem; } }
+</style>

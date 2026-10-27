@@ -1,0 +1,37 @@
+---
+import type { Block } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { resolveHref } from '../../lib/links';
+import Icon from '../Icon.astro';
+
+type Cta = Extract<Block, { type: 'cta' }>;
+interface Props { block: Cta; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+const isTel = (h: string) => h === 'tel' || h === 'emergency';
+---
+<section class="section section--purple cta" aria-labelledby={`h-${idx}`}>
+  <div class="container cta__inner">
+    <div>
+      <h2 id={`h-${idx}`}>{b.title}</h2>
+      <p set:html={b.text} />
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={resolveHref(b.primary.href, lang)}>
+        {isTel(b.primary.href) && <Icon name="phone" />}{b.primary.label}
+      </a>
+      {b.secondary && (
+        <a class="btn btn--ghost-light" href={resolveHref(b.secondary.href, lang)}>
+          {isTel(b.secondary.href) && <Icon name="phone" />}{b.secondary.label}
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { position: relative; overflow: hidden; }
+  .cta::after { content: ''; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgb(236 72 153 / 0.45), transparent 65%); pointer-events: none; }
+  .cta__inner { position: relative; z-index: 1; display: grid; gap: 1.75rem; align-items: center; }
+  @media (min-width: 900px) { .cta__inner { grid-template-columns: 1.4fr auto; } }
+  .cta p { color: #e9ddff; font-size: 1.12rem; margin: 0; max-width: 60ch; }
+</style>
