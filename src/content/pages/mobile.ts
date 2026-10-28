@@ -33,7 +33,7 @@ const page: PageModule = {
         type: 'answer',
         bg: 'lavender',
         question: 'How fast can a mobile drug tester get to my job site?',
-        answer: 'L&T Solutions dispatches mobile specimen collectors 24/7 with a target on-site response time of within 2 hours across Marshall, Longview, Tyler, Hallsville, Carthage, and Shreveport. Our fully equipped medical collection vans handle workplace drug screening, alcohol breathalyzer testing, post-accident emergency collections, and in-home phlebotomy blood draws.',
+        answer: 'L&T Solutions dispatches mobile specimen collectors 24/7 with a target on-site response time of within 2 hours across Marshall, Longview, Tyler, Hallsville, Carthage, and Shreveport. Our fully equipped mobile medical collection vehicles handle workplace drug screening, alcohol breathalyzer testing, post-accident emergency collections, and in-home phlebotomy blood draws.',
       },
       {
         type: 'cards',
@@ -80,7 +80,7 @@ const page: PageModule = {
           'Complete legal chain-of-custody documentation and tamper-evident seals',
         ],
         image: 'mobile',
-        imageAlt: 'Mobile collection van equipped for cold chain storage and biohazard containment',
+        imageAlt: 'Mobile collection unit equipped for cold chain storage and biohazard containment',
         cta: { label: 'Dispatch a Mobile Unit Now', href: '#dispatch' },
       },
       {

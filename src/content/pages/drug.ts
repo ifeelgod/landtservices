@@ -191,7 +191,7 @@ const page: PageModule = {
           },
           {
             q: 'Do you offer mobile workplace drug screening in Marshall?',
-            a: 'Yes. Our 24/7 mobile collection van comes directly to your facility, job site, or fleet yard anywhere in Harrison County and surrounding East Texas towns.',
+            a: 'Yes. Our 24/7 mobile collection unit comes directly to your facility, job site, or fleet yard anywhere in Harrison County and surrounding East Texas towns.',
           },
         ],
       },

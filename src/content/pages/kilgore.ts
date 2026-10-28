@@ -22,7 +22,7 @@ const page: PageModule = {
         type: 'answer',
         bg: 'lavender',
         question: 'Does L&T Solutions offer mobile testing in Kilgore, TX?',
-        answer: 'Yes. L&T Solutions dispatches mobile collection vans directly to Kilgore, TX. We provide 5/10/12-panel drug screens, 90-day hair follicle testing, DOT physical coordination, AABB legal court DNA, and in-home blood draws for local residents.',
+        answer: 'Yes. L&T Solutions dispatches mobile collection units directly to Kilgore, TX. We provide 5/10/12-panel drug screens, 90-day hair follicle testing, DOT physical coordination, AABB legal court DNA, and in-home blood draws for local residents.',
       },
       {
         type: 'tool',
