@@ -4,6 +4,7 @@ export const LANGS: Lang[] = ['en', 'es'];
 /** Paired EN ↔ ES routes. Drives the language toggle, hreflang tags and nav. */
 export const ROUTES = {
   home: { en: '/', es: '/es/' },
+  pricing: { en: '/pricing/', es: '/es/precios/' },
   drug: { en: '/drug-testing/', es: '/es/pruebas-de-drogas/' },
   dna: { en: '/dna-testing/', es: '/es/pruebas-adn/' },
   blood: { en: '/blood-draws/', es: '/es/extraccion-de-sangre/' },

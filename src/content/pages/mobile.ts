@@ -46,6 +46,7 @@ const page: PageModule = {
             title: '24/7 Emergency Post-Accident',
             text: 'Immediate dispatch for workplace accidents or reasonable suspicion to satisfy DOT and OSHA mandatory time windows.',
             icon: 'siren',
+            price: '$85',
           },
           {
             title: 'Oilfield & Industrial Job Sites',
@@ -171,6 +172,7 @@ const page: PageModule = {
             title: 'Emergencia 24/7 por Accidentes',
             text: 'Envío inmediato por accidentes laborales o sospecha razonable para cumplir tiempos obligatorios DOT y OSHA.',
             icon: 'siren',
+            price: '$85',
           },
           {
             title: 'Campos Petroleros y Obras',

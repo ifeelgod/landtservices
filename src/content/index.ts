@@ -21,9 +21,10 @@ import carthage from './pages/carthage';
 import kilgore from './pages/kilgore';
 import hallsville from './pages/hallsville';
 import notary from './pages/notary';
+import pricing from './pages/pricing';
 
 export const PAGES: Record<RouteKey, PageModule> = {
-  home, drug, dna, blood, kits, gender, dot, mobile, about, area, compliance, contact, privacy,
+  home, pricing, drug, dna, blood, kits, gender, dot, mobile, about, area, compliance, contact, privacy,
   corporate, longview, marshall, carthage, kilgore, hallsville, notary,
 };
 

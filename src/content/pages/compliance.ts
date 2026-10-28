@@ -61,6 +61,19 @@ const page: PageModule = {
         ],
       },
       {
+        type: 'table',
+        title: 'Verification & Compliance Services Fee Schedule',
+        intro: 'On-site identity verification and workforce compliance services at our Marshall office.',
+        head: ['Service / Item', 'Standard Fee', 'Turnaround / Delivery', 'Description'],
+        rows: [
+          ['Ink / Roll Fingerprints (2 Cards)', '$50', 'Same-Visit (In-House)', 'Standard FD-258 fingerprint cards for employment, licensing, and security'],
+          ['Form I-9 Employment Verification', '$75', 'Instant', 'Authorized representative physical document inspection and I-9 verification'],
+          ['Background Checks', '$75', 'Instant / Rapid', 'Comprehensive employment, criminal, and identity verification searches'],
+        ],
+        note: 'Fingerprinting is conducted in-house with standard FBI FD-258 cards provided.',
+        bg: 'white',
+      },
+      {
         type: 'faq',
         title: 'Compliance FAQ',
         bg: 'lavender',
@@ -137,6 +150,19 @@ const page: PageModule = {
           'Solo pedimos la información necesaria para agendar y realizar su toma de muestra. El laboratorio asociado o el Médico Revisor reporta los resultados a los destinatarios autorizados que usted o su empleador designen, conforme a leyes como HIPAA y 49 CFR Parte 40.',
           'Esta página es informativa y no constituye asesoría legal. Para preguntas sobre su situación legal o la política de su empresa, consulte a un abogado calificado.',
         ],
+      },
+      {
+        type: 'table',
+        title: 'Tarifas de Servicios de Verificación y Cumplimiento',
+        intro: 'Servicios de verificación de identidad y cumplimiento laboral en nuestra oficina de Marshall.',
+        head: ['Servicio / Trámite', 'Tarifa Estándar', 'Tiempo / Entrega', 'Descripción'],
+        rows: [
+          ['Toma de Huellas en Tinta (2 Tarjetas)', '$50', 'Misma Visita (En Oficina)', 'Tarjetas oficiales FD-258 para empleo, licencias y acreditación'],
+          ['Verificación de Empleo Formulario I-9', '$75', 'Inmediato', 'Inspección física de documentos y firma como representante autorizado'],
+          ['Verificación de Antecedentes (Background Checks)', '$75', 'Inmediato / Rápido', 'Búsqueda exhaustiva de antecedentes laborales, penales y de identidad'],
+        ],
+        note: 'La toma de huellas dactilares se realiza en nuestra oficina de Marshall con tarjetas estándar FBI FD-258 incluidas.',
+        bg: 'white',
       },
       {
         type: 'faq',

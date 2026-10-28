@@ -21,9 +21,11 @@ const en = {
     lab: 'Lab & Blood Draws',
     dot: 'Employers / DOT',
     mobile: 'Mobile 24/7',
+    pricing: 'Pricing',
     about: 'About',
   },
   navItems: {
+    pricing: 'Price List & Services Catalog',
     notary: 'Notary',
     blood: 'In-Home & Walk-In Blood Draws',
     kits: 'Specialty Lab Kits',
@@ -113,9 +115,11 @@ const es: UI = {
     lab: 'Laboratorio y Sangre',
     dot: 'Empresas / DOT',
     mobile: 'Servicio Móvil 24/7',
+    pricing: 'Precios',
     about: 'Nosotros',
   },
   navItems: {
+    pricing: 'Lista Oficial de Precios y Servicios',
     notary: 'Notario',
     blood: 'Extracción de Sangre a Domicilio y en Clínica',
     kits: 'Kits de Laboratorio Especializados',

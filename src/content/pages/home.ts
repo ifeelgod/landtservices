@@ -5,7 +5,7 @@ import { SITE, price } from '../../config/site';
 const page: PageModule = {
   en: {
     title: 'Accredited Drug, Alcohol & DNA Testing in Marshall, TX | L&T Solutions',
-    description: `SAMHSA-certified drug screening, AABB legal court DNA ($250 all-in), DOT compliance, in-home blood draws and 24/7 mobile collection in Marshall, TX and East Texas.`,
+    description: `SAMHSA-certified drug screening ($75), AABB legal court DNA ($425 all-in), DOT compliance, in-home blood draws and 24/7 mobile collection in Marshall, TX and East Texas.`,
     schemaType: 'WebPage',
     blocks: [
       {
@@ -41,13 +41,13 @@ const page: PageModule = {
         cards: [
           {
             title: 'Individual / Court DNA',
-            text: `AABB legal court-admissible paternity (${price(SITE.prices.dnaLegal) ?? '$250'}), peace-of-mind DNA, or personal testing.`,
+            text: `AABB legal court-admissible paternity (${price(SITE.prices.dnaLegal) ?? '$425'}), peace-of-mind DNA (${price(SITE.prices.dnaPeaceOfMind) ?? '$325'}), or family testing.`,
             href: 'dna',
             icon: 'dna',
           },
           {
             title: 'Employer Drug Screens',
-            text: 'Pre-employment 5/10/12-panel urine, 90-day hair follicle, oral fluid, and alcohol testing for local businesses.',
+            text: 'Pre-employment 5/10/12-panel urine ($75), 90-day hair follicle ($125), oral fluid, and alcohol testing for local businesses.',
             href: 'drug',
             icon: 'briefcase',
           },
@@ -81,16 +81,24 @@ const page: PageModule = {
         cards: [
           {
             title: 'Urinalysis & Drug Screening',
-            text: 'Rapid urinalysis (5, 10, and 12-panel urine screens), 90-day hair follicle testing, saliva tests, and EtG alcohol screening with MRO review.',
+            text: 'Rapid urinalysis ($75), 90-day hair follicle testing ($125), nail testing ($150), and alcohol screening with MRO review.',
             href: 'drug',
             icon: 'flask',
+            price: 'From $75',
           },
           {
             title: 'Legal Court & Private DNA',
-            text: `AABB chain-of-custody paternity testing (${price(SITE.prices.dnaLegal) ?? '$250'} all-in) for Harrison County court, plus private peace-of-mind tests.`,
+            text: `AABB chain-of-custody paternity testing (${price(SITE.prices.dnaLegal) ?? '$425'} all-in) for Harrison County court, plus private peace-of-mind tests ($325).`,
             href: 'dna',
             icon: 'scale',
             price: price(SITE.prices.dnaLegal),
+          },
+          {
+            title: 'Official Price Catalog',
+            text: 'Complete transparent price list for DNA, drug & alcohol screening, fingerprinting ($50), I-9 verification ($75), and immigration consultation.',
+            href: 'pricing',
+            icon: 'clipboard',
+            price: 'View All Prices',
           },
           {
             title: 'In-Home & Walk-In Blood Draws',
@@ -238,7 +246,7 @@ const page: PageModule = {
   },
   es: {
     title: 'Pruebas Acreditadas de Drogas, Alcohol y ADN en Marshall, TX | L&T Solutions',
-    description: `Pruebas de drogas certificadas por SAMHSA, ADN legal para corte ($250), cumplimiento DOT, toma de sangre a domicilio y servicio móvil 24/7 en Marshall y el Este de Texas.`,
+    description: `Pruebas de drogas certificadas por SAMHSA ($75), ADN legal para corte ($425 todo incluido), cumplimiento DOT, toma de sangre a domicilio y servicio móvil 24/7 en Marshall y el Este de Texas.`,
     schemaType: 'WebPage',
     blocks: [
       {
@@ -274,13 +282,13 @@ const page: PageModule = {
         cards: [
           {
             title: 'Individual / ADN para Corte',
-            text: `ADN de paternidad legal admisible en corte (${price(SITE.prices.dnaLegal) ?? '$250'} todo incluido), pruebas privadas y familiares.`,
+            text: `ADN de paternidad legal admisible en corte (${price(SITE.prices.dnaLegal) ?? '$425'} todo incluido), pruebas privadas ($325) y familiares.`,
             href: 'dna',
             icon: 'dna',
           },
           {
             title: 'Pruebas para Empleadores',
-            text: 'Exámenes de orina de 5, 10 y 12 paneles, folículo capilar de 90 días, fluido oral y alcohol para empresas locales.',
+            text: 'Exámenes de orina de 5, 10 y 12 paneles ($75), folículo capilar de 90 días ($125), fluido oral y alcohol para empresas locales.',
             href: 'drug',
             icon: 'briefcase',
           },
@@ -314,16 +322,24 @@ const page: PageModule = {
         cards: [
           {
             title: 'Detección de Drogas y Uroanálisis',
-            text: 'Uroanálisis rápido (5, 10 y 12 sustancias en orina), folículo capilar de 90 días, saliva y pruebas de alcohol EtG con revisión médica MRO.',
+            text: 'Uroanálisis rápido ($75), folículo capilar de 90 días ($125), prueba de uñas ($150) y alcohol con revisión médica MRO.',
             href: 'drug',
             icon: 'flask',
+            price: 'Desde $75',
           },
           {
             title: 'ADN Legal para Corte y Privado',
-            text: `Pruebas con cadena de custodia AABB (${price(SITE.prices.dnaLegal) ?? '$250'} todo incluido) para la corte del condado de Harrison, y pruebas privadas.`,
+            text: `Pruebas con cadena de custodia AABB (${price(SITE.prices.dnaLegal) ?? '$425'} todo incluido) para la corte del condado de Harrison, y pruebas privadas ($325).`,
             href: 'dna',
             icon: 'scale',
             price: price(SITE.prices.dnaLegal),
+          },
+          {
+            title: 'Catálogo Oficial de Precios',
+            text: 'Lista completa de precios para ADN, detección de drogas, toma de huellas ($50), verificación I-9 ($75) y trámites de inmigración.',
+            href: 'pricing',
+            icon: 'clipboard',
+            price: 'Ver Todos los Precios',
           },
           {
             title: 'Extracción de Sangre a Domicilio y en Clínica',

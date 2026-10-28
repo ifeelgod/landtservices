@@ -22,13 +22,13 @@ export const GET: APIRoute = () => {
 - Service area: ${SITE.serviceArea.join(', ')}
 
 ## Core Services
-${(['drug', 'dna', 'dot', 'mobile', 'notary'] as RouteKey[]).map((k) => line(k)).join('\n')}
+${(['pricing', 'drug', 'dna', 'dot', 'mobile', 'notary'] as RouteKey[]).map((k) => line(k)).join('\n')}
 
 ## Lab & Blood Draw Services
 ${(['blood', 'kits', 'gender'] as RouteKey[]).map((k) => line(k)).join('\n')}
 
 ## Servicios en Español
-${(['home', 'drug', 'dna', 'mobile', 'blood'] as RouteKey[]).map((k) => line(k, 'es')).join('\n')}
+${(['home', 'pricing', 'drug', 'dna', 'mobile', 'blood'] as RouteKey[]).map((k) => line(k, 'es')).join('\n')}
 
 ## Operational & Regulatory Standards
 ${(['compliance', 'about', 'area', 'contact'] as RouteKey[]).map((k) => line(k)).join('\n')}

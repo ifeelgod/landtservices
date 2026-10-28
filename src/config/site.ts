@@ -39,10 +39,47 @@ export const SITE = {
     { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' },
   ], // TODO: VERIFY
 
-  /** Prices in USD. Set a value to `null` to hide it everywhere. */
+  /** Prices in USD. Official client price list. */
   prices: {
-    dnaLegal: 250 as number | null, // TODO: VERIFY
-    dnaPeaceOfMind: 150 as number | null, // TODO: VERIFY
+    // DNA Testing Services
+    dnaLegal: 425 as number | null,
+    dnaLegalAddlPerson: 95 as number | null,
+    dnaPeaceOfMind: 325 as number | null,
+    dnaPeaceOfMindAddlPerson: 95 as number | null,
+    dnaGrandparentage: 500 as number | null,
+    dnaGrandparentageAddlPerson: 125 as number | null,
+    dnaSibling: 400 as number | null,
+    dnaAvuncular: 510 as number | null,
+    dnaImmigration: 1000 as number | null,
+    dnaPrenatal: 1200 as number | null,
+    dnaInfidelity: 525 as number | null,
+    dnaGeneticWeight: 425 as number | null,
+    dnaAncestry: 385 as number | null,
+    dnaPet: 300 as number | null,
+
+    // Drug & Alcohol Testing Services
+    drugDotNonDot: 75 as number | null,
+    drugRapid: 75 as number | null,
+    drugPostAccident: 85 as number | null,
+    alcoholInitial: 85 as number | null,
+    alcoholConfirmation: 105 as number | null,
+    drugHairFollicle: 125 as number | null,
+    drugNail: 150 as number | null,
+
+    // Verification & Compliance Services
+    fingerprintsInkRoll2Cards: 50 as number | null,
+    formI9Verification: 75 as number | null,
+    backgroundChecks: 75 as number | null,
+
+    // Immigration Consultation Services (USCIS filing fees separate)
+    immigrationWorkPermitI765: 825 as number | null,
+    immigrationDacaRenewal: 900 as number | null,
+    immigrationNaturalizationN400: 1300 as number | null,
+    immigrationTravelDocI131: 1350 as number | null,
+    immigrationAffidavitSupportI864: 1650 as number | null,
+    immigrationFamilyPetitionI130: 1700 as number | null,
+    immigrationMarriageGreenCard: 2150 as number | null,
+    immigrationAdjustmentStatusI485: 2250 as number | null,
   },
 
   /** Toggle each trust badge. Only enable what you can document. */
