@@ -28,20 +28,40 @@ export const ROUTES = {
 
 export type RouteKey = keyof typeof ROUTES;
 
-export const path = (key: RouteKey, lang: Lang) => ROUTES[key][lang];
+const rawBase = import.meta.env.BASE_URL ?? '/';
+export const BASE_PREFIX = rawBase === '/' ? '' : rawBase.replace(/\/$/, '');
+
+export function stripBase(p: string): string {
+  if (BASE_PREFIX && p.startsWith(BASE_PREFIX)) {
+    const stripped = p.slice(BASE_PREFIX.length);
+    return stripped.startsWith('/') ? stripped : `/${stripped}`;
+  }
+  return p;
+}
+
+export function withBase(p: string): string {
+  if (!p || p.startsWith('http') || p.startsWith('mailto:') || p.startsWith('tel:') || p.startsWith('#')) {
+    return p;
+  }
+  const clean = stripBase(p.startsWith('/') ? p : `/${p}`);
+  return `${BASE_PREFIX}${clean}`;
+}
+
+export const path = (key: RouteKey, lang: Lang) => withBase(ROUTES[key][lang]);
 
 const norm = (p: string) => (p.endsWith('/') ? p : `${p}/`);
 
 /** Find the route key for a given pathname (either language). */
 export function routeKeyOf(pathname: string): RouteKey | undefined {
-  const p = norm(pathname);
+  const p = norm(stripBase(pathname));
   return (Object.keys(ROUTES) as RouteKey[]).find((k) => ROUTES[k].en === p || ROUTES[k].es === p);
 }
 
 /** Path of the same page in the other language (falls back to that language's home). */
 export function alternatePath(pathname: string, target: Lang): string {
   const key = routeKeyOf(pathname);
-  return key ? ROUTES[key][target] : ROUTES.home[target];
+  const targetRoute = key ? ROUTES[key][target] : ROUTES.home[target];
+  return withBase(targetRoute);
 }
 
-export const langFromPath = (pathname: string): Lang => (norm(pathname).startsWith('/es/') ? 'es' : 'en');
+export const langFromPath = (pathname: string): Lang => (norm(stripBase(pathname)).startsWith('/es/') ? 'es' : 'en');
