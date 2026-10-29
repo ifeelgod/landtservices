@@ -26,8 +26,8 @@ const page: PageModule = {
         eyebrow: 'Drug & Alcohol Screening · Urinalysis',
         title: 'Comprehensive Urinalysis & Drug Screening in Marshall, TX',
         subtitle: 'Confidential pre-employment, court-ordered, and personal urinalysis testing with rapid SAMHSA-certified lab turnaround within 24–48 hours and licensed MRO verification.',
-        image: 'clinic',
-        imageAlt: 'Clean, modern collection room for urinalysis and drug screening in Marshall TX',
+        image: 'drugStation',
+        imageAlt: 'Spotless clinical specimen collection counter with rapid multi-panel drug test cartridges and chain of custody documentation',
         primary: { label: 'Schedule a Drug Test', href: 'contact' },
         secondary: { label: '24/7 Mobile Dispatch', href: 'mobile' },
         points: [
@@ -228,8 +228,8 @@ const page: PageModule = {
         eyebrow: 'Exámenes de Drogas y Alcohol · Uroanálisis',
         title: 'Pruebas Integrales de Uroanálisis y Drogas en Marshall, TX',
         subtitle: 'Exámenes confidenciales de uroanálisis para empleo, orden judicial y particulares, con resultados rápidos de laboratorio certificado por SAMHSA en 24 a 48 horas y revisión médica MRO.',
-        image: 'clinic',
-        imageAlt: 'Sala de toma de muestras moderna y limpia para uroanálisis y pruebas de drogas en Marshall TX',
+        image: 'drugStation',
+        imageAlt: 'Estación de toma de muestras clínicas con pruebas rápidas de drogas multidroga y documentación de cadena de custodia',
         primary: { label: 'Agendar Prueba de Drogas', href: 'contact' },
         secondary: { label: 'Servicio Móvil 24/7', href: 'mobile' },
         points: [

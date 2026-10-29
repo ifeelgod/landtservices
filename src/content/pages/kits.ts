@@ -94,8 +94,8 @@ const page: PageModule = {
           'Strict adherence to kit collection, freezing, and shipping protocols',
           'Eliminate phlebotomy overhead and specimen liability from your practice',
         ],
-        image: 'blood',
-        imageAlt: 'Certified phlebotomist preparing specimen tubes for specialty laboratory shipment',
+        image: 'kitShipping',
+        imageAlt: 'Specialty functional medicine lab kit prepared with color-coded blood tubes, cold pack, biohazard bag, and courier shipping box',
         cta: { label: 'Inquire About Clinician Referral Accounts', href: 'contact' },
       },
       {
@@ -222,8 +222,8 @@ const page: PageModule = {
           'Cumplimiento estricto de protocolos de congelación y envío de kits',
           'Elimine costos de flebotomía y manejo de muestras en su propio consultorio',
         ],
-        image: 'blood',
-        imageAlt: 'Flebotomista preparando tubos de muestra para kit especializado en laboratorio',
+        image: 'kitShipping',
+        imageAlt: 'Kit especializado preparado con tubos de muestra etiquetados, paquete refrigerante, bolsa de bioseguridad y caja de envío',
         cta: { label: 'Solicitar Cuenta para Médicos', href: 'contact' },
       },
       {

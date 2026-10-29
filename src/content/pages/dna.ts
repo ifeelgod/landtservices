@@ -143,8 +143,8 @@ const page: PageModule = {
           'Separate, conflict-free appointments available for mother and alleged father',
           'Out-of-state collection coordination if one party lives in another city or state',
         ],
-        image: 'dna',
-        imageAlt: 'BUCCAL cheek swab collection materials for legal court DNA test',
+        image: 'dnaLab',
+        imageAlt: 'Senior geneticist performing AABB-accredited DNA analysis using automated PCR genetic sequencer and allele peak verification',
         cta: { label: 'Schedule Your Legal DNA Test', href: 'contact' },
       },
       {
@@ -321,8 +321,8 @@ const page: PageModule = {
           'Citas separadas disponibles para la madre y el presunto padre en caso de conflicto',
           'Coordinación de muestras en otros estados si una parte vive fuera de Texas',
         ],
-        image: 'dna',
-        imageAlt: 'Hisopado bucal para prueba de ADN legal en Marshall TX',
+        image: 'dnaLab',
+        imageAlt: 'Científica genetista realizando análisis de ADN acreditado por AABB con secuenciador genético automatizado',
         cta: { label: 'Agendar Prueba de ADN Legal', href: 'contact' },
       },
       {

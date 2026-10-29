@@ -10,7 +10,16 @@ export type ImgKey =
   | 'centrifuge'
   | 'storefront'
   | 'entering'
-  | 'drawReal';
+  | 'drawReal'
+  | 'drugStation'
+  | 'genderDraw'
+  | 'kitShipping'
+  | 'notarySigning'
+  | 'fleetCompliance'
+  | 'dnaLab'
+  | 'complianceCert'
+  | 'pricingOffice'
+  | 'mobileLongview';
 export type IconKey =
   | 'drop' | 'dna' | 'flask' | 'truck' | 'briefcase' | 'user' | 'baby' | 'shield' | 'clock' | 'map'
   | 'check' | 'phone' | 'home' | 'scale' | 'hair' | 'cup' | 'breath' | 'clipboard' | 'snow' | 'globe' | 'star' | 'siren';

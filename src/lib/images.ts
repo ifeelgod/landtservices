@@ -9,12 +9,20 @@ import centrifuge from '../assets/img/centrifuge.jpg';
 import storefront from '../assets/img/storefront.jpg';
 import entering from '../assets/img/entering.jpg';
 import drawReal from '../assets/img/draw-real.jpg';
+import drugStation from '../assets/img/drug-station.jpg';
+import genderDraw from '../assets/img/gender-draw.jpg';
+import kitShipping from '../assets/img/kit-shipping.jpg';
+import notarySigning from '../assets/img/notary-signing.jpg';
+import fleetCompliance from '../assets/img/fleet-compliance.jpg';
+import dnaLab from '../assets/img/dna-lab.jpg';
+import complianceCert from '../assets/img/compliance-cert.jpg';
+import pricingOffice from '../assets/img/pricing-office.jpg';
+import mobileLongview from '../assets/img/mobile-longview.jpg';
 import type { ImgKey } from '../content/types';
 
 /**
  * Image map.
- * blood/mobile/clinic/dna are placeholder AI-generated photography.
- * office/officeDesk/centrifuge/storefront/entering/drawReal are client/Gemini onsite photos.
+ * Unique commercial photography and client onsite photos for each service area.
  */
 export const IMAGES: Record<ImgKey, ImageMetadata> = {
   blood,
@@ -27,4 +35,13 @@ export const IMAGES: Record<ImgKey, ImageMetadata> = {
   storefront,
   entering,
   drawReal,
+  drugStation,
+  genderDraw,
+  kitShipping,
+  notarySigning,
+  fleetCompliance,
+  dnaLab,
+  complianceCert,
+  pricingOffice,
+  mobileLongview,
 };

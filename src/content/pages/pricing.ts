@@ -14,8 +14,8 @@ const page: PageModule = {
         title: 'Official Price List & Services Catalog',
         subtitle:
           'Complete, transparent pricing with no hidden facility charges or surprise add-ons. Walk-in at our Marshall clinic or request 24/7 mobile dispatch.',
-        image: 'office',
-        imageAlt: 'L&T Solutions front desk and consultation office in Marshall, TX',
+        image: 'pricingOffice',
+        imageAlt: 'L&T Solutions transparent pricing catalog and professional client consultation office in Marshall, TX',
         primary: { label: 'Schedule an Appointment', href: 'contact' },
         secondary: { label: `Call ${SITE.phone.display}`, href: 'tel' },
         badges: true,
@@ -149,8 +149,8 @@ const page: PageModule = {
         title: 'Lista Oficial de Precios y Catálogo de Servicios',
         subtitle:
           'Tarifas completas y transparentes sin cargos ocultos de clínica. Visítenos sin cita en Marshall o solicite nuestra unidad móvil las 24 horas.',
-        image: 'office',
-        imageAlt: 'Oficina de atención y recepción de L&T Solutions en Marshall, TX',
+        image: 'pricingOffice',
+        imageAlt: 'Oficina de consulta y catálogo de precios transparentes en L&T Solutions en Marshall, TX',
         primary: { label: 'Agendar una Cita', href: 'contact' },
         secondary: { label: `Llamar al ${SITE.phone.display}`, href: 'tel' },
         badges: true,
