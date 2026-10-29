@@ -1,0 +1,81 @@
+---
+import type { Block } from '../../content/types';
+import type { Lang } from '../../i18n/routes';
+import { SITE, fullAddress } from '../../config/site';
+import Section from './Section.astro';
+import Icon from '../Icon.astro';
+
+type MapBlock = Extract<Block, { type: 'map' }>;
+interface Props { block: MapBlock; lang: Lang; idx: number }
+const { block: b, lang, idx } = Astro.props;
+const es = lang === 'es';
+const defaultTitle = es ? 'Ubicación de Nuestra Oficina y Clínica' : 'Our Office & Clinic Location';
+const defaultIntro = es
+  ? `Visítenos en ${fullAddress()} en Marshall, Texas. Estacionamiento conveniente frente a la oficina.`
+  : `Visit us at ${fullAddress()} in Marshall, Texas. Convenient parking available directly in front of the clinic.`;
+---
+<Section bg={b.bg ?? 'white'} labelledby={`map-h-${idx}`}>
+  <div class="section-head text-center">
+    <h2 id={`map-h-${idx}`}>{b.title ?? defaultTitle}</h2>
+    <p>{b.intro ?? defaultIntro}</p>
+  </div>
+  <div class="map-container">
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.9610968138645!2d-94.37145628870884!3d32.52718597365969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636f642fb07262d%3A0xff252ef1c34ad61e!2s203%20W%20Pinecrest%20Dr%2C%20Marshall%2C%20TX%2075670!5e0!3m2!1sen!2sus!4v1793243863039!5m2!1sen!2sus"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="L&T Solutions Office Location Google Map"
+      ></iframe>
+    </div>
+    <div class="map-meta card">
+      <div class="map-meta__item">
+        <Icon name="map" size={24} />
+        <div>
+          <strong>{SITE.name}</strong>
+          <p>{fullAddress()}</p>
+        </div>
+      </div>
+      <div class="map-meta__item">
+        <Icon name="clock" size={24} />
+        <div>
+          <strong>{es ? 'Horario de Clínica:' : 'Clinic Hours:'}</strong>
+          <p>{es ? 'Lunes – Viernes: 8:00 AM – 5:00 PM CT' : 'Monday – Friday: 8:00 AM – 5:00 PM CT'}</p>
+        </div>
+      </div>
+      <div class="map-meta__item">
+        <Icon name="truck" size={24} />
+        <div>
+          <strong>{es ? 'Servicio Móvil:' : 'Mobile Dispatch:'}</strong>
+          <p>{es ? 'Disponible 24/7 en todo el Este de Texas' : 'Available 24/7 Across East Texas'}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .map-container { display: grid; gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+  .map-frame {
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    line-height: 0;
+  }
+  .map-frame iframe { width: 100%; border: 0; display: block; }
+  .map-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    background: #fff;
+    padding: 1.5rem;
+  }
+  .map-meta__item { display: flex; align-items: flex-start; gap: 0.75rem; }
+  .map-meta__item :global(svg) { color: var(--purple-700); flex-shrink: 0; margin-top: 0.2rem; }
+  .map-meta__item p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.95rem; }
+</style>

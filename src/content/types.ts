@@ -19,7 +19,14 @@ export type ImgKey =
   | 'dnaLab'
   | 'complianceCert'
   | 'pricingOffice'
-  | 'mobileLongview';
+  | 'mobileLongview'
+  | 'diverseTeam'
+  | 'dotDriver'
+  | 'paternityConsult'
+  | 'seniorBloodDraw'
+  | 'corpDrugTest'
+  | 'diverseNotary'
+  | 'kiaArrival';
 export type IconKey =
   | 'drop' | 'dna' | 'flask' | 'truck' | 'briefcase' | 'user' | 'baby' | 'shield' | 'clock' | 'map'
   | 'check' | 'phone' | 'home' | 'scale' | 'hair' | 'cup' | 'breath' | 'clipboard' | 'snow' | 'globe' | 'star' | 'siren';
@@ -54,6 +61,7 @@ export type Block =
   | { type: 'prose'; title?: string; paragraphs: string[]; bg?: Bg }
   | { type: 'testimonials'; title: string; note?: string; items: { quote: string; name: string }[]; bg?: Bg }
   | { type: 'area'; title: string; intro?: string; cities?: { name: string; text: string }[]; bg?: Bg }
+  | { type: 'map'; title?: string; intro?: string; bg?: Bg }
   | { type: 'form'; variant: 'appointment' | 'dispatch'; id?: string; title?: string; intro?: string; preset?: FormService; aside?: boolean; bg?: Bg }
   | { type: 'tool'; tool: 'panel' | 'mileage' | 'uploader'; bg?: Bg }
   | { type: 'cta'; title: string; text: string; primary: Cta; secondary?: Cta };

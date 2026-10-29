@@ -35,6 +35,21 @@ const page: PageModule = {
         bg: 'white',
       },
       {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Our Healthcare Team',
+        title: 'Dedicated, Multi-Ethnic East Texas Professionals',
+        text: 'From our intake coordinators to our traveling phlebotomists and DOT collectors, our staff is rooted in East Texas and committed to treating every client with compassion, cultural respect, and technical excellence.',
+        items: [
+          'Certified phlebotomy and DOT-qualified personnel',
+          'Multi-ethnic staff reflecting our diverse regional communities',
+          'Warm, bilingual communication in English and Spanish',
+        ],
+        image: 'diverseTeam',
+        imageAlt: 'Diverse healthcare team and friendly medical staff at L&T Solutions in Marshall, TX',
+      },
+      {
         type: 'cards',
         eyebrow: 'Trust',
         title: 'Credentials & standards',
@@ -109,6 +124,21 @@ const page: PageModule = {
         image: 'blood',
         imageAlt: 'Flebotomista preparando una extracción de sangre con cuidado',
         bg: 'white',
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Nuestro Equipo',
+        title: 'Profesionales Dedicados y Multiétnicos del Este de Texas',
+        text: 'Desde nuestra recepción hasta nuestros flebotomistas y recolectores móviles, nuestro personal está comprometido con brindarle una atención humana, respetuosa y técnicamente impecable.',
+        items: [
+          'Personal certificado en flebotomía y normas federales DOT',
+          'Equipo multiétnico que refleja la diversidad de nuestra comunidad',
+          'Atención cálida y 100% bilingüe en inglés y español',
+        ],
+        image: 'diverseTeam',
+        imageAlt: 'Personal médico multiétnico y amable de L&T Solutions en Marshall, TX',
       },
       {
         type: 'cards',

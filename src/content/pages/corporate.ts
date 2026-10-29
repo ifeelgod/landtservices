@@ -73,6 +73,35 @@ const page: PageModule = {
         tool: 'mileage',
       },
       {
+        type: 'split',
+        bg: 'white',
+        eyebrow: 'Fleet Terminal Solutions',
+        title: 'Seamless On-Site Driver Collections Across East Texas',
+        text: 'Keep your freight rolling along the I-20 corridor. Our mobile DOT collectors travel directly to your distribution hub, truck stop, or terminal to process drivers without costly layovers.',
+        items: [
+          'Immediate FormFox & eScreen digital barcode scanning',
+          'Tamper-evident chain of custody satisfying FMCSA federal audits',
+          'Fast 5-to-10 minute turnaround per driver',
+        ],
+        image: 'dotDriver',
+        imageAlt: 'DOT medical collector with chain of custody paperwork beside an African-American commercial truck driver in East Texas',
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Plant & Manufacturing Screening',
+        title: 'Turnkey Workplace Safety & Shift Drug Screening',
+        text: 'From annual plant-wide safety blitzes to rapid new-hire orientation batches, our team handles all specimen collection on-site with clinical precision.',
+        items: [
+          'Rapid oral fluid, urine, and hair follicle collection options',
+          'Dedicated collector teams dispatched for multi-shift testing',
+          'Direct online reporting to your safety director and DER',
+        ],
+        image: 'corpDrugTest',
+        imageAlt: 'Certified occupational health collector administering rapid drug screen in manufacturing facility',
+      },
+      {
         type: 'faq',
         title: 'Corporate Portal Frequently Asked Questions',
         items: [
@@ -172,6 +201,35 @@ const page: PageModule = {
       {
         type: 'tool',
         tool: 'mileage',
+      },
+      {
+        type: 'split',
+        bg: 'white',
+        eyebrow: 'Soluciones para Patios y Flotas',
+        title: 'Toma de Muestras en Sitio para Choferes en el Este de Texas',
+        text: 'Mantenga sus camiones en ruta sobre el corredor de la I-20. Nuestros recolectores certificados DOT van directamente a su centro de distribución o patio para procesar choferes sin retrasos innecesarios.',
+        items: [
+          'Escaneo inmediato de códigos de barras digitales de FormFox y eScreen',
+          'Cadena de custodia que cumple al 100% con auditorías federales de FMCSA',
+          'Toma rápida de 5 a 10 minutos por chofer',
+        ],
+        image: 'dotDriver',
+        imageAlt: 'Recolectora médica DOT con formulario de custodia junto a un chofer de camión comercial en el Este de Texas',
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Seguridad en Fábricas y Plantas',
+        title: 'Pruebas Integrales de Drogas en Turnos de Trabajo',
+        text: 'Desde revisiones masivas anuales de seguridad hasta ingresos de personal, nuestro equipo maneja toda la recolección en sus instalaciones con estricta precisión clínica.',
+        items: [
+          'Opciones de saliva rápida, orina y folículo capilar',
+          'Equipos de recolectores asignados para múltiples turnos laborales',
+          'Reportes directos en línea para su director de seguridad y contacto DER',
+        ],
+        image: 'corpDrugTest',
+        imageAlt: 'Especialista de salud ocupacional certificada realizando prueba rápida en una planta industrial',
       },
       {
         type: 'faq',

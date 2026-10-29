@@ -107,6 +107,21 @@ const page: PageModule = {
         cta: { label: 'Schedule Appointment Now', href: 'contact' },
       },
       {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'In-Home Care for Seniors & Homebound',
+        title: 'Gentle, Compassionate In-Home Mobile Phlebotomy',
+        text: 'For seniors, mobility-impaired patients, or family members recovering from illness, travelling to an outpatient laboratory can be exhausting. Our licensed phlebotomists bring hospital-grade care right to your living room.',
+        items: [
+          'Gentle technique with small-gauge pediatric and butterfly needles',
+          'Sterile, single-use supplies and on-site centrifuging/cold-chain preservation',
+          'Prompt delivery directly to Quest, Labcorp, or local hospital pathology labs',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Certified Hispanic phlebotomist smiling and gently performing an in-home blood draw for an elderly lady in her armchair',
+      },
+      {
         type: 'faq',
         bg: 'lavender',
         title: 'Blood Draw Frequently Asked Questions',
@@ -241,6 +256,21 @@ const page: PageModule = {
         image: 'clinic',
         imageAlt: 'Silla de flebotomía clínica limpia y suministros en Marshall TX',
         cta: { label: 'Agendar Cita Ahora', href: 'contact' },
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Atención a Domicilio para Adultos Mayores',
+        title: 'Extracción de Sangre Amable y Paciente en la Comodidad del Hogar',
+        text: 'Para adultos mayores o personas con dificultades de movilidad, trasladarse a un laboratorio puede ser difícil y estresante. Nuestras flebotomistas certificadas llevan atención médica de calidad directamente a su sala.',
+        items: [
+          'Técnica delicada con agujas pediátricas y tipo mariposa para el mínimo dolor',
+          'Material estéril desechable y transporte con cadena de frío garantizada',
+          'Entrega oportuna directa a Quest, Labcorp o el laboratorio de su preferencia',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Flebotomista hispana certificada realizando con amabilidad una extracción de sangre a domicilio a una señora mayor en su sillón',
       },
       {
         type: 'faq',

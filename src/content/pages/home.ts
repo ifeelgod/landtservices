@@ -154,6 +154,21 @@ const page: PageModule = {
         cta: { label: 'Learn More About Us', href: 'about' },
       },
       {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Our Healthcare Team',
+        title: 'Certified, Caring & Multi-Ethnic Healthcare Professionals',
+        text: 'Our East Texas clinical team combines bilingual intake coordinators, certified phlebotomists, and DOT-qualified collectors dedicated to fast service, dignity, and total confidentiality.',
+        items: [
+          'Certified collectors and bilingual English/Spanish staff',
+          'Compassionate handling of children, adults, and seniors',
+          'Strict HIPAA compliance and chain-of-custody protocols',
+        ],
+        image: 'diverseTeam',
+        imageAlt: 'Multi-ethnic clinical healthcare team and intake staff at L&T Solutions reception desk in Marshall, TX',
+      },
+      {
         type: 'answer',
         bg: 'lavender',
         question: 'Where can I get a drug test or DNA test in Marshall, TX?',
@@ -393,6 +408,21 @@ const page: PageModule = {
         image: 'office',
         imageAlt: 'Sala de recolección moderna y limpia en L&T Solutions en Marshall TX',
         cta: { label: 'Conozca Más Sobre Nosotros', href: 'about' },
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Nuestro Equipo de Salud',
+        title: 'Profesionales de Salud Certificados, Amables y Multiétnicos',
+        text: 'Nuestro equipo clínico del Este de Texas reúne coordinadores bilingües, flebotomistas certificados y recolectores calificados para DOT, dedicados a una atención rápida, digna y confidencial.',
+        items: [
+          'Recolectores certificados y personal 100% bilingüe en inglés y español',
+          'Trato amable y paciente para niños, adultos y personas mayores',
+          'Cumplimiento estricto de confidencialidad HIPAA y cadena de custodia',
+        ],
+        image: 'diverseTeam',
+        imageAlt: 'Equipo de profesionales de salud multiétnicos y amables en la recepción de L&T Solutions en Marshall, TX',
       },
       {
         type: 'answer',

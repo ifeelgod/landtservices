@@ -99,6 +99,21 @@ const page: PageModule = {
         cta: { label: 'Inquire About Clinician Referral Accounts', href: 'contact' },
       },
       {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'In-Home Kit Collection',
+        title: 'Mobile Kit Blood Draws Directly to Your Home',
+        text: 'Cannot make it into our Marshall clinic? Our mobile phlebotomists come directly to your residence across East Texas with portable centrifuges, specimen cold-packs, and strict protocol adherence.',
+        items: [
+          'Convenient home visits for busy patients, seniors, and families',
+          'Immediate on-site centrifugation and temperature-regulated packaging',
+          'Direct courier drop-off (FedEx/UPS) under strict kit chain of custody',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Certified mobile phlebotomist gently collecting blood for a specialized diagnostic kit in patient living room',
+      },
+      {
         type: 'faq',
         bg: 'lavender',
         title: 'Specialty Lab Kit Frequently Asked Questions',
@@ -225,6 +240,21 @@ const page: PageModule = {
         image: 'kitShipping',
         imageAlt: 'Kit especializado preparado con tubos de muestra etiquetados, paquete refrigerante, bolsa de bioseguridad y caja de envío',
         cta: { label: 'Solicitar Cuenta para Médicos', href: 'contact' },
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Toma de Muestras de Kits a Domicilio',
+        title: 'Toma de Sangre Móvil para Kits Especializados en su Hogar',
+        text: '¿No puede acudir a nuestra clínica? Nuestras flebotomistas móviles van directamente a su casa en el Este de Texas con centrifugadoras portátiles y paquetes de frío.',
+        items: [
+          'Visitas cómodas a domicilio para pacientes, adultos mayores y familias',
+          'Centrifugación inmediata y empaque a temperatura controlada',
+          'Entrega directa a paquetería (FedEx/UPS) con estricto control de custodia',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Flebotomista móvil certificada recolectando muestra de sangre para kit médico especializado a domicilio',
       },
       {
         type: 'faq',

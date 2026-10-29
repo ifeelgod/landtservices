@@ -18,6 +18,13 @@ import dnaLab from '../assets/img/dna-lab.jpg';
 import complianceCert from '../assets/img/compliance-cert.jpg';
 import pricingOffice from '../assets/img/pricing-office.jpg';
 import mobileLongview from '../assets/img/mobile-longview.jpg';
+import diverseTeam from '../assets/img/diverse-team.jpg';
+import dotDriver from '../assets/img/dot-driver.jpg';
+import paternityConsult from '../assets/img/paternity-consult.jpg';
+import seniorBloodDraw from '../assets/img/senior-blood-draw.jpg';
+import corpDrugTest from '../assets/img/corp-drug-test.jpg';
+import diverseNotary from '../assets/img/diverse-notary.jpg';
+import kiaArrival from '../assets/img/kia-arrival.jpg';
 import type { ImgKey } from '../content/types';
 
 /**
@@ -44,4 +51,11 @@ export const IMAGES: Record<ImgKey, ImageMetadata> = {
   complianceCert,
   pricingOffice,
   mobileLongview,
+  diverseTeam,
+  dotDriver,
+  paternityConsult,
+  seniorBloodDraw,
+  corpDrugTest,
+  diverseNotary,
+  kiaArrival,
 };

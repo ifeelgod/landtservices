@@ -25,8 +25,10 @@ const services: { key: RouteKey; label: string }[] = [
 const company: RouteKey[] = ['about', 'area', 'compliance'];
 const fmt = (hhmm: string) => {
   const [h, m] = hhmm.split(':').map(Number);
-  const d = new Date(2000, 0, 1, h, m);
-  return d.toLocaleTimeString(lang === 'es' ? 'es-US' : 'en-US', { hour: 'numeric', minute: '2-digit' });
+  const period = h >= 12 ? 'PM' : 'AM';
+  const hour12 = h % 12 || 12;
+  const minute = m < 10 ? `0${m}` : `${m}`;
+  return `${hour12}:${minute} ${period} CT`;
 };
 const social = Object.entries(SITE.social).filter(([, v]) => hasValue(v));
 ---

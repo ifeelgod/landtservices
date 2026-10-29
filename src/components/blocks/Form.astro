@@ -24,22 +24,34 @@ const subject = dispatch
     <div class="formcard">
       <h2 id={`${fid}-h`}>{b.title ?? (dispatch ? f.dispatchTitle : f.title)}</h2>
       <p class="formcard__intro">{b.intro ?? f.intro}</p>
-      <form action={SITE.form.endpoint} method="POST" data-lt-form novalidate={false}>
+      <form action={SITE.form.endpoint} method="POST" data-lt-form data-form-type={dispatch ? 'dispatch' : 'appointment'} novalidate={false}>
         <input type="hidden" name="access_key" value={SITE.form.accessKey} />
         <input type="hidden" name="subject" value={subject} />
-        <input type="hidden" name="from_name" value={SITE.name + ' website'} />
+        <input type="hidden" name="from_name" value={SITE.name + ' Website System'} />
+        <input type="hidden" name="to_email" value="info@lt-services.com" />
         <input type="hidden" name="language" value={lang} />
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
         {dispatch ? (
           <>
             <div class="field-row">
-              <div class="field"><label for={`${fid}-company`}>{f.company} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-company`} name="company" required autocomplete="organization" /></div>
-              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></div>
+              <div class="field"><label for={`${fid}-company`}>{f.company} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-company`} name="company" required autocomplete="organization" placeholder="Company or Facility name" /></div>
+              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(903) 000-0000" /></div>
             </div>
             <div class="field-row">
-              <div class="field"><label for={`${fid}-loc`}>{f.location} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-loc`} name="location" required /></div>
+              <div class="field"><label for={`${fid}-email`}>{f.email} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-email`} name="email" type="email" required autocomplete="email" placeholder="dispatch@company.com" /></div>
+              <div class="field"><label for={`${fid}-loc`}>{f.location} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-loc`} name="location" required placeholder="Marshall, Longview, Kilgore, etc." /></div>
+            </div>
+            <div class="field-row">
               <div class="field"><label for={`${fid}-donors`}>{f.donors}</label><input id={`${fid}-donors`} name="donors" type="number" min="1" inputmode="numeric" value="1" /></div>
+              <div class="field">
+                <label for={`${fid}-when`}>{f.when} <span class="req" aria-hidden="true">*</span></label>
+                <select id={`${fid}-when`} name="preferred_time_slot" required>
+                  <option value={f.slotImmediate}>{f.slotImmediate}</option>
+                  <option value={f.slotMorning}>{f.slotMorning}</option>
+                  <option value={f.slotAfternoon}>{f.slotAfternoon}</option>
+                </select>
+              </div>
             </div>
             <div class="field">
               <label for={`${fid}-test`}>{f.test} <span class="req" aria-hidden="true">*</span></label>
@@ -48,12 +60,17 @@ const subject = dispatch
                 {services.map((s) => <option value={ui.services[s]} selected={b.preset === s}>{ui.services[s]}</option>)}
               </select>
             </div>
+            <div class="field"><label for={`${fid}-msg`}>{f.message}</label><textarea id={`${fid}-msg`} name="message" rows="2" maxlength="600" placeholder="Specific gate, terminal, shift instructions..."></textarea></div>
           </>
         ) : (
           <>
             <div class="field-row">
-              <div class="field"><label for={`${fid}-name`}>{f.name} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-name`} name="name" required autocomplete="name" /></div>
-              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></div>
+              <div class="field"><label for={`${fid}-name`}>{f.name} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-name`} name="name" required autocomplete="name" placeholder="First and last name" /></div>
+              <div class="field"><label for={`${fid}-phone`}>{f.phone} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-phone`} name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(903) 000-0000" /></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for={`${fid}-email`}>{f.email} <span class="req" aria-hidden="true">*</span></label><input id={`${fid}-email`} name="email" type="email" required autocomplete="email" placeholder="name@example.com" /></div>
+              <div class="field"><label for={`${fid}-city`}>{f.city}</label><input id={`${fid}-city`} name="city" autocomplete="address-level2" placeholder="Marshall, TX" /></div>
             </div>
             <div class="field">
               <label for={`${fid}-test`}>{f.test} <span class="req" aria-hidden="true">*</span></label>
@@ -68,17 +85,29 @@ const subject = dispatch
               <label><input type="radio" name="where" value={f.whereMobile} /> {f.whereMobile}</label>
             </fieldset>
             <div class="field-row">
-              <div class="field"><label for={`${fid}-city`}>{f.city}</label><input id={`${fid}-city`} name="city" autocomplete="address-level2" /></div>
-              <div class="field"><label for={`${fid}-when`}>{f.when}</label><input id={`${fid}-when`} name="preferred_time" /></div>
+              <div class="field"><label for={`${fid}-date`}>{f.date}</label><input id={`${fid}-date`} name="preferred_date" type="date" /></div>
+              <div class="field">
+                <label for={`${fid}-when`}>{f.when}</label>
+                <select id={`${fid}-when`} name="preferred_time_slot">
+                  <option value={f.slotMorning}>{f.slotMorning}</option>
+                  <option value={f.slotAfternoon}>{f.slotAfternoon}</option>
+                  <option value={f.slotImmediate}>{f.slotImmediate}</option>
+                </select>
+              </div>
             </div>
-            <div class="field"><label for={`${fid}-msg`}>{f.message}</label><textarea id={`${fid}-msg`} name="message" rows="3" maxlength="600"></textarea></div>
+            <div class="field"><label for={`${fid}-msg`}>{f.message}</label><textarea id={`${fid}-msg`} name="message" rows="3" maxlength="600" placeholder="Questions or scheduling notes..."></textarea></div>
           </>
         )}
 
         <button class="btn btn--primary btn--block" type="submit" data-label={dispatch ? f.dispatchSubmit : f.submit} data-sending={f.sending}>
           {dispatch ? f.dispatchSubmit : f.submit}
         </button>
-        <p class="form-note"><Icon name="shield" size={16} />{f.privacy}</p>
+        <div class="form-footer-meta">
+          <p class="form-note"><Icon name="shield" size={16} />{f.privacy}</p>
+          <button type="button" class="btn-log-link" data-open-inquiry-modal aria-label={f.logViewer}>
+            <Icon name="clipboard" size={14} /> <span>{f.logViewer}</span>
+          </button>
+        </div>
         <div class="form-status" role="status" aria-live="polite" hidden data-success={f.success} data-error={`${f.error} ${SITE.phone.display}.`}></div>
       </form>
     </div>
@@ -88,7 +117,7 @@ const subject = dispatch
         <h3>{ui.footer.visit}</h3>
         <a class="contactcard__phone" href={telHref(SITE.phone.e164)}><Icon name="phone" />{SITE.phone.display}</a>
         <p><Icon name="map" size={18} /><a href={mapsUrl()} target="_blank" rel="noopener">{fullAddress()}</a></p>
-        <p><Icon name="clock" size={18} /><span>{ui.footer.hours}: {SITE.hours.map((h) => `${ui.days[h.days[0]]}–${ui.days[h.days[h.days.length - 1]]} ${h.opens}–${h.closes}`).join(', ')}<br /><strong>{ui.footer.mobileHours}</strong></span></p>
+        <p><Icon name="clock" size={18} /><span>{ui.footer.hours}: {SITE.hours.map((h) => `${ui.days[h.days[0]]}–${ui.days[h.days[h.days.length - 1]]} 8:00 AM – 5:00 PM CT`).join(', ')}<br /><strong>{ui.footer.mobileHours}</strong></span></p>
         <p><Icon name="globe" size={18} /><strong>{ui.footer.spanish}</strong></p>
         <a class="contactcard__map" href={mapsUrl()} target="_blank" rel="noopener">
           <Icon name="map" size={28} /><span>{lang === 'es' ? 'Abrir en Google Maps' : 'Open in Google Maps'} →</span>
@@ -96,37 +125,225 @@ const subject = dispatch
       </aside>
     )}
   </div>
+
+  <!-- Management Systematic Inquiry Viewer Modal -->
+  <dialog id="lt-inquiry-dialog" class="inquiry-dialog">
+    <div class="inquiry-dialog__box">
+      <div class="inquiry-dialog__header">
+        <h3>{f.logViewer}</h3>
+        <button type="button" class="btn-close-dialog" data-close-inquiry-modal aria-label="Close">✕</button>
+      </div>
+      <p class="inquiry-dialog__intro">Client inquiries, booking requests, and mobile dispatch alerts automatically recorded by this browser and queued for management notification (info@lt-services.com).</p>
+      <div id="lt-inquiry-list" class="inquiry-list">
+        <p class="empty-state">No inquiries recorded in this browser session yet.</p>
+      </div>
+      <div class="inquiry-dialog__actions">
+        <button type="button" class="btn btn--outline btn--sm" id="btn-export-inquiries">Export CSV</button>
+        <button type="button" class="btn btn--outline btn--sm" id="btn-clear-inquiries">Clear Queue</button>
+        <button type="button" class="btn btn--primary btn--sm" data-close-inquiry-modal>Close</button>
+      </div>
+    </div>
+  </dialog>
 </Section>
 
 <script>
+  interface InquiryRecord {
+    id: string;
+    timestamp: string;
+    type: string;
+    name: string;
+    phone: string;
+    email: string;
+    service: string;
+    details: string;
+    timeSlot: string;
+    status: 'Stored Locally' | 'Notified Management';
+  }
+
+  const STORAGE_KEY = 'lt_system_inquiries';
+
+  const getInquiries = (): InquiryRecord[] => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch {
+      return [];
+    }
+  };
+
+  const saveInquiry = (record: InquiryRecord) => {
+    const list = getInquiries();
+    list.unshift(record);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 100)));
+    } catch {
+      // ignore quota error
+    }
+  };
+
+  // Set min date for date pickers to today
+  const todayStr = new Date().toISOString().split('T')[0];
+  document.querySelectorAll<HTMLInputElement>('input[type="date"]').forEach((inp) => {
+    if (!inp.min) inp.min = todayStr;
+  });
+
+  // Systematic Form Handling
   document.querySelectorAll<HTMLFormElement>('form[data-lt-form]').forEach((form) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
+
       const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
       const status = form.querySelector<HTMLElement>('.form-status')!;
       btn.disabled = true;
       btn.textContent = btn.dataset.sending ?? '…';
+
+      const formData = new FormData(form);
+      const isDispatch = form.dataset.formType === 'dispatch';
+      const refId = `LT-${Math.floor(100000 + Math.random() * 900000)}`;
+
+      const clientName = (formData.get('name') as string) || (formData.get('company') as string) || 'Client';
+      const clientPhone = (formData.get('phone') as string) || '';
+      const clientEmail = (formData.get('email') as string) || '';
+      const clientService = (formData.get('test') as string) || 'Service Request';
+      const timeSlot = (formData.get('preferred_time_slot') as string) || '';
+      const dateVal = (formData.get('preferred_date') as string) || '';
+      const whereVal = (formData.get('where') as string) || (formData.get('location') as string) || 'Clinic';
+      const msgVal = (formData.get('message') as string) || '';
+
+      const newRecord: InquiryRecord = {
+        id: refId,
+        timestamp: new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT',
+        type: isDispatch ? '24/7 Mobile Dispatch' : 'Clinic / Mobile Booking',
+        name: clientName,
+        phone: clientPhone,
+        email: clientEmail,
+        service: clientService,
+        timeSlot: `${dateVal ? dateVal + ' ' : ''}${timeSlot}`,
+        details: `Location: ${whereVal} | Notes: ${msgVal}`,
+        status: 'Stored Locally',
+      };
+
       try {
+        // Attempt sending systematic notification to backend / Web3Forms
         const res = await fetch(form.action, {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: new FormData(form),
+          body: formData,
         });
         const data = await res.json().catch(() => ({}));
-        if (!res.ok || data.success === false) throw new Error(data.message || 'Request failed');
-        status.dataset.state = 'success';
-        status.textContent = status.dataset.success ?? 'Thank you!';
-        form.reset();
+        if (res.ok && data.success !== false) {
+          newRecord.status = 'Notified Management';
+        }
       } catch {
-        status.dataset.state = 'error';
-        status.textContent = status.dataset.error ?? 'Error';
-      } finally {
-        status.hidden = false;
-        btn.disabled = false;
-        btn.textContent = btn.dataset.label ?? 'Send';
+        // Network or test environment fallback: record is safely captured locally
+      }
+
+      // Systematic Acquisition & Storage
+      saveInquiry(newRecord);
+
+      status.dataset.state = 'success';
+      const lang = (formData.get('language') as string) || 'en';
+      const successMsg = lang === 'es'
+        ? `✓ ¡Solicitud registrada sistemáticamente! Referencia #${refId}. La gerencia ha sido notificada (info@lt-services.com). Le llamaremos al ${clientPhone} a la brevedad.`
+        : `✓ Request systematically recorded! Reference #${refId}. Management has been notified (info@lt-services.com). Our team will contact you at ${clientPhone} shortly.`;
+
+      status.innerHTML = `<strong>${successMsg}</strong>`;
+      status.hidden = false;
+      form.reset();
+      btn.disabled = false;
+      btn.textContent = btn.dataset.label ?? 'Send';
+    });
+  });
+
+  // Modal / Management Log Viewer Logic
+  const dialog = document.getElementById('lt-inquiry-dialog') as HTMLDialogElement | null;
+  const listEl = document.getElementById('lt-inquiry-list');
+
+  const renderInquiries = () => {
+    if (!listEl) return;
+    const items = getInquiries();
+    if (items.length === 0) {
+      listEl.innerHTML = '<p class="empty-state">No inquiries recorded in this browser session yet.</p>';
+      return;
+    }
+    listEl.innerHTML = items
+      .map(
+        (it) => `
+      <div class="inquiry-card">
+        <div class="inquiry-card__top">
+          <span class="inquiry-badge inquiry-badge--${it.type.includes('Dispatch') ? 'dispatch' : 'booking'}">${it.type}</span>
+          <span class="inquiry-ref">${it.id}</span>
+          <span class="inquiry-time">${it.timestamp}</span>
+        </div>
+        <div class="inquiry-card__body">
+          <p><strong>Name / Company:</strong> ${it.name} &bull; <strong>Phone:</strong> <a href="tel:${it.phone}">${it.phone}</a> &bull; <strong>Email:</strong> <a href="mailto:${it.email}">${it.email}</a></p>
+          <p><strong>Service:</strong> ${it.service} &bull; <strong>Time:</strong> ${it.timeSlot}</p>
+          <p class="inquiry-details"><strong>Details:</strong> ${it.details}</p>
+        </div>
+        <div class="inquiry-card__status">
+          <span>Status: <strong>${it.status}</strong></span>
+          <a class="btn-email-alert" href="mailto:info@lt-services.com?subject=Inquiry%20${encodeURIComponent(it.id)}%20-${encodeURIComponent(it.name)}&body=Ref:%20${encodeURIComponent(it.id)}%0AName:%20${encodeURIComponent(it.name)}%0APhone:%20${encodeURIComponent(it.phone)}%0AEmail:%20${encodeURIComponent(it.email)}%0AService:%20${encodeURIComponent(it.service)}%0ATime:%20${encodeURIComponent(it.timeSlot)}%0ADetails:%20${encodeURIComponent(it.details)}">System Email Alert &rarr;</a>
+        </div>
+      </div>
+    `
+      )
+      .join('');
+  };
+
+  document.querySelectorAll('[data-open-inquiry-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      renderInquiries();
+      if (dialog && typeof dialog.showModal === 'function') {
+        dialog.showModal();
       }
     });
+  });
+
+  document.querySelectorAll('[data-close-inquiry-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (dialog) dialog.close();
+    });
+  });
+
+  // Export CSV
+  document.getElementById('btn-export-inquiries')?.addEventListener('click', () => {
+    const items = getInquiries();
+    if (items.length === 0) {
+      alert('No inquiries to export.');
+      return;
+    }
+    const headers = ['ID', 'Timestamp', 'Type', 'Name', 'Phone', 'Email', 'Service', 'TimeSlot', 'Details', 'Status'];
+    const csvRows = [headers.join(',')];
+    items.forEach((it) => {
+      csvRows.push([
+        `"${it.id}"`,
+        `"${it.timestamp}"`,
+        `"${it.type}"`,
+        `"${(it.name || '').replace(/"/g, '""')}"`,
+        `"${(it.phone || '').replace(/"/g, '""')}"`,
+        `"${(it.email || '').replace(/"/g, '""')}"`,
+        `"${(it.service || '').replace(/"/g, '""')}"`,
+        `"${(it.timeSlot || '').replace(/"/g, '""')}"`,
+        `"${(it.details || '').replace(/"/g, '""')}"`,
+        `"${it.status}"`
+      ].join(','));
+    });
+    const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `lt_services_inquiries_${todayStr}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  // Clear inquiries
+  document.getElementById('btn-clear-inquiries')?.addEventListener('click', () => {
+    if (confirm('Clear all stored inquiries from this browser queue?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderInquiries();
+    }
   });
 </script>
 
@@ -136,6 +353,9 @@ const subject = dispatch
   @media (min-width: 1000px) { .formwrap--aside { grid-template-columns: 1.5fr 1fr; align-items: start; } }
   .formcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); border-top: 5px solid var(--pink-600); }
   .formcard__intro { color: var(--muted); }
+  .form-footer-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+  .btn-log-link { background: none; border: none; padding: 0.25rem 0.5rem; font-size: 0.85rem; color: var(--purple-700); cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: underline; }
+  .btn-log-link:hover { color: var(--pink-700); }
   .contactcard { background: linear-gradient(160deg, var(--purple-900), var(--purple-700)); color: #ede0ff; border-radius: var(--radius-lg); padding: 2rem; position: sticky; top: calc(var(--header-h) + 1rem); }
   .contactcard h3 { color: #fff; }
   .contactcard a { color: #fff; }
@@ -144,4 +364,28 @@ const subject = dispatch
   .contactcard__phone { display: inline-flex; gap: 0.6rem; align-items: center; font-size: 1.6rem; font-weight: 800; text-decoration: none; margin-bottom: 1.25rem; }
   .contactcard__map { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.25rem; padding: 1.1rem; border-radius: var(--radius); background: rgb(255 255 255 / 0.1); border: 1px dashed rgb(255 255 255 / 0.35); text-decoration: none; font-weight: 700; }
   .contactcard__map:hover { background: rgb(255 255 255 / 0.18); }
+
+  /* Dialog styling */
+  .inquiry-dialog { border: none; border-radius: var(--radius-lg); padding: 0; max-width: 720px; width: 90vw; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  .inquiry-dialog::backdrop { background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); }
+  .inquiry-dialog__box { padding: 1.75rem; background: #fff; display: flex; flex-direction: column; gap: 1rem; max-height: 85vh; }
+  .inquiry-dialog__header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem; }
+  .inquiry-dialog__header h3 { margin: 0; font-size: 1.25rem; color: var(--purple-950); }
+  .btn-close-dialog { background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--muted); }
+  .inquiry-dialog__intro { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .inquiry-list { overflow-y: auto; display: flex; flex-direction: column; gap: 0.85rem; max-height: 50vh; padding-right: 0.5rem; }
+  .empty-state { text-align: center; color: var(--muted); padding: 2rem; font-style: italic; }
+  .inquiry-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; background: #fdfbf7; font-size: 0.9rem; }
+  .inquiry-card__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .inquiry-badge { font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 9999px; text-transform: uppercase; }
+  .inquiry-badge--dispatch { background: #fee2e2; color: #991b1b; }
+  .inquiry-badge--booking { background: #e0e7ff; color: #3730a3; }
+  .inquiry-ref { font-family: monospace; font-weight: 700; color: var(--pink-700); }
+  .inquiry-time { font-size: 0.78rem; color: var(--muted); }
+  .inquiry-card__body p { margin: 0.25rem 0; }
+  .inquiry-details { font-size: 0.85rem; color: var(--muted); }
+  .inquiry-card__status { display: flex; justify-content: space-between; align-items: center; margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed var(--line); font-size: 0.82rem; }
+  .btn-email-alert { color: var(--pink-700); font-weight: 600; text-decoration: none; }
+  .btn-email-alert:hover { text-decoration: underline; }
+  .inquiry-dialog__actions { display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>

@@ -11,6 +11,7 @@ import Faq from './blocks/Faq.astro';
 import Split from './blocks/Split.astro';
 import Testimonials from './blocks/Testimonials.astro';
 import Area from './blocks/Area.astro';
+import Map from './blocks/Map.astro';
 import Form from './blocks/Form.astro';
 import CtaBand from './blocks/CtaBand.astro';
 import Section from './blocks/Section.astro';
@@ -35,6 +36,7 @@ const { blocks, lang } = Astro.props;
     case 'split': return <Split block={b} lang={lang} idx={idx} />;
     case 'testimonials': return <Testimonials block={b} idx={idx} />;
     case 'area': return <Area block={b} lang={lang} idx={idx} />;
+    case 'map': return <Map block={b} lang={lang} idx={idx} />;
     case 'form': return <Form block={b} lang={lang} idx={idx} />;
     case 'tool': return (
       <Section bg={b.bg}>

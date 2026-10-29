@@ -148,6 +148,21 @@ const page: PageModule = {
         cta: { label: 'Schedule Your Legal DNA Test', href: 'contact' },
       },
       {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Compassionate Family Care',
+        title: 'Confidential Consultation & Private Family Support',
+        text: 'DNA testing involves life-changing answers. Our certified genetic collectors provide a warm, respectful environment where parents and children feel comfortable, with complete privacy and zero judgment.',
+        items: [
+          'Comfortable private consultation rooms in Marshall',
+          'Gentle buccal cheek swabs — zero needles or discomfort for babies and children',
+          'Confidential results delivered securely via encrypted portal and notarized mail',
+        ],
+        image: 'paternityConsult',
+        imageAlt: 'African-American father and daughter in a compassionate private clinic consultation with a professional medical specialist',
+      },
+      {
         type: 'faq',
         bg: 'lavender',
         title: 'DNA Testing Frequently Asked Questions',
@@ -324,6 +339,21 @@ const page: PageModule = {
         image: 'dnaLab',
         imageAlt: 'Científica genetista realizando análisis de ADN acreditado por AABB con secuenciador genético automatizado',
         cta: { label: 'Agendar Prueba de ADN Legal', href: 'contact' },
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'white',
+        eyebrow: 'Atención Familiar Humana y Privada',
+        title: 'Consulta Confidencial y Apoyo Familiar Respetuoso',
+        text: 'Las pruebas de ADN implican decisiones importantes. Nuestros recolectores certificados brindan un ambiente cálido y confidencial donde las familias se sienten cómodas y respetadas en todo momento.',
+        items: [
+          'Salas privadas y cómodas de consulta en nuestra clínica de Marshall',
+          'Hisopados bucales indoloros — sin agujas ni molestias para bebés y niños',
+          'Resultados confidenciales entregados por portal encriptado y correo notariado',
+        ],
+        image: 'paternityConsult',
+        imageAlt: 'Padre e hija afroamericanos en una consulta privada de ADN con una especialista médica profesional',
       },
       {
         type: 'faq',

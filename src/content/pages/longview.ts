@@ -62,6 +62,35 @@ const page: PageModule = {
         tool: 'mileage',
       },
       {
+        type: 'split',
+        bg: 'white',
+        eyebrow: 'In-Home Phlebotomy',
+        title: 'Gentle, Stress-Free Blood Draws in Your Longview Home',
+        text: 'Skip the congested parking and crowded waiting rooms at regional laboratory centers. Our certified mobile phlebotomists come directly to your residence in Longview, Gregg County, and surrounding neighborhoods.',
+        items: [
+          'Compassionate technique for seniors, homebound family members, and children',
+          'Strict adherence to doctor-ordered fasting and collection requirements',
+          'Immediate cold-chain preservation and delivery to Quest, Labcorp, or hospital labs',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Certified Hispanic phlebotomist smiling and gently performing an in-home blood draw for an elderly lady in her armchair',
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Fleet & Job Site Dispatch',
+        title: 'Rapid 24/7 Mobile Testing Across Longview Commercial Corridors',
+        text: 'Need on-site post-accident drug screening or DOT random consortium testing? Our equipped mobile units travel anywhere across Longview industrial parks and fleet yards.',
+        items: [
+          'Target arrival within 1 to 2 hours for priority workplace calls',
+          'Equipped with digital barcode scanners, breathalyzers, and split-specimen custody forms',
+          'Bilingual Spanish/English collectors available around the clock',
+        ],
+        image: 'kiaArrival',
+        imageAlt: 'Clean silver Kia SUV mobile collection unit parked at East Texas facility with collector carrying medical transport case',
+      },
+      {
         type: 'faq',
         title: 'Longview Mobile Testing Frequently Asked Questions',
         items: [
@@ -146,6 +175,35 @@ const page: PageModule = {
       {
         type: 'tool',
         tool: 'mileage',
+      },
+      {
+        type: 'split',
+        bg: 'white',
+        eyebrow: 'Flebotomía a Domicilio',
+        title: 'Tomas de Sangre Amables y sin Estrés en su Hogar en Longview',
+        text: 'Evite las filas y la congestión en clínicas de laboratorio. Nuestras flebotomistas móviles certificadas acuden directamente a su domicilio en Longview y el condado de Gregg.',
+        items: [
+          'Trato comprensivo y paciente para adultos mayores y niños',
+          'Cumplimiento estricto de las indicaciones médicas de ayuno y toma',
+          'Preservación inmediata en frío y entrega a Quest, Labcorp o laboratorios hospitalarios',
+        ],
+        image: 'seniorBloodDraw',
+        imageAlt: 'Flebotomista hispana certificada realizando con amabilidad una extracción de sangre a domicilio a una señora mayor en su sillón',
+      },
+      {
+        type: 'split',
+        reverse: true,
+        bg: 'lavender',
+        eyebrow: 'Atención a Flotas y Obras',
+        title: 'Servicio Móvil Rápido 24/7 en Corredores Comerciales de Longview',
+        text: '¿Requiere pruebas post-accidente o exámenes aleatorios DOT en sus instalaciones? Nuestras unidades móviles acuden a cualquier parque industrial o patio de camiones en Longview.',
+        items: [
+          'Llegada estimada en 1 a 2 horas para llamadas urgentes de empresas',
+          'Equipadas con escáneres de códigos de barras, alcoholímetros y formularios oficiales',
+          'Atención 100% bilingüe en español e inglés las 24 horas',
+        ],
+        image: 'kiaArrival',
+        imageAlt: 'Unidad móvil SUV Kia gris plateada estacionada en instalación de Texas con recolector médico certificado',
       },
       {
         type: 'faq',
