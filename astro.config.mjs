@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Keep in sync with SITE.url in src/config/site.ts
-const SITE_URL = 'https://lt-services.com';
+const SITE_URL = 'https://landtsolutions.com';
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 
 export default defineConfig({

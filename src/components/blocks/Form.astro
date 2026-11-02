@@ -28,7 +28,7 @@ const subject = dispatch
         <input type="hidden" name="access_key" value={SITE.form.accessKey} />
         <input type="hidden" name="subject" value={subject} />
         <input type="hidden" name="from_name" value={SITE.name + ' Website System'} />
-        <input type="hidden" name="to_email" value="info@lt-services.com" />
+        <input type="hidden" name="to_email" value="info@landtsolutions.com" />
         <input type="hidden" name="language" value={lang} />
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -133,7 +133,7 @@ const subject = dispatch
         <h3>{f.logViewer}</h3>
         <button type="button" class="btn-close-dialog" data-close-inquiry-modal aria-label="Close">✕</button>
       </div>
-      <p class="inquiry-dialog__intro">Client inquiries, booking requests, and mobile dispatch alerts automatically recorded by this browser and queued for management notification (info@lt-services.com).</p>
+      <p class="inquiry-dialog__intro">Client inquiries, booking requests, and mobile dispatch alerts automatically recorded by this browser and queued for management notification (info@landtsolutions.com).</p>
       <div id="lt-inquiry-list" class="inquiry-list">
         <p class="empty-state">No inquiries recorded in this browser session yet.</p>
       </div>
@@ -244,8 +244,8 @@ const subject = dispatch
       status.dataset.state = 'success';
       const lang = (formData.get('language') as string) || 'en';
       const successMsg = lang === 'es'
-        ? `✓ ¡Solicitud registrada sistemáticamente! Referencia #${refId}. La gerencia ha sido notificada (info@lt-services.com). Le llamaremos al ${clientPhone} a la brevedad.`
-        : `✓ Request systematically recorded! Reference #${refId}. Management has been notified (info@lt-services.com). Our team will contact you at ${clientPhone} shortly.`;
+        ? `✓ ¡Solicitud registrada sistemáticamente! Referencia #${refId}. La gerencia ha sido notificada (info@landtsolutions.com). Le llamaremos al ${clientPhone} a la brevedad.`
+        : `✓ Request systematically recorded! Reference #${refId}. Management has been notified (info@landtsolutions.com). Our team will contact you at ${clientPhone} shortly.`;
 
       status.innerHTML = `<strong>${successMsg}</strong>`;
       status.hidden = false;
@@ -282,7 +282,7 @@ const subject = dispatch
         </div>
         <div class="inquiry-card__status">
           <span>Status: <strong>${it.status}</strong></span>
-          <a class="btn-email-alert" href="mailto:info@lt-services.com?subject=Inquiry%20${encodeURIComponent(it.id)}%20-${encodeURIComponent(it.name)}&body=Ref:%20${encodeURIComponent(it.id)}%0AName:%20${encodeURIComponent(it.name)}%0APhone:%20${encodeURIComponent(it.phone)}%0AEmail:%20${encodeURIComponent(it.email)}%0AService:%20${encodeURIComponent(it.service)}%0ATime:%20${encodeURIComponent(it.timeSlot)}%0ADetails:%20${encodeURIComponent(it.details)}">System Email Alert &rarr;</a>
+          <a class="btn-email-alert" href="mailto:info@landtsolutions.com?subject=Inquiry%20${encodeURIComponent(it.id)}%20-${encodeURIComponent(it.name)}&body=Ref:%20${encodeURIComponent(it.id)}%0AName:%20${encodeURIComponent(it.name)}%0APhone:%20${encodeURIComponent(it.phone)}%0AEmail:%20${encodeURIComponent(it.email)}%0AService:%20${encodeURIComponent(it.service)}%0ATime:%20${encodeURIComponent(it.timeSlot)}%0ADetails:%20${encodeURIComponent(it.details)}">System Email Alert &rarr;</a>
         </div>
       </div>
     `

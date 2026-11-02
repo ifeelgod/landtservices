@@ -18,12 +18,12 @@ export const SITE = {
   name: 'L&T Solutions',
   shortName: 'L&T Solutions',
   /** Must match `site` in astro.config.mjs. */
-  url: 'https://lt-services.com', // TODO: VERIFY domain
+  url: 'https://landtsolutions.com',
 
   phone: { display: '877-329-5339', e164: '+18773295339' }, // OFFICIAL (client-supplied)
   /** 24/7 dispatch / on-call line (can equal main phone). */
   emergencyPhone: { display: '877-329-5339', e164: '+18773295339' }, // same toll-free line; TODO: VERIFY 24/7 on-call
-  email: 'info@lt-services.com', // TODO: VERIFY
+  email: 'info@landtsolutions.com',
 
   address: {
     street: '203 A W. Pinecrest Dr.', // OFFICIAL (client-supplied)
