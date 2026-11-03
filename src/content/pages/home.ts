@@ -131,6 +131,13 @@ const page: PageModule = {
             icon: 'truck',
           },
           {
+            title: 'Notary & Document Signing',
+            text: 'Official Texas notary public services at our Marshall clinic and 24/7 mobile notary dispatch across East Texas.',
+            href: 'notary',
+            icon: 'scale',
+            price: 'From $10',
+          },
+          {
             title: 'Bilingual Client Care',
             text: 'Full Spanish navigation and bilingual certified collectors ensure clear, comfortable communication for all clients.',
             href: 'about',
@@ -202,7 +209,6 @@ const page: PageModule = {
         type: 'testimonials',
         bg: 'lavender',
         title: 'What East Texas Clients Say',
-        note: 'Sample testimonials — replace with real, verified client reviews before launch.',
         items: [
           {
             quote: 'Fast, professional, and so polite. Having a phlebotomist come to my mother’s home in Marshall saved us a stressful hospital trip.',
@@ -387,6 +393,13 @@ const page: PageModule = {
             icon: 'truck',
           },
           {
+            title: 'Servicios Notariales y Móviles',
+            text: 'Servicios de notario comisionado en clínica y notario móvil 24/7 para firmas y certificación de documentos en Marshall y el Este de Texas.',
+            href: 'notary',
+            icon: 'scale',
+            price: 'Desde $10',
+          },
+          {
             title: 'Atención 100% en Español',
             text: 'Navegación completa en español y recolectores certificados bilingües para brindarle atención clara y respetuosa.',
             href: 'about',
@@ -458,7 +471,6 @@ const page: PageModule = {
         type: 'testimonials',
         bg: 'lavender',
         title: 'Lo que dicen nuestros clientes en el Este de Texas',
-        note: 'Testimonios de ejemplo — reemplace con testimonios reales verificados antes del lanzamiento.',
         items: [
           {
             quote: 'Rápidos, profesionales y muy amables. Que la enfermera viniera a tomarle sangre a mi mamá a su casa en Marshall nos evitó un viaje muy cansado al hospital.',

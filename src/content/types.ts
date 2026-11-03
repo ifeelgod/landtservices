@@ -36,7 +36,7 @@ export type Cta = { label: string; href: RouteKey | 'tel' | 'emergency' | `#${st
 
 export type Card = { title: string; text: string; href?: RouteKey; icon?: IconKey; price?: string | null; cta?: string };
 
-export type FormService = 'drug' | 'dnaLegal' | 'dnaPrivate' | 'dot' | 'blood' | 'kits' | 'gender' | 'other';
+export type FormService = 'drug' | 'dnaLegal' | 'dnaPrivate' | 'dot' | 'blood' | 'kits' | 'gender' | 'notary' | 'other';
 
 export type Block =
   | {

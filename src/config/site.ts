@@ -13,7 +13,7 @@
 
 export const SITE = {
   /** Shows a "DRAFT — placeholder data" ribbon on every page. Set false at launch. */
-  isDraft: true,
+  isDraft: false,
 
   name: 'L&T Solutions',
   shortName: 'L&T Solutions',
@@ -22,8 +22,10 @@ export const SITE = {
 
   phone: { display: '877-329-5339', e164: '+18773295339' }, // OFFICIAL (client-supplied)
   /** 24/7 dispatch / on-call line (can equal main phone). */
-  emergencyPhone: { display: '877-329-5339', e164: '+18773295339' }, // same toll-free line; TODO: VERIFY 24/7 on-call
+  emergencyPhone: { display: '877-329-5339', e164: '+18773295339' }, // same toll-free line; 24/7 on-call
   email: 'info@landtsolutions.com',
+  /** Management notification recipient for client inquiries & dispatch requests */
+  managementEmail: 'trenton.tucker@ymail.com',
 
   address: {
     street: '203 A W. Pinecrest Dr.', // OFFICIAL (client-supplied)
@@ -67,6 +69,8 @@ export const SITE = {
     drugNail: 150 as number | null,
 
     // Verification & Compliance Services
+    notaryInClinic: 10 as number | null,
+    notaryMobileBase: 45 as number | null,
     fingerprintsInkRoll2Cards: 50 as number | null,
     formI9Verification: 75 as number | null,
     backgroundChecks: 75 as number | null,

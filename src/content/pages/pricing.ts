@@ -1,5 +1,5 @@
 import type { PageModule } from '../types';
-import { SITE, price } from '../../config/site';
+import { SITE } from '../../config/site';
 
 const page: PageModule = {
   en: {
@@ -30,7 +30,7 @@ const page: PageModule = {
         bg: 'lavender',
         question: 'How much do DNA tests, drug tests, and verification services cost at L&T Solutions?',
         answer:
-          'Drug and urinalysis testing starts at $75 for DOT, non-DOT, and rapid screens ($125 for 90-day hair follicle). Legal court-admissible DNA paternity is $425 ($325 for private peace-of-mind). Two-card ink fingerprinting is $50, Form I-9 verification is $75, and immigration form consultations range from $825 to $2,250.',
+          'Drug and urinalysis testing starts at $75 for DOT, non-DOT, and rapid screens ($125 for 90-day hair follicle). Legal court-admissible DNA paternity is $425 ($325 for private peace-of-mind). Two-card ink fingerprinting is $50, Form I-9 verification is $75, in-clinic Texas notary public is $10/seal (mobile notary from $45), and immigration form consultations range from $825 to $2,250.',
       },
       {
         type: 'cards',
@@ -120,6 +120,8 @@ const page: PageModule = {
           'On-site identity verification and workforce onboarding services for employers, licensing boards, and job candidates.',
         head: ['Service / Item', 'Standard Fee', 'Turnaround / Delivery', 'Description'],
         rows: [
+          ['Notary Public (In-Clinic)', '$10 / seal', 'Walk-In / Immediate', 'Official Texas notarial acts, acknowledgments, jurats, and document certifications'],
+          ['Mobile Notary & Document Signing', 'From $45', 'On-Demand / 24/7 Dispatch', 'Mobile notary dispatched to homes, care facilities, hospitals, or corporate offices in Marshall & East Texas'],
           ['Ink / Roll Fingerprints (2 Cards)', '$50', 'Same-Visit (In-House)', 'Standard FD-258 fingerprint cards for employment, licensing, and security'],
           ['Form I-9 Employment Verification', '$75', 'Instant', 'Authorized representative physical document inspection and I-9 verification'],
           ['Background Checks', '$75', 'Instant / Rapid', 'Comprehensive employment, criminal, and identity verification searches'],
@@ -235,7 +237,7 @@ const page: PageModule = {
         bg: 'lavender',
         question: '¿Cuánto cuestan las pruebas de ADN, drogas y trámites en L&T Solutions?',
         answer:
-          'Las pruebas de drogas en orina comienzan en $75 para exámenes DOT, no DOT y pruebas rápidas ($125 para prueba de cabello de 90 días). La prueba de paternidad legal de ADN cuesta $425 ($325 para prueba privada). La toma de huellas en tinta (2 tarjetas) cuesta $50, la verificación I-9 cuesta $75 y las consultas de inmigración van de $825 a $2,250.',
+          'Las pruebas de drogas en orina comienzan en $75 para exámenes DOT, no DOT y pruebas rápidas ($125 para prueba de cabello de 90 días). La prueba de paternidad legal de ADN cuesta $425 ($325 para prueba privada). La toma de huellas en tinta (2 tarjetas) cuesta $50, la verificación I-9 cuesta $75, los servicios notariales en clínica cuestan $10 por firma (notario móvil desde $45) y las consultas de inmigración van de $825 a $2,250.',
       },
       {
         type: 'cards',
@@ -325,6 +327,8 @@ const page: PageModule = {
           'Servicios de verificación de identidad e incorporación laboral para empleadores, juntas profesionales y candidatos.',
         head: ['Servicio / Trámite', 'Tarifa Estándar', 'Tiempo / Entrega', 'Descripción'],
         rows: [
+          ['Servicios Notariales en Clínica', '$10 / firma', 'En Clínica / Inmediato', 'Actos notariales de Texas, juramentos, certificaciones de documentos y declaraciones juradas'],
+          ['Servicio Notarial Móvil a Domicilio', 'Desde $45', 'A Domicilio / Servicio 24/7', 'Notario móvil a domicilio, hospitales, centros de atención u oficinas en Marshall y el Este de Texas'],
           ['Toma de Huellas en Tinta (2 Tarjetas)', '$50', 'Misma Visita (En Oficina)', 'Tarjetas oficiales FD-258 para empleo, licencias y acreditación'],
           ['Verificación de Empleo Formulario I-9', '$75', 'Inmediato', 'Inspección física de documentos y firma como representante autorizado'],
           ['Verificación de Antecedentes (Background Checks)', '$75', 'Inmediato / Rápido', 'Búsqueda exhaustiva de antecedentes laborales, penales y de identidad'],
