@@ -34,7 +34,7 @@ export const SITE = {
     zip: '75670',
     country: 'US',
   },
-  geo: { lat: 32.54487, lng: -94.36742 }, // TODO: VERIFY - coordinates are from the OLD placeholder address; update for 203 A W. Pinecrest Dr.
+  geo: { lat: 32.527186, lng: -94.371456 }, // Exact coordinates for 203 A W. Pinecrest Dr., Marshall, TX 75670
 
   /** Clinic walk-in hours. Mobile dispatch is advertised as 24/7 separately. */
   hours: [
