@@ -66,9 +66,9 @@ const social = Object.entries(SITE.social).filter(([, v]) => hasValue(v));
     <div>
       <h2 class="footer__h">{ui.footer.visit}</h2>
       <address class="footer__nap">
-        <strong>{SITE.name}</strong><br />
-        <a href={mapsUrl()} target="_blank" rel="noopener">{fullAddress()}</a><br />
-        <a class="footer__phone" href={telHref(SITE.phone.e164)}>{SITE.phone.display}</a><br />
+        <strong>{SITE.name}</strong>
+        <a href={mapsUrl()} target="_blank" rel="noopener">{fullAddress()}</a>
+        <a class="footer__phone" href={telHref(SITE.phone.e164)}>{SITE.phone.display}</a>
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       </address>
       <p class="footer__hours">
@@ -99,9 +99,10 @@ const social = Object.entries(SITE.social).filter(([, v]) => hasValue(v));
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    min-height: 46px;
     color: #f3e8ff;
     text-decoration: none;
-    padding: 0.45rem 0.9rem;
+    padding: 0.55rem 1rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -117,8 +118,10 @@ const social = Object.entries(SITE.social).filter(([, v]) => hasValue(v));
     transform: translateY(-1px);
   }
   .footer__h { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: #fff; margin-bottom: 1rem; }
-  .footer__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
-  .footer__nap { font-style: normal; line-height: 1.8; }
+  .footer__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.15rem; }
+  .footer__links a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0.25rem; }
+  .footer__nap { font-style: normal; line-height: 1.6; display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+  .footer__nap a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0.2rem; }
   .footer__phone { font-weight: 800; font-size: 1.1rem; }
   .footer__hours { margin-top: 1rem; line-height: 1.7; }
   .footer__247 { color: #fbcfe8; }
