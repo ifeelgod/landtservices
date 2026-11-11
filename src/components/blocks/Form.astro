@@ -24,13 +24,11 @@ const subject = dispatch
     <div class="formcard">
       <h2 id={`${fid}-h`}>{b.title ?? (dispatch ? f.dispatchTitle : f.title)}</h2>
       <p class="formcard__intro">{b.intro ?? f.intro}</p>
+      <div class="form-receipt" data-form-receipt hidden tabindex="-1" role="status" aria-live="polite"></div>
       <form action={SITE.form.endpoint} method="POST" data-lt-form data-form-type={dispatch ? 'dispatch' : 'appointment'} novalidate={false}>
         <input type="hidden" name="access_key" value={SITE.form.accessKey} />
         <input type="hidden" name="subject" value={subject} />
         <input type="hidden" name="from_name" value={SITE.name + ' Website System'} />
-        <input type="hidden" name="to_email" value={`info@landtsolutions.com, ${SITE.managementEmail}`} />
-        <input type="hidden" name="management_recipient" value={SITE.managementEmail} />
-        <input type="hidden" name="cc" value={SITE.managementEmail} />
         <input type="hidden" name="language" value={lang} />
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -188,14 +186,21 @@ const subject = dispatch
     if (!inp.min) inp.min = todayStr;
   });
 
+  const escHtml = (s: string) =>
+    s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]!));
+
   // Systematic Form Handling
   document.querySelectorAll<HTMLFormElement>('form[data-lt-form]').forEach((form) => {
+    const card = form.closest<HTMLElement>('.formcard');
+    const receipt = card?.querySelector<HTMLElement>('[data-form-receipt]') ?? null;
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
 
       const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
       const status = form.querySelector<HTMLElement>('.form-status')!;
+      status.hidden = true;
       btn.disabled = true;
       btn.textContent = btn.dataset.sending ?? '…';
 
@@ -203,14 +208,16 @@ const subject = dispatch
       const isDispatch = form.dataset.formType === 'dispatch';
       const refId = `LT-${Math.floor(100000 + Math.random() * 900000)}`;
 
-      const clientName = (formData.get('name') as string) || (formData.get('company') as string) || 'Client';
-      const clientPhone = (formData.get('phone') as string) || '';
-      const clientEmail = (formData.get('email') as string) || '';
-      const clientService = (formData.get('test') as string) || 'Service Request';
-      const timeSlot = (formData.get('preferred_time_slot') as string) || '';
-      const dateVal = (formData.get('preferred_date') as string) || '';
-      const whereVal = (formData.get('where') as string) || (formData.get('location') as string) || 'Clinic';
-      const msgVal = (formData.get('message') as string) || '';
+      const clientName = ((formData.get('name') as string) || (formData.get('company') as string) || 'Client').trim();
+      const clientPhone = ((formData.get('phone') as string) || '').trim();
+      const clientEmail = ((formData.get('email') as string) || '').trim();
+      const clientService = ((formData.get('test') as string) || 'Service Request').trim();
+      const timeSlot = ((formData.get('preferred_time_slot') as string) || '').trim();
+      const dateVal = ((formData.get('preferred_date') as string) || '').trim();
+      const whereVal = ((formData.get('where') as string) || (formData.get('location') as string) || 'Clinic').trim();
+      const msgVal = ((formData.get('message') as string) || '').trim();
+      const lang = ((formData.get('language') as string) || 'en').toLowerCase();
+      const es = lang === 'es';
 
       const newRecord: InquiryRecord = {
         id: refId,
@@ -225,35 +232,107 @@ const subject = dispatch
         status: 'Stored Locally',
       };
 
+      let delivered = false;
+      let apiErrorMsg = '';
       try {
-        // Attempt sending systematic notification to backend / Web3Forms
         const res = await fetch(form.action, {
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: formData,
         });
         const data = await res.json().catch(() => ({}));
-        if (res.ok && data.success !== false) {
+        if (res.ok && data.success === true) {
+          delivered = true;
           newRecord.status = 'Notified Management';
+        } else {
+          apiErrorMsg = data.message || `HTTP ${res.status}`;
         }
-      } catch {
-        // Network or test environment fallback: record is safely captured locally
+      } catch (err) {
+        apiErrorMsg = err instanceof Error ? err.message : 'Network error';
       }
 
       // Systematic Acquisition & Storage
       saveInquiry(newRecord);
 
-      status.dataset.state = 'success';
-      const lang = (formData.get('language') as string) || 'en';
-      const successMsg = lang === 'es'
-        ? `✓ ¡Solicitud registrada sistemáticamente! Referencia #${refId}. La gerencia ha sido notificada (info@landtsolutions.com / trenton.tucker@ymail.com). Le llamaremos al ${clientPhone} a la brevedad.`
-        : `✓ Request systematically recorded! Reference #${refId}. Management has been notified (info@landtsolutions.com / trenton.tucker@ymail.com). Our team will contact you at ${clientPhone} shortly.`;
-
-      status.innerHTML = `<strong>${successMsg}</strong>`;
-      status.hidden = false;
-      form.reset();
       btn.disabled = false;
       btn.textContent = btn.dataset.label ?? 'Send';
+
+      if (delivered && receipt) {
+        const whenSummary = [dateVal, timeSlot].filter(Boolean).join(' · ') || (es ? 'Lo antes posible' : 'First available');
+        const mailtoHref = `mailto:trenton.tucker@ymail.com,info@landtsolutions.com?subject=${encodeURIComponent(`Request #${refId} - ${clientName}`)}`;
+
+        receipt.innerHTML = es
+          ? `
+            <div class="receipt-badge">✓ Solicitud Enviada y Recibida</div>
+            <h3 class="receipt-title">¡Gracias, ${escHtml(clientName)}!</h3>
+            <p class="receipt-sub">Su solicitud ha sido enviada y recibida por nuestro equipo de coordinación en Marshall, TX.</p>
+            <dl class="receipt-summary">
+              <div><dt>Referencia</dt><dd><code>#${escHtml(refId)}</code></dd></div>
+              <div><dt>Servicio</dt><dd>${escHtml(clientService)}</dd></div>
+              <div><dt>Modalidad / Lugar</dt><dd>${escHtml(whereVal)}</dd></div>
+              <div><dt>Horario solicitado</dt><dd>${escHtml(whenSummary)}</dd></div>
+              <div><dt>Teléfono de contacto</dt><dd>${escHtml(clientPhone)}</dd></div>
+            </dl>
+            <div class="receipt-next">
+              <h4>¿Qué sigue ahora?</h4>
+              <ol>
+                <li><strong>Confirmación por teléfono:</strong> Nuestro equipo le llamará o enviará mensaje al <strong>${escHtml(clientPhone)}</strong> dentro de 1 hora hábil (Lunes–Viernes 8:00 AM–5:00 PM CT) o en <strong>15–30 minutos</strong> si solicitó despacho móvil urgente 24/7.</li>
+                <li><strong>Lo que debe tener listo:</strong> Tenga a la mano una <strong>identificación oficial con foto vigente</strong> y cualquier orden médica, del empleador (CCF) o de la corte.</li>
+                <li><strong>¿Necesita atención inmediata?</strong> Llámenos directamente al <a href="tel:+18773295339">877-329-5339</a> e indique su referencia <strong>#${escHtml(refId)}</strong>.</li>
+              </ol>
+            </div>
+            <div class="receipt-actions">
+              <a class="btn btn--primary btn--sm" href="tel:+18773295339">Llamar al 877-329-5339</a>
+              <button type="button" class="btn btn--outline btn--sm" data-reset-receipt>Enviar otra solicitud</button>
+              <a class="receipt-mail-link" href="${mailtoHref}">Enviar copia por correo</a>
+            </div>
+          `
+          : `
+            <div class="receipt-badge">✓ Request Sent &amp; Received</div>
+            <h3 class="receipt-title">Thank you, ${escHtml(clientName)}!</h3>
+            <p class="receipt-sub">Your request has been sent and received by our scheduling &amp; dispatch team in Marshall, TX.</p>
+            <dl class="receipt-summary">
+              <div><dt>Reference ID</dt><dd><code>#${escHtml(refId)}</code></dd></div>
+              <div><dt>Service</dt><dd>${escHtml(clientService)}</dd></div>
+              <div><dt>Location</dt><dd>${escHtml(whereVal)}</dd></div>
+              <div><dt>Requested Time</dt><dd>${escHtml(whenSummary)}</dd></div>
+              <div><dt>Callback Number</dt><dd>${escHtml(clientPhone)}</dd></div>
+            </dl>
+            <div class="receipt-next">
+              <h4>What Happens Next</h4>
+              <ol>
+                <li><strong>Team Review &amp; Callback:</strong> Expect a call or text at <strong>${escHtml(clientPhone)}</strong> within 1 business hour (Mon–Fri, 8:00 AM–5:00 PM CT) — or within <strong>15–30 minutes</strong> for urgent 24/7 mobile dispatch.</li>
+                <li><strong>What to Have Ready:</strong> Please bring a <strong>valid government photo ID</strong> along with any doctor order, employer chain-of-custody form (CCF), court order, or lab kit if applicable.</li>
+                <li><strong>Need Urgent Assistance?</strong> Call us directly at <a href="tel:+18773295339">877-329-5339</a> and mention Reference <strong>#${escHtml(refId)}</strong>.</li>
+              </ol>
+            </div>
+            <div class="receipt-actions">
+              <a class="btn btn--primary btn--sm" href="tel:+18773295339">Call 877-329-5339 Now</a>
+              <button type="button" class="btn btn--outline btn--sm" data-reset-receipt>Submit Another Request</button>
+              <a class="receipt-mail-link" href="${mailtoHref}">Open Email Backup</a>
+            </div>
+          `;
+
+        form.hidden = true;
+        receipt.hidden = false;
+        form.reset();
+        receipt.querySelector('[data-reset-receipt]')?.addEventListener('click', () => {
+          receipt.hidden = true;
+          form.hidden = false;
+          card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        receipt.focus({ preventScroll: true });
+      } else {
+        const mailBody = `Ref: #${refId}\nName: ${clientName}\nPhone: ${clientPhone}\nEmail: ${clientEmail}\nService: ${clientService}\nLocation: ${whereVal}\nTime: ${dateVal} ${timeSlot}\nNotes: ${msgVal}`;
+        const fallbackMailto = `mailto:trenton.tucker@ymail.com,info@landtsolutions.com?subject=${encodeURIComponent(`L&T Solutions Request #${refId} - ${clientName}`)}&body=${encodeURIComponent(mailBody)}`;
+        status.dataset.state = 'error';
+        status.innerHTML = es
+          ? `<strong>No se pudo completar el envío automático (${escHtml(apiErrorMsg || 'error de conexión')}).</strong> Su solicitud quedó guardada localmente con la referencia <strong>#${escHtml(refId)}</strong>.<br>Por favor llame al <a href="tel:+18773295339">877-329-5339</a> o <a href="${fallbackMailto}">haga clic aquí para enviarla por correo electrónico</a>.`
+          : `<strong>Automatic delivery could not be completed (${escHtml(apiErrorMsg || 'connection error')}).</strong> Your details were saved locally under Reference <strong>#${escHtml(refId)}</strong>.<br>Please call <a href="tel:+18773295339">877-329-5339</a> directly or <a href="${fallbackMailto}">click here to send via your email app</a>.`;
+        status.hidden = false;
+        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     });
   });
 
@@ -353,8 +432,22 @@ const subject = dispatch
   .formwrap { display: grid; gap: 2rem; max-width: 820px; }
   .formwrap--aside { max-width: none; }
   @media (min-width: 1000px) { .formwrap--aside { grid-template-columns: 1.5fr 1fr; align-items: start; } }
-  .formcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); border-top: 5px solid var(--pink-600); }
+  .formcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); border-top: 5px solid var(--pink-600); scroll-margin-top: calc(var(--header-h) + 24px); }
   .formcard__intro { color: var(--muted); }
+  .form-receipt { margin-top: 1.25rem; background: #f8fdf9; border: 2px solid #16a34a; border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 1.75rem); color: var(--ink); }
+  .form-receipt:focus { outline: none; }
+  .form-receipt :global(.receipt-badge) { display: inline-flex; align-items: center; gap: 0.4rem; background: #16a34a; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 0.35rem 0.85rem; border-radius: 999px; letter-spacing: 0.02em; }
+  .form-receipt :global(.receipt-title) { margin: 0.9rem 0 0.35rem; font-size: 1.45rem; color: #14532d; }
+  .form-receipt :global(.receipt-sub) { margin: 0 0 1.15rem; color: var(--ink-soft); }
+  .form-receipt :global(.receipt-summary) { display: grid; gap: 0.6rem 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); background: #fff; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 0.9rem 1rem; margin: 0 0 1.25rem; }
+  .form-receipt :global(.receipt-summary dt) { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 700; }
+  .form-receipt :global(.receipt-summary dd) { margin: 0.15rem 0 0; font-weight: 700; color: var(--ink); word-break: break-word; }
+  .form-receipt :global(.receipt-summary code) { background: #ecfdf5; color: #065f46; padding: 0.1rem 0.45rem; border-radius: 6px; font-size: 0.95rem; }
+  .form-receipt :global(.receipt-next) { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--purple-700); border-radius: var(--radius-sm); padding: 1rem 1.15rem; margin-bottom: 1.25rem; }
+  .form-receipt :global(.receipt-next h4) { margin: 0 0 0.6rem; font-size: 1.05rem; color: var(--purple-900); }
+  .form-receipt :global(.receipt-next ol) { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.55rem; color: var(--ink-soft); }
+  .form-receipt :global(.receipt-actions) { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+  .form-receipt :global(.receipt-mail-link) { font-size: 0.88rem; font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; padding: 0.25rem 0.5rem; }
   .form-footer-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
   .btn-log-link { background: none; border: none; padding: 0.4rem 0.6rem; min-height: 44px; font-size: 0.85rem; color: var(--purple-700); cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: underline; }
   .btn-log-link:hover { color: var(--pink-700); }
