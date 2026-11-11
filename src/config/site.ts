@@ -107,7 +107,7 @@ export const SITE = {
   form: {
     /** Web3Forms (https://web3forms.com) — free, emails each submission to you. */
     endpoint: 'https://api.web3forms.com/submit',
-    accessKey: 'REPLACE_WITH_WEB3FORMS_ACCESS_KEY', // TODO: required for the form to work
+    accessKey: '7c8fc788-d0e3-49ca-84d3-77e602624f1c',
   },
 
   /** Optional Tier-2 bridge: link to Acuity / Square / Calendly booking page. */
